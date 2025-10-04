@@ -139,7 +139,7 @@ const PropertyDetail = () => {
                     <div className="text-sm text-gray-600">Sq. Yds</div>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg text-center">
-                    <Home size={24} className="mx-auto text-kmk-gold mb-2" />
+                    <HomeIcon size={24} className="mx-auto text-kmk-gold mb-2" />
                     <div className="font-semibold text-kmk-navy">{property.built_up_area}</div>
                     <div className="text-sm text-gray-600">Sq. Ft</div>
                   </div>
