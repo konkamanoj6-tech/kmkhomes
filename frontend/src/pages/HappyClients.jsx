@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Quote, MapPin, Calendar, ArrowRight, Users, Award, Home } from 'lucide-react';
+import { Star, Quote, MapPin, Calendar, ArrowRight, Users, Award, Home as HomeIcon } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { testimonials } from '../data/mock';
