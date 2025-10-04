@@ -169,7 +169,7 @@ const Contact = () => {
                         Property Interest
                       </label>
                       <div className="relative">
-                        <Home size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                        <HomeIcon size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
                         <select
                           id="propertyInterest"
                           name="propertyInterest"
