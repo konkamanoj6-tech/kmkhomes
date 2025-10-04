@@ -46,7 +46,7 @@ const Home = () => {
   };
 
   const stats = [
-    { number: "50+", label: "Projects Delivered", icon: Home },
+    { number: "50+", label: "Projects Delivered", icon: HomeIcon },
     { number: "1000+", label: "Happy Families", icon: Star },
     { number: "15+", label: "Years Experience", icon: Calendar },
     { number: "100%", label: "Customer Satisfaction", icon: CheckCircle }
