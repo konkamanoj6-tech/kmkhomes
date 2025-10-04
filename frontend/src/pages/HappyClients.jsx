@@ -62,7 +62,7 @@ const HappyClients = () => {
     {
       number: "50+",
       label: "Projects Delivered",
-      icon: Home
+      icon: HomeIcon
     },
     {
       number: "15+",
