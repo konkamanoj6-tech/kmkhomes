@@ -230,7 +230,7 @@ const Home = () => {
                       <span>{property.plot_size} Sq.Yds</span>
                     </div>
                     <div className="flex items-center">
-                      <Home size={16} className="mr-2 text-kmk-gold" />
+                      <HomeIcon size={16} className="mr-2 text-kmk-gold" />
                       <span>{property.built_up_area} Sq.Ft</span>
                     </div>
                     <div className="flex items-center">
