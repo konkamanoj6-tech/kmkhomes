@@ -13,6 +13,11 @@ module.exports = {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		colors: {
+  			// KMK Homes Brand Colors
+  			'kmk-navy': '#0A1D37',
+  			'kmk-gold': '#D4AF37',
+  			'kmk-background': '#F5F6FA',
+  			
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
