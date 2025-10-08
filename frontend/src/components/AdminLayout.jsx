@@ -43,6 +43,21 @@ const AdminLayout = () => {
       icon: MessageSquare
     },
     {
+      name: 'Happy Clients',
+      href: '/admin/happy-clients',
+      icon: Users
+    },
+    {
+      name: 'News & Events',
+      href: '/admin/news-events',
+      icon: Newspaper
+    },
+    {
+      name: 'NRI Corner',
+      href: '/admin/nri-corner',
+      icon: Globe
+    },
+    {
       name: 'Contact Info',
       href: '/admin/contact',
       icon: Phone
