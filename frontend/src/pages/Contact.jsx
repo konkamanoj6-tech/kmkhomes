@@ -47,21 +47,30 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Mock form submission - would integrate with backend in real implementation
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setSubmitting(true);
     
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      propertyInterest: '',
-      message: '',
-      visitDate: ''
-    });
+    try {
+      await publicApi.submitContactForm(formData);
+      setIsSubmitted(true);
+      setTimeout(() => setIsSubmitted(false), 5000);
+      
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        property_interest: '',
+        message: '',
+        visit_date: ''
+      });
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert('Error submitting form. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactInfo = [
