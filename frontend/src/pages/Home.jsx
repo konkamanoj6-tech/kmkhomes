@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, MapPin, Home as HomeIcon, Ruler, Compass, Ca
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { properties, testimonials } from '../data/mock';
+import { publicApi } from '../services/api';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
