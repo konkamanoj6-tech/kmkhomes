@@ -79,8 +79,8 @@ function App() {
               <Route index element={<Navigate to="/admin/dashboard" replace />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="properties" element={<AdminProperties />} />
-              <Route path="banners" element={<div className="text-center text-gray-600 py-20">Home Banners - Coming Soon</div>} />
-              <Route path="testimonials" element={<div className="text-center text-gray-600 py-20">Testimonials - Coming Soon</div>} />
+              <Route path="banners" element={<AdminBanners />} />
+              <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="contact" element={<AdminContactInfo />} />
               <Route path="submissions" element={<AdminSubmissions />} />
               <Route path="settings" element={<div className="text-center text-gray-600 py-20">Settings - Coming Soon</div>} />
