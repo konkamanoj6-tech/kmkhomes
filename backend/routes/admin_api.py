@@ -249,3 +249,129 @@ async def admin_get_contact_submissions(current_user: dict = Depends(get_current
     """Get contact form submissions."""
     submissions = await contact_submissions_db.get_all(sort=[("created_at", -1)])
     return submissions
+
+# Happy Clients CRUD
+@router.get("/happy-clients")
+async def admin_get_happy_clients(current_user: dict = Depends(get_current_admin_user)):
+    """Get all happy clients."""
+    clients = await testimonials_db.get_all(sort=[("created_at", -1)])
+    return clients
+
+@router.post("/happy-clients")
+async def admin_create_happy_client(
+    data: TestimonialCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create happy client."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    client_id = await testimonials_db.create(data_dict)
+    return {"id": client_id, "message": "Happy client created successfully"}
+
+@router.put("/happy-clients/{item_id}")
+async def admin_update_happy_client(
+    item_id: str,
+    data: TestimonialCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update happy client."""
+    success = await testimonials_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Happy client not found")
+    return {"message": "Happy client updated successfully"}
+
+@router.delete("/happy-clients/{item_id}")
+async def admin_delete_happy_client(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete happy client."""
+    success = await testimonials_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Happy client not found")
+    return {"message": "Happy client deleted successfully"}
+
+# News & Events CRUD
+@router.get("/news-events")
+async def admin_get_news_events(current_user: dict = Depends(get_current_admin_user)):
+    """Get all news and events."""
+    news = await news_events_db.get_all(sort=[("created_at", -1)])
+    return news
+
+@router.post("/news-events")
+async def admin_create_news_event(
+    data: NewsEventCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create news/event."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    news_id = await news_events_db.create(data_dict)
+    return {"id": news_id, "message": "News/Event created successfully"}
+
+@router.put("/news-events/{item_id}")
+async def admin_update_news_event(
+    item_id: str,
+    data: NewsEventCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update news/event."""
+    success = await news_events_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="News/Event not found")
+    return {"message": "News/Event updated successfully"}
+
+@router.delete("/news-events/{item_id}")
+async def admin_delete_news_event(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete news/event."""
+    success = await news_events_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="News/Event not found")
+    return {"message": "News/Event deleted successfully"}
+
+# NRI Content CRUD
+@router.get("/nri-content")
+async def admin_get_nri_content(current_user: dict = Depends(get_current_admin_user)):
+    """Get all NRI content."""
+    content = await nri_content_db.get_all(sort=[("created_at", -1)])
+    return content
+
+@router.post("/nri-content")
+async def admin_create_nri_content(
+    data: NRIContentCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create NRI content."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    content_id = await nri_content_db.create(data_dict)
+    return {"id": content_id, "message": "NRI content created successfully"}
+
+@router.put("/nri-content/{item_id}")
+async def admin_update_nri_content(
+    item_id: str,
+    data: NRIContentCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update NRI content."""
+    success = await nri_content_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="NRI content not found")
+    return {"message": "NRI content updated successfully"}
+
+@router.delete("/nri-content/{item_id}")
+async def admin_delete_nri_content(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete NRI content."""
+    success = await nri_content_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="NRI content not found")
+    return {"message": "NRI content deleted successfully"}
