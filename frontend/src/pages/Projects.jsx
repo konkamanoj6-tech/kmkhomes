@@ -4,7 +4,7 @@ import { MapPin, Home as HomeIcon, Ruler, Compass, ArrowRight, Search, Filter } 
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { properties } from '../data/mock';
+import { publicApi } from '../services/api';
 
 const Projects = () => {
   const [filters, setFilters] = useState({
