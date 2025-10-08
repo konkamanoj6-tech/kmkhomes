@@ -21,6 +21,8 @@ import AdminLogin from './pages/AdminLogin';
 import AdminLayout from './components/AdminLayout';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminProperties from './pages/AdminProperties';
+import AdminContactInfo from './pages/AdminContactInfo';
+import AdminSubmissions from './pages/AdminSubmissions';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
