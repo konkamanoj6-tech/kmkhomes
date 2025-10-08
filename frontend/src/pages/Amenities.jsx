@@ -6,6 +6,24 @@ import { Card, CardContent } from '../components/ui/card';
 import { publicApi } from '../services/api';
 
 const Amenities = () => {
+  const [amenities, setAmenities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAmenities();
+  }, []);
+
+  const fetchAmenities = async () => {
+    try {
+      const response = await publicApi.getAmenities();
+      setAmenities(response.data);
+    } catch (error) {
+      console.error('Error fetching amenities:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const allAmenities = [
     {
       icon: Shield,
