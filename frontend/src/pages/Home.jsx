@@ -14,16 +14,40 @@ const Home = () => {
     plotSize: '',
     builtUpArea: ''
   });
+  const [homeBanners, setHomeBanners] = useState([]);
+  const [featuredProperties, setFeaturedProperties] = useState([]);
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const heroImages = [
-    "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/e9f5ygj3_IMG_9413.jpeg",
-    "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/o0b7p5qk_IMG_9414.jpeg",
-    "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/6wd7nnfd_IMG_9415.jpeg",
-    "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/8xyjt9jf_IMG_9421.jpeg",
-    "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/52snr89o_IMG_9420.jpeg"
-  ];
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
 
-  const featuredProperties = properties.filter(property => property.featured);
+  const fetchHomeData = async () => {
+    try {
+      const [bannersRes, propertiesRes, testimonialsRes] = await Promise.all([
+        publicApi.getHomeBanners(),
+        publicApi.getProperties({ featured: true, limit: 6 }),
+        publicApi.getTestimonials({ featured: true, limit: 3 })
+      ]);
+
+      setHomeBanners(bannersRes.data);
+      setFeaturedProperties(propertiesRes.data);
+      setTestimonials(testimonialsRes.data);
+    } catch (error) {
+      console.error('Error fetching home data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const heroImages = homeBanners.length > 0 
+    ? homeBanners.map(banner => banner.image_url)
+    : [
+        "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/e9f5ygj3_IMG_9413.jpeg",
+        "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/o0b7p5qk_IMG_9414.jpeg",
+        "https://customer-assets.emergentagent.com/job_luxrealestate/artifacts/6wd7nnfd_IMG_9415.jpeg"
+      ];
 
   // Auto-slide effect
   useEffect(() => {
