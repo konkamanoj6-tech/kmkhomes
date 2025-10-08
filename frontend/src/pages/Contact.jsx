@@ -251,11 +251,12 @@ const Contact = () => {
 
                   <Button 
                     type="submit"
+                    disabled={submitting}
                     size="lg" 
                     className="w-full bg-kmk-gold hover:bg-kmk-gold/90 text-white py-4"
                   >
                     <Send size={18} className="mr-2" />
-                    Send Enquiry
+                    {submitting ? 'Sending...' : 'Send Enquiry'}
                   </Button>
                 </form>
               </CardContent>
