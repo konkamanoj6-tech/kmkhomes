@@ -1,6 +1,9 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+
+// Public Pages
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -13,25 +16,76 @@ import HappyClients from './pages/HappyClients';
 import News from './pages/News';
 import Contact from './pages/Contact';
 
+// Admin Pages
+import AdminLogin from './pages/AdminLogin';
+import AdminLayout from './components/AdminLayout';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminProperties from './pages/AdminProperties';
+
+// Protected Route Component
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg text-gray-600">Loading...</div>
+      </div>
+    );
+  }
+  
+  return isAuthenticated ? children : <Navigate to="/admin/login" replace />;
+};
+
+// Public Layout Component
+const PublicLayout = ({ children }) => (
+  <>
+    <Header />
+    <main>{children}</main>
+    <Footer />
+  </>
+);
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <main>
+        <AuthProvider>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/property/:id" element={<PropertyDetail />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/amenities" element={<Amenities />} />
-            <Route path="/nri-corner" element={<NRICorner />} />
-            <Route path="/clients" element={<HappyClients />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/contact" element={<Contact />} />
+            {/* Public Routes */}
+            <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
+            <Route path="/projects" element={<PublicLayout><Projects /></PublicLayout>} />
+            <Route path="/property/:id" element={<PublicLayout><PropertyDetail /></PublicLayout>} />
+            <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
+            <Route path="/amenities" element={<PublicLayout><Amenities /></PublicLayout>} />
+            <Route path="/nri-corner" element={<PublicLayout><NRICorner /></PublicLayout>} />
+            <Route path="/clients" element={<PublicLayout><HappyClients /></PublicLayout>} />
+            <Route path="/news" element={<PublicLayout><News /></PublicLayout>} />
+            <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+
+            {/* Admin Login */}
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+            {/* Protected Admin Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }>
+              <Route index element={<Navigate to="/admin/dashboard" replace />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="properties" element={<AdminProperties />} />
+              <Route path="banners" element={<div className="text-center text-gray-600 py-20">Home Banners - Coming Soon</div>} />
+              <Route path="testimonials" element={<div className="text-center text-gray-600 py-20">Testimonials - Coming Soon</div>} />
+              <Route path="contact" element={<div className="text-center text-gray-600 py-20">Contact Info - Coming Soon</div>} />
+              <Route path="submissions" element={<div className="text-center text-gray-600 py-20">Contact Submissions - Coming Soon</div>} />
+              <Route path="settings" element={<div className="text-center text-gray-600 py-20">Settings - Coming Soon</div>} />
+            </Route>
+
+            {/* Catch all route */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
-        </main>
-        <Footer />
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );
