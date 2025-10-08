@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, MessageCircle, Send, User, Home as HomeIcon } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
-import { companyInfo } from '../data/mock';
+import { publicApi } from '../services/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
