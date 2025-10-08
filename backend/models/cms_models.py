@@ -1,7 +1,33 @@
 from pydantic import BaseModel, Field
 from typing import Optional, List
 from datetime import datetime
-from .base import BaseDocument
+from bson import ObjectId
+
+class PyObjectId(ObjectId):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v):
+        if not ObjectId.is_valid(v):
+            raise ValueError('Invalid ObjectId')
+        return ObjectId(v)
+
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type='string')
+
+class BaseDocument(BaseModel):
+    id: Optional[PyObjectId] = Field(alias='_id', default=None)
+    created_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
+    updated_at: Optional[datetime] = Field(default_factory=datetime.utcnow)
+
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {ObjectId: str}
+        use_enum_values = True
 
 # Properties Model
 class Property(BaseDocument):
@@ -34,7 +60,6 @@ class PropertyCreate(BaseModel):
     enquiry_link: str
     map_link: str
     featured: bool = Field(default=False)
-    active: bool = Field(default=True)
 
 # Home Banners Model
 class HomeBanner(BaseDocument):
@@ -52,12 +77,11 @@ class HomeBannerCreate(BaseModel):
     image_url: str
     cta_text: Optional[str] = None
     cta_link: Optional[str] = None
-    active: bool = Field(default=True)
     display_order: int = Field(default=0)
 
-# About Us Section Model
+# About Section Model
 class AboutSection(BaseDocument):
-    section_name: str = Field(..., description="company_story, mission, vision, etc.")
+    section_name: str = Field(..., description="company_story, mission, vision")
     title: str
     content: str
     image_url: Optional[str] = None
@@ -69,10 +93,9 @@ class AboutSectionCreate(BaseModel):
     title: str
     content: str
     image_url: Optional[str] = None
-    active: bool = Field(default=True)
     display_order: int = Field(default=0)
 
-# Team Members Model
+# Team Member Model
 class TeamMember(BaseDocument):
     name: str
     position: str
@@ -87,9 +110,8 @@ class TeamMemberCreate(BaseModel):
     bio: str
     image_url: str
     display_order: int = Field(default=0)
-    active: bool = Field(default=True)
 
-# Amenities Model
+# Amenity Model
 class Amenity(BaseDocument):
     title: str
     description: str
@@ -103,10 +125,9 @@ class AmenityCreate(BaseModel):
     description: str
     icon_name: str
     image_url: Optional[str] = None
-    active: bool = Field(default=True)
     display_order: int = Field(default=0)
 
-# Upcoming Projects Model
+# Upcoming Project Model
 class UpcomingProject(BaseDocument):
     title: str
     description: str
@@ -125,9 +146,8 @@ class UpcomingProjectCreate(BaseModel):
     image_url: str
     features: List[str] = Field(default_factory=list)
     early_access_link: Optional[str] = None
-    active: bool = Field(default=True)
 
-# Testimonials Model
+# Testimonial Model
 class Testimonial(BaseDocument):
     name: str
     location: str
@@ -146,9 +166,8 @@ class TestimonialCreate(BaseModel):
     rating: int = Field(default=5, ge=1, le=5)
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
-    active: bool = Field(default=True)
 
-# News & Events Model
+# News Event Model
 class NewsEvent(BaseDocument):
     title: str
     excerpt: str
@@ -168,10 +187,9 @@ class NewsEventCreate(BaseModel):
     image_url: str
     category: str
     author: str
-    publish_date: datetime = Field(default_factory=datetime.utcnow)
+    publish_date: Optional[datetime] = None
     event_date: Optional[datetime] = None
     featured: bool = Field(default=False)
-    active: bool = Field(default=True)
 
 # NRI Content Model
 class NRIContent(BaseDocument):
@@ -190,7 +208,6 @@ class NRIContentCreate(BaseModel):
     icon_name: Optional[str] = None
     image_url: Optional[str] = None
     display_order: int = Field(default=0)
-    active: bool = Field(default=True)
 
 # Contact Info Model
 class ContactInfo(BaseDocument):
@@ -216,35 +233,34 @@ class SiteSetting(BaseDocument):
     setting_key: str
     setting_value: str
 
-class SiteSettingUpdate(BaseModel):
-    setting_value: str
-
-# Admin Users Model
+# Admin User Model
 class AdminUser(BaseDocument):
     username: str
     email: str
     password_hash: str
-    role: str = Field(default="admin", description="admin, editor")
-    active: bool = Field(default=True)
-
-class AdminUserCreate(BaseModel):
-    username: str
-    email: str
-    password: str
     role: str = Field(default="admin")
     active: bool = Field(default=True)
 
+class AdminCreate(BaseModel):
+    username: str
+    email: str
+    password: str
+
+class AdminLogin(BaseModel):
+    username: str
+    password: str
+
 # Contact Form Submission Model
-class ContactFormSubmission(BaseDocument):
+class ContactSubmission(BaseDocument):
     name: str
     email: str
     phone: str
     property_interest: Optional[str] = None
-    visit_date: Optional[datetime] = None
+    visit_date: Optional[str] = None
     message: str
-    status: str = Field(default="new", description="new, contacted, closed")
+    status: str = Field(default="new")
 
-class ContactFormCreate(BaseModel):
+class ContactSubmissionCreate(BaseModel):
     name: str
     email: str
     phone: str

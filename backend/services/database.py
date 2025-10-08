@@ -10,23 +10,6 @@ DB_NAME = os.environ.get('DB_NAME', 'kmk_homes')
 client = AsyncIOMotorClient(MONGO_URL)
 database = client[DB_NAME]
 
-# Collection names
-COLLECTIONS = {
-    'properties': 'properties',
-    'home_banners': 'home_banners',
-    'about_sections': 'about_sections',
-    'team_members': 'team_members',
-    'amenities': 'amenities',
-    'upcoming_projects': 'upcoming_projects',
-    'testimonials': 'testimonials',
-    'news_events': 'news_events',
-    'nri_content': 'nri_content',
-    'contact_info': 'contact_info',
-    'site_settings': 'site_settings',
-    'admin_users': 'admin_users',
-    'contact_submissions': 'contact_submissions'
-}
-
 class DatabaseService:
     def __init__(self, collection_name: str):
         self.collection = database[collection_name]
@@ -71,7 +54,6 @@ class DatabaseService:
         if not ObjectId.is_valid(doc_id):
             return False
         
-        # Add updated_at timestamp
         from datetime import datetime
         update_data["updated_at"] = datetime.utcnow()
         
@@ -100,17 +82,17 @@ class DatabaseService:
             document["_id"] = str(document["_id"])
         return document
 
-# Service instances for each collection
-properties_service = DatabaseService(COLLECTIONS['properties'])
-home_banners_service = DatabaseService(COLLECTIONS['home_banners'])
-about_sections_service = DatabaseService(COLLECTIONS['about_sections'])
-team_members_service = DatabaseService(COLLECTIONS['team_members'])
-amenities_service = DatabaseService(COLLECTIONS['amenities'])
-upcoming_projects_service = DatabaseService(COLLECTIONS['upcoming_projects'])
-testimonials_service = DatabaseService(COLLECTIONS['testimonials'])
-news_events_service = DatabaseService(COLLECTIONS['news_events'])
-nri_content_service = DatabaseService(COLLECTIONS['nri_content'])
-contact_info_service = DatabaseService(COLLECTIONS['contact_info'])
-site_settings_service = DatabaseService(COLLECTIONS['site_settings'])
-admin_users_service = DatabaseService(COLLECTIONS['admin_users'])
-contact_submissions_service = DatabaseService(COLLECTIONS['contact_submissions'])
+# Service instances
+properties_db = DatabaseService('properties')
+home_banners_db = DatabaseService('home_banners')
+about_sections_db = DatabaseService('about_sections')
+team_members_db = DatabaseService('team_members')
+amenities_db = DatabaseService('amenities')
+upcoming_projects_db = DatabaseService('upcoming_projects')
+testimonials_db = DatabaseService('testimonials')
+news_events_db = DatabaseService('news_events')
+nri_content_db = DatabaseService('nri_content')
+contact_info_db = DatabaseService('contact_info')
+site_settings_db = DatabaseService('site_settings')
+admin_users_db = DatabaseService('admin_users')
+contact_submissions_db = DatabaseService('contact_submissions')

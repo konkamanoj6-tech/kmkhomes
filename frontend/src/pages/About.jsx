@@ -31,7 +31,7 @@ const About = () => {
   const milestones = [
     { year: "2009", title: "Company Founded", description: "Started with a vision to create premium homes" },
     { year: "2012", title: "First Project Completed", description: "Successfully delivered our first luxury villa project" },
-    { year: "2018", title: "50+ Projects Milestone", description: "Completed over 50 premium villa projects across Hyderabad" },
+    { year: "2018", title: "100+ Projects Milestone", description: "Completed over 50 premium villa projects across Hyderabad" },
     { year: "2024", title: "Industry Recognition", description: "Awarded 'Best Real Estate Developer' in Hyderabad" }
   ];
 
@@ -45,7 +45,7 @@ const About = () => {
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6">About KMK Homes</h1>
               <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                Building dream homes for over 15 years with exceptional quality, innovative design, 
+                Building dream homes for over 21 years with exceptional quality, innovative design, 
                 and unwavering commitment to customer satisfaction. Your trusted partner in luxury real estate.
               </p>
               <Button asChild size="lg" className="bg-kmk-gold hover:bg-kmk-gold/90">

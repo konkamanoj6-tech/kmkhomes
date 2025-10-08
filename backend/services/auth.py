@@ -2,12 +2,15 @@ import jwt
 import bcrypt
 from datetime import datetime, timedelta
 from typing import Optional
-from fastapi import HTTPException, status
+from fastapi import HTTPException, status, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import os
 
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-here")
+SECRET_KEY = os.getenv("JWT_SECRET_KEY", "kmk-homes-secret-key-2024")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 480  # 8 hours
+
+security = HTTPBearer()
 
 def hash_password(password: str) -> str:
     """Hash a password using bcrypt."""
@@ -39,10 +42,32 @@ def decode_access_token(token: str):
         if username is None:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Could not validate credentials"
+                detail="Could not validate credentials",
+                headers={"WWW-Authenticate": "Bearer"},
             )
         return payload
     except jwt.PyJWTError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+async def get_current_admin_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
+    """Get current authenticated admin user."""
+    try:
+        payload = decode_access_token(credentials.credentials)
+        username: str = payload.get("sub")
+        role: str = payload.get("role")
+        
+        if username is None or role != "admin":
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Could not validate credentials"
+            )
+        
+        return {"username": username, "role": role}
+    except Exception:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials"
