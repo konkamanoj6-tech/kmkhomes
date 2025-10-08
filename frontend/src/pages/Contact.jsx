@@ -314,7 +314,7 @@ const Contact = () => {
                     className="w-full bg-green-600 hover:bg-green-700 text-white"
                   >
                     <a
-                      href={`https://wa.me/${companyInfo.whatsapp}?text=Hi! I'm interested in KMK Homes villas. Can you provide more information?`}
+                      href={`https://wa.me/${contactInfo.whatsapp}?text=Hi! I'm interested in KMK Homes villas. Can you provide more information?`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
