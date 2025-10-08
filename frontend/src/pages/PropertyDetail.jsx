@@ -285,10 +285,10 @@ const PropertyDetail = () => {
           <h2 className="text-3xl font-bold text-kmk-navy mb-8">Similar Properties</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {similarProperties.map((similarProperty) => (
-                <Card key={similarProperty.id} className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0">
+                <Card key={similarProperty._id} className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0">
                   <div className="relative overflow-hidden">
                     <img
-                      src={similarProperty.gallery_images[0]}
+                      src={similarProperty.gallery_images && similarProperty.gallery_images.length > 0 ? similarProperty.gallery_images[0] : '/placeholder-villa.jpg'}
                       alt={similarProperty.villa_number}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
