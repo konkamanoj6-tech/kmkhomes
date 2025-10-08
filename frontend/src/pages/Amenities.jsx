@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Zap, Waves, Dumbbell, Trees, Car, Wifi, Camera, Users, Gamepad2, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
