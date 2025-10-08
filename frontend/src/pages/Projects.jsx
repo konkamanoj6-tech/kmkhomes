@@ -16,6 +16,23 @@ const Projects = () => {
     searchTerm: ''
   });
   const [showFilters, setShowFilters] = useState(false);
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProperties();
+  }, []);
+
+  const fetchProperties = async () => {
+    try {
+      const response = await publicApi.getProperties();
+      setProperties(response.data);
+    } catch (error) {
+      console.error('Error fetching properties:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Filter options
   const statusOptions = [...new Set(properties.map(p => p.status))];
