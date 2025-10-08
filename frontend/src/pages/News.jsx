@@ -8,6 +8,23 @@ import { publicApi } from '../services/api';
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [newsEvents, setNewsEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchNewsEvents();
+  }, []);
+
+  const fetchNewsEvents = async () => {
+    try {
+      const response = await publicApi.getNewsEvents({ limit: 20 });
+      setNewsEvents(response.data);
+    } catch (error) {
+      console.error('Error fetching news events:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const allNews = [
     ...newsEvents,
