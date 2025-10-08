@@ -97,7 +97,7 @@ const Projects = () => {
       
       return true;
     });
-  }, [filters]);
+  }, [properties, filters]);
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
