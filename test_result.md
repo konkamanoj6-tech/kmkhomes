@@ -165,6 +165,30 @@ backend:
         agent: "testing"
         comment: "TESTED: Property detail API working correctly. GET /api/properties/{id} returns proper property data for all tested property IDs. No 'not found' issues detected in backend API. Issue may be in frontend routing or data handling."
 
+  - task: "Properties listing API"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/public_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Properties listing API working correctly. GET /api/properties returns 5 properties with proper data structure. Filtering and pagination parameters functional."
+
+  - task: "Admin authentication API"
+    implemented: true
+    working: true
+    file: "/app/backend/routes/admin_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Admin authentication working perfectly. POST /api/admin/auth/login with credentials (admin/admin123) returns valid JWT token. Token-based authentication for admin endpoints functional."
+
 frontend:
   - task: "AdminBanners component"
     implemented: true
