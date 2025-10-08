@@ -73,32 +73,32 @@ const Contact = () => {
     }
   };
 
-  const contactInfo = [
+  const contactInfoItems = [
     {
       icon: Phone,
       title: "Phone",
-      details: companyInfo.phone,
-      action: `tel:${companyInfo.phone}`,
+      details: contactInfo.phone,
+      action: `tel:${contactInfo.phone}`,
       actionText: "Call Now"
     },
     {
       icon: Mail,
       title: "Email",
-      details: companyInfo.email,
-      action: `mailto:${companyInfo.email}`,
+      details: contactInfo.email,
+      action: `mailto:${contactInfo.email}`,
       actionText: "Send Email"
     },
     {
       icon: MapPin,
       title: "Office Address",
-      details: companyInfo.address,
-      action: "https://maps.google.com/?q=" + encodeURIComponent(companyInfo.address),
+      details: contactInfo.address,
+      action: "https://maps.google.com/?q=" + encodeURIComponent(contactInfo.address),
       actionText: "Get Directions"
     },
     {
       icon: Clock,
       title: "Business Hours",
-      details: "Mon - Sat: 9:00 AM - 7:00 PM\nSun: 10:00 AM - 5:00 PM",
+      details: contactInfo.business_hours || "Mon - Sat: 9:00 AM - 7:00 PM\nSun: 10:00 AM - 5:00 PM",
       action: null,
       actionText: null
     }
