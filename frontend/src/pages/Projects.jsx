@@ -302,7 +302,7 @@ const Projects = () => {
                     
                     <div className="flex gap-3">
                       <Button asChild className="flex-1 bg-kmk-navy hover:bg-kmk-navy/90">
-                        <Link to={`/property/${property.id}`}>
+                        <Link to={`/property/${property._id}`}>
                           View Details <ArrowRight size={16} className="ml-2" />
                         </Link>
                       </Button>
