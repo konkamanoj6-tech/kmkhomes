@@ -9,8 +9,30 @@ import { publicApi } from '../services/api';
 const PropertyDetail = () => {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-  const property = properties.find(p => p.id === parseInt(id));
+  const [property, setProperty] = useState(null);
+  const [similarProperties, setSimilarProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProperty();
+  }, [id]);
+
+  const fetchProperty = async () => {
+    try {
+      const [propertyRes, propertiesRes] = await Promise.all([
+        publicApi.getProperty(id),
+        publicApi.getProperties({ status: 'Available', limit: 3 })
+      ]);
+      
+      setProperty(propertyRes.data);
+      // Filter out current property from similar properties
+      setSimilarProperties(propertiesRes.data.filter(p => p._id !== id));
+    } catch (error) {
+      console.error('Error fetching property:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!property) {
     return (
