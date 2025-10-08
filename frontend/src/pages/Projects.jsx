@@ -26,10 +26,11 @@ const Projects = () => {
   const fetchProperties = async () => {
     try {
       const response = await publicApi.getProperties();
-      console.log('Properties response:', response);
-      setProperties(response);
+      console.log('Properties API response:', response.data);
+      setProperties(response.data || []);
     } catch (error) {
       console.error('Error fetching properties:', error);
+      setProperties([]);
     } finally {
       setLoading(false);
     }
