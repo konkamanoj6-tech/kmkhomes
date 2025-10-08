@@ -69,6 +69,24 @@ export const adminApi = {
   
   // Contact Submissions
   getContactSubmissions: () => api.get('/admin/contact-submissions'),
+
+  // Happy Clients
+  getHappyClients: () => api.get('/admin/happy-clients'),
+  createHappyClient: (data) => api.post('/admin/happy-clients', data),
+  updateHappyClient: (id, data) => api.put(`/admin/happy-clients/${id}`, data),
+  deleteHappyClient: (id) => api.delete(`/admin/happy-clients/${id}`),
+
+  // News & Events
+  getNewsEvents: () => api.get('/admin/news-events'),
+  createNewsEvent: (data) => api.post('/admin/news-events', data),
+  updateNewsEvent: (id, data) => api.put(`/admin/news-events/${id}`, data),
+  deleteNewsEvent: (id) => api.delete(`/admin/news-events/${id}`),
+
+  // NRI Corner
+  getNRIContent: () => api.get('/admin/nri-content'),
+  createNRIContent: (data) => api.post('/admin/nri-content', data),
+  updateNRIContent: (id, data) => api.put(`/admin/nri-content/${id}`, data),
+  deleteNRIContent: (id) => api.delete(`/admin/nri-content/${id}`),
   
   // File Upload
   uploadFile: (file) => {
