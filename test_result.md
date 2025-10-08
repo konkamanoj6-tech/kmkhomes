@@ -137,15 +137,18 @@ backend:
 
   - task: "File upload API for images"
     implemented: true
-    working: "unknown"
+    working: true
     file: "/app/backend/routes/admin_api.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "unknown"
         agent: "main"
         comment: "Upload endpoint exists but needs testing for image display issues"
+      - working: true
+        agent: "testing"
+        comment: "TESTED: File upload API working correctly. POST /api/admin/upload successfully uploads files and returns accessible URLs. Uploaded files are properly served via /uploads/{filename} endpoint. Backend file handling is functional."
 
   - task: "Property detail API"
     implemented: true
