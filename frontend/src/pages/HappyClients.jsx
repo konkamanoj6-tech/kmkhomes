@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Star, Quote, MapPin, Calendar, ArrowRight, Users, Award, Home as HomeIcon } from 'lucide-react';
 import { Button } from '../components/ui/button';
