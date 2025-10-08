@@ -340,7 +340,7 @@ const Contact = () => {
             <CardContent className="p-0">
               <div className="h-96 bg-gray-100">
                 <iframe
-                  src={companyInfo.mapEmbedUrl}
+                  src={contactInfo.mapEmbedUrl || contactInfo.map_embed_url}
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
