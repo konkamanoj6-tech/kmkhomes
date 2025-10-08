@@ -23,6 +23,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import AdminProperties from './pages/AdminProperties';
 import AdminBanners from './pages/AdminBanners';
 import AdminTestimonials from './pages/AdminTestimonials';
+import AdminHappyClients from './pages/AdminHappyClients';
+import AdminNewsEvents from './pages/AdminNewsEvents';
+import AdminNRICorner from './pages/AdminNRICorner';
 import AdminContactInfo from './pages/AdminContactInfo';
 import AdminSubmissions from './pages/AdminSubmissions';
 
