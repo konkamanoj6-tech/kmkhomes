@@ -84,8 +84,8 @@ async def upload_file(
         content = await file.read()
         buffer.write(content)
     
-    # Return file URL (you may need to adjust this based on your static file serving)
-    file_url = f"/uploads/{unique_filename}"
+    # Return file URL - using the external backend URL
+    file_url = f"{os.environ.get('BACKEND_URL', 'http://localhost:8001')}/uploads/{unique_filename}"
     
     return {"file_url": file_url, "filename": unique_filename}
 
