@@ -84,6 +84,9 @@ function App() {
               <Route path="properties" element={<AdminProperties />} />
               <Route path="banners" element={<AdminBanners />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="happy-clients" element={<AdminHappyClients />} />
+              <Route path="news-events" element={<AdminNewsEvents />} />
+              <Route path="nri-corner" element={<AdminNRICorner />} />
               <Route path="contact" element={<AdminContactInfo />} />
               <Route path="submissions" element={<AdminSubmissions />} />
               <Route path="settings" element={<div className="text-center text-gray-600 py-20">Settings - Coming Soon</div>} />
