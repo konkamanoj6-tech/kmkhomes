@@ -260,14 +260,13 @@ test_plan:
   current_focus:
     - "AdminBanners component"
     - "AdminTestimonials component"
-    - "Admin Banners CRUD API"
-    - "Admin Testimonials CRUD API"
   stuck_tasks:
     - "Property Detail page data loading"
     - "Projects page property display"
     - "Image display in admin and public"
   test_all: false
   test_priority: "high_first"
+  backend_testing_complete: true
 
 agent_communication:
   - agent: "main"
