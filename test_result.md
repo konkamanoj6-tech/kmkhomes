@@ -152,15 +152,18 @@ backend:
 
   - task: "Property detail API"
     implemented: true
-    working: "unknown"
+    working: true
     file: "/app/backend/routes/public_api.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "unknown"
         agent: "main"
         comment: "Property detail endpoint needs debugging for 'not found' issues"
+      - working: true
+        agent: "testing"
+        comment: "TESTED: Property detail API working correctly. GET /api/properties/{id} returns proper property data for all tested property IDs. No 'not found' issues detected in backend API. Issue may be in frontend routing or data handling."
 
 frontend:
   - task: "AdminBanners component"
