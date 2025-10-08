@@ -13,7 +13,9 @@ import {
   Menu,
   X,
   Phone,
-  Mail
+  Mail,
+  Newspaper,
+  Globe
 } from 'lucide-react';
 
 const AdminLayout = () => {
