@@ -251,10 +251,10 @@ const Projects = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProperties.map((property) => (
-                <Card key={property.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
+                <Card key={property._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
                   <div className="relative overflow-hidden">
                     <img
-                      src={property.gallery_images[0]}
+                      src={property.gallery_images && property.gallery_images.length > 0 ? property.gallery_images[0] : '/placeholder-villa.jpg'}
                       alt={property.villa_number}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -266,7 +266,7 @@ const Projects = () => {
                       {property.status}
                     </Badge>
                     <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                      {property.gallery_images.length} Photos
+                      {property.gallery_images ? property.gallery_images.length : 0} Photos
                     </div>
                   </div>
                   
