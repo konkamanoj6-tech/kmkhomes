@@ -34,6 +34,14 @@ const PropertyDetail = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg text-gray-600">Loading property details...</div>
+      </div>
+    );
+  }
+
   if (!property) {
     return (
       <div className="min-h-screen flex items-center justify-center">
