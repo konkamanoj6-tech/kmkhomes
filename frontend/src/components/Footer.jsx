@@ -5,6 +5,27 @@ import { publicApi } from '../services/api';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [contactInfo, setContactInfo] = React.useState({
+    phone: "+91 98765 43210",
+    email: "info@kmkhomes.com",
+    whatsapp: "919876543210",
+    address: "Plot No. 123, Road No. 36, Jubilee Hills, Hyderabad - 500033"
+  });
+
+  React.useEffect(() => {
+    fetchContactInfo();
+  }, []);
+
+  const fetchContactInfo = async () => {
+    try {
+      const response = await publicApi.getContactInfo();
+      if (response.data) {
+        setContactInfo(response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching contact info:', error);
+    }
+  };
 
   const quickLinks = [
     { name: 'About Us', path: '/about' },
