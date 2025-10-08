@@ -84,8 +84,9 @@ async def upload_file(
         content = await file.read()
         buffer.write(content)
     
-    # Return file URL - using the external backend URL
-    file_url = f"{os.environ.get('BACKEND_URL', 'http://localhost:8001')}/uploads/{unique_filename}"
+    # Return file URL - using the correct base URL
+    backend_url = os.environ.get('BACKEND_URL', 'https://home-listing-cms.preview.emergentagent.com')
+    file_url = f"{backend_url}/uploads/{unique_filename}"
     
     return {"file_url": file_url, "filename": unique_filename}
 
