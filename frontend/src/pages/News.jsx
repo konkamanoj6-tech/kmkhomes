@@ -4,7 +4,7 @@ import { Calendar, Clock, ArrowRight, Tag, User, ExternalLink } from 'lucide-rea
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { newsEvents } from '../data/mock';
+import { publicApi } from '../services/api';
 
 const News = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
