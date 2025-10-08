@@ -120,8 +120,8 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={18} className="text-kmk-gold flex-shrink-0" />
-                <a href={`tel:${companyInfo.phone}`} className="text-gray-300 hover:text-kmk-gold transition-colors">
-                  {companyInfo.phone}
+                <a href={`tel:${contactInfo.phone}`} className="text-gray-300 hover:text-kmk-gold transition-colors">
+                  {contactInfo.phone}
                 </a>
               </div>
               <div className="flex items-center space-x-3">
