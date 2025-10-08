@@ -266,7 +266,7 @@ const Contact = () => {
           {/* Contact Information */}
           <div className="lg:col-span-1">
             <div className="space-y-6">
-              {contactInfo.map((info, index) => {
+              {contactInfoItems.map((info, index) => {
                 const IconComponent = info.icon;
                 return (
                   <Card key={index} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
