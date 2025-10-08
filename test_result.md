@@ -308,16 +308,12 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus:
-    - "AdminBanners component"
-    - "AdminTestimonials component"
-  stuck_tasks:
-    - "Property Detail page data loading"
-    - "Projects page property display"
-    - "Image display in admin and public"
-  test_all: false
-  test_priority: "high_first"
+  current_focus: []
+  stuck_tasks: []
+  test_all: true
+  test_priority: "complete"
   backend_testing_complete: true
+  frontend_testing_complete: true
 
 agent_communication:
   - agent: "main"
