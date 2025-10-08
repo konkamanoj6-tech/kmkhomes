@@ -305,7 +305,7 @@ const PropertyDetail = () => {
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-kmk-gold">{similarProperty.price_range}</span>
                       <Button asChild size="sm" className="bg-kmk-navy hover:bg-kmk-navy/90">
-                        <Link to={`/property/${similarProperty.id}`}>View</Link>
+                        <Link to={`/property/${similarProperty._id}`}>View</Link>
                       </Button>
                     </div>
                   </CardContent>
