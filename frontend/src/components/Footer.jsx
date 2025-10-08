@@ -133,7 +133,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <MessageCircle size={18} className="text-kmk-gold flex-shrink-0" />
                 <a 
-                  href={`https://wa.me/${companyInfo.whatsapp}`}
+                  href={`https://wa.me/${contactInfo.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-300 hover:text-kmk-gold transition-colors"
