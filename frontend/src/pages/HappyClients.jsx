@@ -6,6 +6,24 @@ import { Card, CardContent } from '../components/ui/card';
 import { publicApi } from '../services/api';
 
 const HappyClients = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, []);
+
+  const fetchTestimonials = async () => {
+    try {
+      const response = await publicApi.getTestimonials();
+      setTestimonials(response.data);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const clientStories = [
     {
       id: 1,
