@@ -412,3 +412,45 @@ async def admin_delete_nri_content(
     if not success:
         raise HTTPException(status_code=404, detail="NRI content not found")
     return {"message": "NRI content deleted successfully"}
+
+# Amenities CRUD
+@router.get("/amenities")
+async def admin_get_amenities(current_user: dict = Depends(get_current_admin_user)):
+    """Get all amenities."""
+    amenities = await amenities_db.get_all(sort=[("display_order", 1), ("created_at", -1)])
+    return amenities
+
+@router.post("/amenities")
+async def admin_create_amenity(
+    data: AmenityCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create amenity."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    amenity_id = await amenities_db.create(data_dict)
+    return {"id": amenity_id, "message": "Amenity created successfully"}
+
+@router.put("/amenities/{item_id}")
+async def admin_update_amenity(
+    item_id: str,
+    data: AmenityCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update amenity."""
+    success = await amenities_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Amenity not found")
+    return {"message": "Amenity updated successfully"}
+
+@router.delete("/amenities/{item_id}")
+async def admin_delete_amenity(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete amenity."""
+    success = await amenities_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Amenity not found")
+    return {"message": "Amenity deleted successfully"}
