@@ -110,24 +110,36 @@ const PropertyDetail = () => {
           {/* Image Gallery - Left Side */}
           <div className="lg:col-span-2">
             {/* Main Image */}
-            <div className="relative mb-4 rounded-2xl overflow-hidden">
+            <div className="relative mb-4 rounded-2xl overflow-hidden cursor-pointer group">
               <img
                 src={getImageUrl(property.gallery_images[currentImageIndex])}
                 alt={`${property.villa_number} - Image ${currentImageIndex + 1}`}
-                className="w-full h-96 md:h-[500px] object-cover"
+                className="w-full h-96 md:h-[500px] object-cover transition-transform duration-300 group-hover:scale-105"
+                onClick={() => openImageModal(currentImageIndex)}
               />
+              
+              {/* Expand Icon */}
+              <div className="absolute top-4 right-4 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <Expand size={20} />
+              </div>
               
               {/* Navigation Arrows */}
               {property.gallery_images.length > 1 && (
                 <>
                   <button
-                    onClick={prevImage}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevImage();
+                    }}
                     className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-200"
                   >
                     <ChevronLeft size={20} />
                   </button>
                   <button
-                    onClick={nextImage}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextImage();
+                    }}
                     className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/50 hover:bg-black/70 backdrop-blur-sm rounded-full flex items-center justify-center text-white transition-all duration-200"
                   >
                     <ChevronRight size={20} />
