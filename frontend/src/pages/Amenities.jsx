@@ -33,14 +33,12 @@ const Amenities = () => {
     {
       icon: Shield,
       title: "24/7 Security",
-      description: "Round-the-clock security with CCTV surveillance, trained guards, and controlled access gates for complete safety.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop"
+      description: "Round-the-clock security with CCTV surveillance, trained guards, and controlled access gates for complete safety."
     },
     {
       icon: Zap, 
       title: "Power & Water Backup",
-      description: "Uninterrupted power supply with diesel generators, solar panels, and reliable water supply with overhead tanks.",
-      image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=400&h=250&fit=crop"
+      description: "Uninterrupted power supply with diesel generators, solar panels, and reliable water supply with overhead tanks."
     },
     {
       icon: Waves,
