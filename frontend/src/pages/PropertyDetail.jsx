@@ -70,6 +70,27 @@ const PropertyDetail = () => {
     setCurrentImageIndex(index);
   };
 
+  const openImageModal = (index) => {
+    setModalImageIndex(index);
+    setShowImageModal(true);
+  };
+
+  const closeImageModal = () => {
+    setShowImageModal(false);
+  };
+
+  const nextModalImage = () => {
+    setModalImageIndex((prev) => 
+      prev === property.gallery_images.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevModalImage = () => {
+    setModalImageIndex((prev) => 
+      prev === 0 ? property.gallery_images.length - 1 : prev - 1
+    );
+  };
+
   return (
     <div className="min-h-screen bg-kmk-background">
       {/* Back Button */}
