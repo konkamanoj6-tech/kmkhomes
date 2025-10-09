@@ -140,7 +140,7 @@ const PropertyDetail = () => {
                   }`}
                 >
                   <img
-                    src={image}
+                    src={getImageUrl(image)}
                     alt={`Thumbnail ${index + 1}`}
                     className="w-full h-full object-cover"
                   />
