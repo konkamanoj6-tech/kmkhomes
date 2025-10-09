@@ -78,18 +78,16 @@ const About = () => {
               <h2 className="text-4xl font-bold text-kmk-navy mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Founded in 2009, KMK Homes began with a simple yet powerful vision: to create premium 
-                  residential spaces that families would be proud to call home. What started as a small 
-                  construction company has grown into one of Hyderabad's most trusted real estate developers.
+                  Founded in 2009, KMK Homes began with a simple yet powerful vision — to create premium residential spaces that families would be proud to call home.
                 </p>
                 <p>
-                  Over the years, we have successfully completed more than 50 luxury villa projects across 
-                  prime locations in Hyderabad. Our commitment to quality, innovation, and customer 
-                  satisfaction has earned us the trust of over 1000 happy families.
+                  We started our journey by building high-quality apartment projects, successfully delivering 60+ apartments across Hyderabad. With a strong foundation in trust and craftsmanship, we later expanded into constructing ultra-luxury triplex villas, completing 20+ premium villa projects in some of the city's most sought-after locations.
                 </p>
                 <p>
-                  Today, KMK Homes continues to set new standards in luxury living, combining modern 
-                  architecture with world-class amenities to create homes that exceed expectations.
+                  Over the years, our commitment to quality, innovation, and customer satisfaction has earned us the trust of over 1000 happy families.
+                </p>
+                <p>
+                  Today, KMK Homes continues to set new benchmarks in luxury living — combining modern architecture, custom designs, and world-class amenities to create homes that truly exceed expectations.
                 </p>
               </div>
             </div>
