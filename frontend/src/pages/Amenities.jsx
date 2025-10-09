@@ -219,55 +219,7 @@ const Amenities = () => {
 
       {/* Removed Amenities Gallery images as requested */}
 
-      {/* Dynamic Property Specifications */}
-      {properties.length > 0 && (
-        <section className="py-20 bg-kmk-background">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-kmk-navy mb-4">Property Specifications</h2>
-              <p className="text-xl text-gray-600">
-                Explore the variety of plot sizes and built-up areas available
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {properties.map((property, index) => (
-                <Card key={property._id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-bold text-kmk-navy mb-3">{property.villa_number}</h3>
-                    <div className="space-y-2 text-gray-600">
-                      <div className="flex justify-between">
-                        <span>Plot Size:</span>
-                        <span className="font-semibold">{property.plot_size} Sq.Yds</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Built-up Area:</span>
-                        <span className="font-semibold">{property.built_up_area} Sq.Ft</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Facing:</span>
-                        <span className="font-semibold">{property.facing}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Status:</span>
-                        <span className={`font-semibold ${
-                          property.status === 'Available' ? 'text-green-600' : 'text-red-600'
-                        }`}>{property.status}</span>
-                      </div>
-                      <div className="pt-2 border-t border-gray-200">
-                        <div className="flex justify-between">
-                          <span className="font-medium">Price:</span>
-                          <span className="font-bold text-kmk-gold">{property.price_range}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Property Specifications section removed as requested */}
 
       {/* CTA Section */}
       <section className="py-20 bg-kmk-navy text-white">
