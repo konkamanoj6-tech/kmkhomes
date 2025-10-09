@@ -6,9 +6,9 @@ import { publicApi } from '../services/api';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [contactInfo, setContactInfo] = React.useState({
-    phone: "+91 98765 43210",
-    email: "info@kmkhomes.com",
-    whatsapp: "919876543210",
+    phone: "+91 8074831140",
+    email: "homeskmk3@gmail.com",
+    whatsapp: "918074831140",
     address: "Plot No. 123, Road No. 36, Jubilee Hills, Hyderabad - 500033"
   });
 
