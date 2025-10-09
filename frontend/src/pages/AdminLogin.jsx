@@ -114,11 +114,10 @@ const AdminLogin = () => {
             </Button>
           </form>
 
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-sm text-gray-600 text-center">
-              <strong>Demo Credentials:</strong><br />
-              Username: admin<br />
-              Password: admin123
+          <div className="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200">
+            <p className="text-sm text-amber-700 text-center">
+              <strong>Security Notice:</strong><br />
+              Please change your password after logging in for the first time.
             </p>
           </div>
         </CardContent>
