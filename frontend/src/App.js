@@ -92,7 +92,7 @@ function App() {
               <Route path="nri-corner" element={<AdminNRICorner />} />
               <Route path="contact" element={<AdminContactInfo />} />
               <Route path="submissions" element={<AdminSubmissions />} />
-              <Route path="settings" element={<div className="text-center text-gray-600 py-20">Settings - Coming Soon</div>} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
 
             {/* Catch all route */}
