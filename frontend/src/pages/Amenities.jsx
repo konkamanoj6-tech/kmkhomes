@@ -7,18 +7,23 @@ import { publicApi } from '../services/api';
 
 const Amenities = () => {
   const [amenities, setAmenities] = useState([]);
+  const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAmenities();
+    fetchData();
   }, []);
 
-  const fetchAmenities = async () => {
+  const fetchData = async () => {
     try {
-      const response = await publicApi.getAmenities();
-      setAmenities(response.data);
+      const [amenitiesRes, propertiesRes] = await Promise.all([
+        publicApi.getAmenities(),
+        publicApi.getProperties()
+      ]);
+      setAmenities(amenitiesRes.data);
+      setProperties(propertiesRes.data);
     } catch (error) {
-      console.error('Error fetching amenities:', error);
+      console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
     }
