@@ -73,14 +73,12 @@ const Amenities = () => {
     {
       icon: Users,
       title: "Clubhouse & Community Hall",
-      description: "Spacious clubhouse with event halls, party areas, library, and spaces for social gatherings and celebrations.",
-      image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&h=250&fit=crop"
+      description: "Spacious clubhouse with event halls, party areas, library, and spaces for social gatherings and celebrations."
     },
     {
       icon: Gamepad2,
       title: "Kids Play Area",
-      description: "Safe and colorful play zones with modern equipment, sand pits, swings, and supervised activity areas.",
-      image: "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=400&h=250&fit=crop"
+      description: "Safe and colorful play zones with modern equipment, sand pits, swings, and supervised activity areas."
     }
   ];
 
