@@ -43,38 +43,32 @@ const Amenities = () => {
     {
       icon: Waves,
       title: "Swimming Pool Complex", 
-      description: "Luxurious swimming pool with separate kids section, poolside seating, and professional maintenance services.",
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop"
+      description: "Luxurious swimming pool with separate kids section, poolside seating, and professional maintenance services."
     },
     {
       icon: Dumbbell,
       title: "Modern Fitness Center",
-      description: "Fully equipped gymnasium with latest cardio and strength training equipment, yoga studio, and certified trainers.",
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop"
+      description: "Fully equipped gymnasium with latest cardio and strength training equipment, yoga studio, and certified trainers."
     },
     {
       icon: Trees,
       title: "Landscaped Gardens",
-      description: "Beautiful green spaces with walking paths, meditation areas, outdoor seating, and recreational zones for families.",
-      image: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=250&fit=crop"
+      description: "Beautiful green spaces with walking paths, meditation areas, outdoor seating, and recreational zones for families."
     },
     {
       icon: Car, 
       title: "Covered Parking",
-      description: "Secure covered parking spaces for residents and guests with EV charging stations and vehicle maintenance area.",
-      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop"
+      description: "Secure covered parking spaces for residents and guests with EV charging stations and vehicle maintenance area."
     },
     {
       icon: Wifi,
       title: "High-Speed Internet",
-      description: "Fiber optic internet connectivity throughout the community with WiFi zones in common areas.",
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=400&h=250&fit=crop"
+      description: "Fiber optic internet connectivity throughout the community with WiFi zones in common areas."
     },
     {
       icon: Camera,
       title: "Smart Home Features",
-      description: "Integrated smart home systems with video door bells, automated lighting, and climate control systems.",
-      image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=250&fit=crop"
+      description: "Integrated smart home systems with video door bells, automated lighting, and climate control systems."
     },
     {
       icon: Users,
