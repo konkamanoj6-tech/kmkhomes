@@ -16,9 +16,9 @@ const Contact = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [contactInfo, setContactInfo] = useState({
-    phone: "+91 98765 43210",
-    email: "info@kmkhomes.com",
-    whatsapp: "919876543210",
+    phone: "+91 8074831140",
+    email: "homeskmk3@gmail.com",
+    whatsapp: "918074831140",
     address: "Plot No. 123, Road No. 36, Jubilee Hills, Hyderabad - 500033",
     mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.35148728277!2d78.24323262812499!3d17.412608040492422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1645678901234!5m2!1sen!2sin"
   });
