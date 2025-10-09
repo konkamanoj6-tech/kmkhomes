@@ -17,6 +17,8 @@ const PropertyDetail = () => {
   const [modalImageIndex, setModalImageIndex] = useState(0);
 
   useEffect(() => {
+    // Scroll to top when navigating to property details
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     fetchProperty();
   }, [id]);
 
