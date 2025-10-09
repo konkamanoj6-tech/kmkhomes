@@ -18,6 +18,9 @@ const Home = () => {
   const [homeBanners, setHomeBanners] = useState([]);
   const [featuredProperties, setFeaturedProperties] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
+  const [allProperties, setAllProperties] = useState([]);
+  const [plotSizeRanges, setPlotSizeRanges] = useState([]);
+  const [builtUpAreaRanges, setBuiltUpAreaRanges] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
