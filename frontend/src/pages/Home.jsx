@@ -256,9 +256,9 @@ const Home = () => {
                   className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold focus:border-transparent"
                 >
                   <option value="">Built-up Area (Sq.Ft)</option>
-                  <option value="2000-2500">2000-2500</option>
-                  <option value="2500-3000">2500-3000</option>
-                  <option value="3000+">3000+</option>
+                  {builtUpAreaRanges.map((range, index) => (
+                    <option key={index} value={range.value}>{range.label}</option>
+                  ))}
                 </select>
               </div>
               
