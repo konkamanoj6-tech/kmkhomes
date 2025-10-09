@@ -167,20 +167,11 @@ const Amenities = () => {
             {allAmenities.map((amenity, index) => {
               const IconComponent = amenity.icon;
               return (
-                <Card key={index} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={amenity.image}
-                      alt={amenity.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-kmk-navy/60 group-hover:bg-kmk-navy/40 transition-all duration-300" />
-                    <div className="absolute top-4 left-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                <Card key={index} className="group hover:shadow-2xl transition-all duration-300 border-0">
+                  <CardContent className="p-6">
+                    <div className="w-12 h-12 bg-kmk-navy rounded-lg flex items-center justify-center mb-4">
                       <IconComponent size={24} className="text-white" />
                     </div>
-                  </div>
-                  
-                  <CardContent className="p-6">
                     <h3 className="text-xl font-bold text-kmk-navy mb-3">{amenity.title}</h3>
                     <p className="text-gray-600 leading-relaxed">{amenity.description}</p>
                   </CardContent>
