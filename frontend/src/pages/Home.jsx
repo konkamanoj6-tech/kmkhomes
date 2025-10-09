@@ -5,6 +5,7 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { publicApi } from '../services/api';
+import { getImageUrl } from '../utils/imageUtils';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
