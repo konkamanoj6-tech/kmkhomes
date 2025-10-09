@@ -15,7 +15,8 @@ import {
   Phone,
   Mail,
   Newspaper,
-  Globe
+  Globe,
+  Zap
 } from 'lucide-react';
 
 const AdminLayout = () => {
