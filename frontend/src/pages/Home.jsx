@@ -245,9 +245,9 @@ const Home = () => {
                   className="px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold focus:border-transparent"
                 >
                   <option value="">Plot Size (Sq.Yds)</option>
-                  <option value="1500-2000">1500-2000</option>
-                  <option value="2000-2500">2000-2500</option>
-                  <option value="2500+">2500+</option>
+                  {plotSizeRanges.map((range, index) => (
+                    <option key={index} value={range.value}>{range.label}</option>
+                  ))}
                 </select>
                 
                 <select
