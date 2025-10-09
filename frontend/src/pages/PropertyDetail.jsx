@@ -289,7 +289,7 @@ const PropertyDetail = () => {
                 <Card key={similarProperty._id} className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0">
                   <div className="relative overflow-hidden">
                     <img
-                      src={similarProperty.gallery_images && similarProperty.gallery_images.length > 0 ? similarProperty.gallery_images[0] : '/placeholder-villa.jpg'}
+                      src={similarProperty.gallery_images && similarProperty.gallery_images.length > 0 ? getImageUrl(similarProperty.gallery_images[0]) : '/placeholder-villa.jpg'}
                       alt={similarProperty.villa_number}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
