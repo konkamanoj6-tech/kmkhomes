@@ -88,6 +88,7 @@ function App() {
               <Route path="properties" element={<AdminProperties />} />
               <Route path="banners" element={<AdminBanners />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
+              <Route path="amenities" element={<AdminAmenities />} />
               <Route path="happy-clients" element={<AdminHappyClients />} />
               <Route path="news-events" element={<AdminNewsEvents />} />
               <Route path="nri-corner" element={<AdminNRICorner />} />
