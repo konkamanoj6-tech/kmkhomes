@@ -21,9 +21,6 @@ const Header = () => {
     { name: 'About Us', path: '/about' },
     { name: 'Projects', path: '/projects' },
     { name: 'Amenities', path: '/amenities' },
-    { name: 'NRI Corner', path: '/nri-corner' },
-    { name: 'Happy Clients', path: '/clients' },
-    { name: 'News & Events', path: '/news' },
     { name: 'Contact', path: '/contact' }
   ];
 
