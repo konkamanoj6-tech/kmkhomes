@@ -326,7 +326,7 @@ const Home = () => {
                   </div>
                   
                   <Button asChild className="w-full bg-kmk-navy hover:bg-kmk-navy/90">
-                    <Link to={`/property/${property.id}`}>
+                    <Link to={`/property/${property._id}`}>
                       View Details <ArrowRight size={16} className="ml-2" />
                     </Link>
                   </Button>
