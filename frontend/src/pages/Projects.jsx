@@ -255,7 +255,7 @@ const Projects = () => {
                 <Card key={property._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
                   <div className="relative overflow-hidden">
                     <img
-                      src={property.gallery_images && property.gallery_images.length > 0 ? property.gallery_images[0] : '/placeholder-villa.jpg'}
+                      src={property.gallery_images && property.gallery_images.length > 0 ? getImageUrl(property.gallery_images[0]) : '/placeholder-villa.jpg'}
                       alt={property.villa_number}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
