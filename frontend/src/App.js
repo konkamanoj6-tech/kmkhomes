@@ -65,9 +65,11 @@ function App() {
             <Route path="/property/:id" element={<PublicLayout><PropertyDetail /></PublicLayout>} />
             <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
             <Route path="/amenities" element={<PublicLayout><Amenities /></PublicLayout>} />
+            {/* Disabled routes - available in admin only
             <Route path="/nri-corner" element={<PublicLayout><NRICorner /></PublicLayout>} />
             <Route path="/clients" element={<PublicLayout><HappyClients /></PublicLayout>} />
             <Route path="/news" element={<PublicLayout><News /></PublicLayout>} />
+            */}
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
 
             {/* Admin Login */}
