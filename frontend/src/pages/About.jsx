@@ -126,51 +126,7 @@ const About = () => {
 
       {/* Removed Our Journey section as requested */}
 
-      {/* Leadership Team */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-kmk-navy mb-4">Leadership Team</h2>
-            <p className="text-xl text-gray-600">Meet the visionaries behind KMK Homes</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Rajesh Kumar",
-                position: "Founder & Managing Director",
-                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-                bio: "With over 20 years in real estate, Rajesh leads KMK Homes with vision and dedication to quality."
-              },
-              {
-                name: "Priya Sharma", 
-                position: "Chief Design Officer",
-                image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop&crop=face",
-                bio: "Priya brings innovative design concepts and architectural excellence to every KMK project."
-              },
-              {
-                name: "Amit Patel",
-                position: "Head of Operations",
-                image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-                bio: "Amit ensures seamless project execution and timely delivery across all KMK developments."
-              }
-            ].map((member, index) => (
-              <Card key={index} className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-24 h-24 rounded-full object-cover mx-auto mb-4"
-                  />
-                  <h3 className="text-xl font-bold text-kmk-navy mb-2">{member.name}</h3>
-                  <p className="text-kmk-gold font-semibold mb-4">{member.position}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Removed Leadership Team section as requested */}
 
       {/* CTA Section */}
       <section className="py-20 bg-kmk-navy text-white">
