@@ -20,6 +20,23 @@ const PropertyDetail = () => {
     fetchProperty();
   }, [id]);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!showImageModal) return;
+      
+      if (e.key === 'Escape') {
+        closeImageModal();
+      } else if (e.key === 'ArrowLeft') {
+        prevModalImage();
+      } else if (e.key === 'ArrowRight') {
+        nextModalImage();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showImageModal, modalImageIndex, property?.gallery_images?.length]);
+
   const fetchProperty = async () => {
     try {
       const [propertyRes, propertiesRes] = await Promise.all([
