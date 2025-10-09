@@ -225,7 +225,7 @@ const Home = () => {
               <Card key={property.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
                 <div className="relative overflow-hidden">
                   <img
-                    src={property.gallery_images[0]}
+                    src={getImageUrl(property.gallery_images[0])}
                     alt={property.villa_number}
                     className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
