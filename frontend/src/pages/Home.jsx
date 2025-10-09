@@ -283,7 +283,7 @@ const Home = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProperties.map((property) => (
-              <Card key={property.id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
+              <Card key={property._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
                 <div className="relative overflow-hidden">
                   <img
                     src={getImageUrl(property.gallery_images[0])}
