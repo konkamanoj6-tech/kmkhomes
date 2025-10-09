@@ -124,40 +124,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Company Milestones */}
-      <section className="py-20 bg-kmk-background">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-kmk-navy mb-4">Our Journey</h2>
-            <p className="text-xl text-gray-600">Key milestones in our growth story</p>
-          </div>
-
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-kmk-gold" />
-            
-            {milestones.map((milestone, index) => (
-              <div key={index} className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'justify-start' : 'justify-end'
-              }`}>
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-kmk-gold rounded-full border-4 border-white shadow-lg" />
-                
-                {/* Content Card */}
-                <Card className={`w-full max-w-md border-0 shadow-lg ${
-                  index % 2 === 0 ? 'mr-auto lg:mr-8' : 'ml-auto lg:ml-8'
-                }`}>
-                  <CardContent className="p-6">
-                    <div className="text-3xl font-bold text-kmk-gold mb-2">{milestone.year}</div>
-                    <h3 className="text-xl font-bold text-kmk-navy mb-2">{milestone.title}</h3>
-                    <p className="text-gray-600">{milestone.description}</p>
-                  </CardContent>
-                </Card>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Removed Our Journey section as requested */}
 
       {/* Leadership Team */}
       <section className="py-20 bg-white">
