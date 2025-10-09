@@ -45,6 +45,11 @@ const AdminLayout = () => {
       icon: MessageSquare
     },
     {
+      name: 'Amenities',
+      href: '/admin/amenities',
+      icon: Zap
+    },
+    {
       name: 'Happy Clients',
       href: '/admin/happy-clients',
       icon: Users
