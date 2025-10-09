@@ -89,7 +89,7 @@ const PropertyDetail = () => {
             {/* Main Image */}
             <div className="relative mb-4 rounded-2xl overflow-hidden">
               <img
-                src={property.gallery_images[currentImageIndex]}
+                src={getImageUrl(property.gallery_images[currentImageIndex])}
                 alt={`${property.villa_number} - Image ${currentImageIndex + 1}`}
                 className="w-full h-96 md:h-[500px] object-cover"
               />
