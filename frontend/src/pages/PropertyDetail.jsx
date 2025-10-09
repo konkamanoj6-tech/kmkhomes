@@ -168,6 +168,7 @@ const PropertyDetail = () => {
                 <button
                   key={index}
                   onClick={() => selectImage(index)}
+                  onDoubleClick={() => openImageModal(index)}
                   className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all duration-200 ${
                     index === currentImageIndex 
                       ? 'border-kmk-gold ring-2 ring-kmk-gold/30' 
