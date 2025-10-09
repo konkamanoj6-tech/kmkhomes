@@ -60,6 +60,42 @@ async def get_current_user(current_user: dict = Depends(get_current_admin_user))
         "role": admin["role"]
     }
 
+@router.post("/auth/change-password")
+async def change_password(
+    password_data: dict,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Change admin password."""
+    current_password = password_data.get("current_password")
+    new_password = password_data.get("new_password")
+    
+    if not current_password or not new_password:
+        raise HTTPException(status_code=400, detail="Current password and new password are required")
+    
+    if len(new_password) < 6:
+        raise HTTPException(status_code=400, detail="New password must be at least 6 characters long")
+    
+    # Get current admin
+    admin = await admin_users_db.get_one({"username": current_user["username"]})
+    if not admin:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Verify current password
+    if not verify_password(current_password, admin["password_hash"]):
+        raise HTTPException(status_code=400, detail="Current password is incorrect")
+    
+    # Update password
+    new_password_hash = hash_password(new_password)
+    success = await admin_users_db.update_by_id(admin["_id"], {
+        "password_hash": new_password_hash,
+        "updated_at": datetime.utcnow()
+    })
+    
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to update password")
+    
+    return {"message": "Password changed successfully"}
+
 # File upload
 @router.post("/upload")
 async def upload_file(
