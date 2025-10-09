@@ -29,20 +29,78 @@ const Home = () => {
 
   const fetchHomeData = async () => {
     try {
-      const [bannersRes, propertiesRes, testimonialsRes] = await Promise.all([
+      const [bannersRes, allPropertiesRes, testimonialsRes] = await Promise.all([
         publicApi.getHomeBanners(),
-        publicApi.getProperties({ featured: true, limit: 6 }),
+        publicApi.getProperties(),
         publicApi.getTestimonials({ featured: true, limit: 3 })
       ]);
 
+      const properties = allPropertiesRes.data || [];
       setHomeBanners(bannersRes.data);
-      setFeaturedProperties(propertiesRes.data);
+      setAllProperties(properties);
+      setFeaturedProperties(properties.filter(p => p.featured).slice(0, 6));
       setTestimonials(testimonialsRes.data);
+
+      // Calculate dynamic ranges from actual property data
+      if (properties.length > 0) {
+        const plotSizes = properties.map(p => p.plot_size).filter(size => size);
+        const builtUpAreas = properties.map(p => p.built_up_area).filter(area => area);
+
+        // Create plot size ranges based on actual data
+        const minPlot = Math.min(...plotSizes);
+        const maxPlot = Math.max(...plotSizes);
+        const plotRanges = generateRanges(minPlot, maxPlot, 'Sq.Yds');
+        setPlotSizeRanges(plotRanges);
+
+        // Create built-up area ranges based on actual data
+        const minBuiltUp = Math.min(...builtUpAreas);
+        const maxBuiltUp = Math.max(...builtUpAreas);
+        const builtUpRanges = generateRanges(minBuiltUp, maxBuiltUp, 'Sq.Ft');
+        setBuiltUpAreaRanges(builtUpRanges);
+      }
     } catch (error) {
       console.error('Error fetching home data:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  // Helper function to generate ranges based on min/max values
+  const generateRanges = (min, max, unit) => {
+    const ranges = [];
+    const diff = max - min;
+    const step = Math.ceil(diff / 3); // Create 3 ranges
+
+    if (diff <= 100) {
+      // If range is small, create specific ranges
+      ranges.push({
+        label: `${min}-${min + step} ${unit}`,
+        value: `${min}-${min + step}`
+      });
+      ranges.push({
+        label: `${min + step + 1}-${max} ${unit}`,
+        value: `${min + step + 1}-${max}`
+      });
+    } else {
+      // Create 3 ranges
+      const range1End = min + step;
+      const range2End = range1End + step;
+      
+      ranges.push({
+        label: `${min}-${range1End} ${unit}`,
+        value: `${min}-${range1End}`
+      });
+      ranges.push({
+        label: `${range1End + 1}-${range2End} ${unit}`,
+        value: `${range1End + 1}-${range2End}`
+      });
+      ranges.push({
+        label: `${range2End + 1}+ ${unit}`,
+        value: `${range2End + 1}+`
+      });
+    }
+
+    return ranges;
   };
 
   const heroImages = homeBanners.length > 0 
