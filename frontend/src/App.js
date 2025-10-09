@@ -28,6 +28,7 @@ import AdminNewsEvents from './pages/AdminNewsEvents';
 import AdminNRICorner from './pages/AdminNRICorner';
 import AdminContactInfo from './pages/AdminContactInfo';
 import AdminSubmissions from './pages/AdminSubmissions';
+import AdminSettings from './pages/AdminSettings';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
