@@ -88,6 +88,12 @@ export const adminApi = {
   createNRIContent: (data) => api.post('/admin/nri-content', data),
   updateNRIContent: (id, data) => api.put(`/admin/nri-content/${id}`, data),
   deleteNRIContent: (id) => api.delete(`/admin/nri-content/${id}`),
+
+  // Amenities
+  getAmenities: () => api.get('/admin/amenities'),
+  createAmenity: (data) => api.post('/admin/amenities', data),
+  updateAmenity: (id, data) => api.put(`/admin/amenities/${id}`, data),
+  deleteAmenity: (id) => api.delete(`/admin/amenities/${id}`),
   
   // File Upload
   uploadFile: (file) => {
