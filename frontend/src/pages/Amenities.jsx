@@ -231,39 +231,7 @@ const Amenities = () => {
         </div>
       </section>
 
-      {/* Amenities Gallery */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-kmk-navy mb-4">Amenities Gallery</h2>
-            <p className="text-xl text-gray-600">
-              Take a visual tour of our premium facilities
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=300&fit=crop", 
-              "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1558002038-1055907df827?w=300&h=300&fit=crop",
-              "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300&h=300&fit=crop"
-            ].map((image, index) => (
-              <div key={index} className="relative group overflow-hidden rounded-lg">
-                <img
-                  src={image}
-                  alt={`Amenity ${index + 1}`}
-                  className="w-full h-full object-cover aspect-square group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-kmk-navy/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Removed Amenities Gallery images as requested */}
 
       {/* CTA Section */}
       <section className="py-20 bg-kmk-navy text-white">
