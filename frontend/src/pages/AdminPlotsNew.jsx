@@ -318,23 +318,6 @@ const AdminPlots = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Property Type *
-                    </label>
-                    <select
-                      required
-                      value={formData.property_type}
-                      onChange={(e) => setFormData(prev => ({ ...prev, property_type: e.target.value }))}
-                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    >
-                      <option value="Apartment">Apartment</option>
-                      <option value="Villa">Villa</option>
-                      <option value="Plot">Plot</option>
-                      <option value="Commercial">Commercial</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Facing
                     </label>
                     <select
