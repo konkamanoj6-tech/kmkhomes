@@ -317,25 +317,37 @@ const Projects = () => {
                       style={{ transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                   <div className="relative overflow-hidden">
                     <img
-                      src={getImageUrl(project.thumbnail_image)}
-                      alt={project.project_name}
+                      src={getImageUrl(activeTab === 'plots' ? project.main_image : project.thumbnail_image)}
+                      alt={activeTab === 'plots' ? project.title : project.project_name}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                       style={{ transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
                     />
                     
-                    {/* Price Range Badge */}
-                    <Badge className={`absolute top-4 left-4 ${
-                      project.price_range === 'Affordable' ? 'bg-green-500' :
-                      project.price_range === 'Mid-range' ? 'bg-blue-500' :
-                      'bg-purple-500'
-                    } hover:bg-opacity-90 transition-colors duration-200`}>
-                      {project.price_range}
-                    </Badge>
+                    {/* Badge - Price Range for projects, Status for plots */}
+                    {activeTab === 'plots' ? (
+                      <Badge className={`absolute top-4 left-4 ${
+                        project.status === 'Available' ? 'bg-green-500' :
+                        project.status === 'Sold' ? 'bg-red-500' :
+                        'bg-blue-500'
+                      }`}>
+                        {project.status}
+                      </Badge>
+                    ) : (
+                      <Badge className={`absolute top-4 left-4 ${
+                        project.price_range === 'Affordable' ? 'bg-green-500' :
+                        project.price_range === 'Mid-range' ? 'bg-blue-500' :
+                        'bg-purple-500'
+                      } hover:bg-opacity-90 transition-colors duration-200`}>
+                        {project.price_range}
+                      </Badge>
+                    )}
                     
-                    {/* Property Type Badge */}
-                    <Badge variant="outline" className="absolute top-4 right-4 bg-white/90 text-gray-700">
-                      {project.property_type}
-                    </Badge>
+                    {/* Property Type Badge - only for projects */}
+                    {activeTab !== 'plots' && (
+                      <Badge variant="outline" className="absolute top-4 right-4 bg-white/90 text-gray-700">
+                        {project.property_type}
+                      </Badge>
+                    )}
 
                     {/* YouTube Button */}
                     {project.youtube_link && (
