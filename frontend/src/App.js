@@ -26,6 +26,7 @@ import AdminTestimonials from './pages/AdminTestimonials';
 import AdminAmenities from './pages/AdminAmenities';
 import AdminOurProjects from './pages/AdminOurProjects';
 import AdminBudgetHomes from './pages/AdminBudgetHomes';
+import AdminPlots from './pages/AdminPlots';
 import AdminHappyClients from './pages/AdminHappyClients';
 import AdminNewsEvents from './pages/AdminNewsEvents';
 import AdminNRICorner from './pages/AdminNRICorner';
