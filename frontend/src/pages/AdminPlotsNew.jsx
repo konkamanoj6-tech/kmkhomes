@@ -17,25 +17,24 @@ import {
 } from 'lucide-react';
 import { adminApi } from '../services/api';
 
-const AdminOurProjects = () => {
+const AdminPlots = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingProject, setEditingProject] = useState(null);
   const [formData, setFormData] = useState({
-    project_name: '',
+    title: '',
     location: '',
     status: 'Available',
-    plot_size: '',
-    built_up_area: '',
+    area_sqyds: '',
+    area_sqft: '',
+    price_per_sqyd: '',
     facing: 'East',
     price: '',
     price_range: 'Mid-range',
-    property_type: 'Villa',
     description: '',
-    thumbnail_image: '',
+    main_image: '',
     gallery_images: [],
-    amenities: [],
     youtube_link: '',
     enquiry_link: '',
     map_link: '',
