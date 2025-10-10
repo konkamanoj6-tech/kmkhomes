@@ -359,6 +359,7 @@ class BudgetHomeCreate(BaseModel):
 class Plot(BaseDocument):
     title: str = Field(..., description="Plot Name/Title")
     location: str
+    price: str = Field(..., description="Actual price e.g., ₹50 Lakhs")
     price_range: str
     area_sqyds: Optional[float] = Field(None, description="Area in Square Yards")
     area_sqft: Optional[float] = Field(None, description="Area in Square Feet")
@@ -378,6 +379,7 @@ class Plot(BaseDocument):
 class PlotCreate(BaseModel):
     title: str
     location: str
+    price: str
     price_range: str
     area_sqyds: Optional[float] = None
     area_sqft: Optional[float] = None
