@@ -92,15 +92,18 @@ const Projects = () => {
       // Location filter
       if (filters.location && project.location !== filters.location) return false;
       
-      // Price range filter
-      if (filters.price_range && project.price_range !== filters.price_range) return false;
+      // Price range filter (not applicable for plots)
+      if (filters.price_range && activeTab !== 'plots' && project.price_range !== filters.price_range) return false;
       
-      // Property type filter
-      if (filters.property_type && project.property_type !== filters.property_type) return false;
+      // Property type filter (not applicable for plots)
+      if (filters.property_type && activeTab !== 'plots' && project.property_type !== filters.property_type) return false;
+      
+      // Status filter (for plots only)
+      if (filters.status && activeTab === 'plots' && project.status !== filters.status) return false;
       
       return true;
     });
-  }, [currentData, filters]);
+  }, [currentData, filters, activeTab]);
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
