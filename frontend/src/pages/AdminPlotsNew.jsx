@@ -244,15 +244,15 @@ const AdminPlots = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Name *
+                      Plot Title *
                     </label>
                     <input
                       type="text"
                       required
-                      value={formData.project_name}
-                      onChange={(e) => setFormData(prev => ({ ...prev, project_name: e.target.value }))}
+                      value={formData.title}
+                      onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                       className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                      placeholder="e.g., Royal Gardens Phase II"
+                      placeholder="e.g., Prime Plot in Gachibowli"
                     />
                   </div>
 
