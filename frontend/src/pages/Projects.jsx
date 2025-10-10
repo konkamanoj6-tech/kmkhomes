@@ -12,6 +12,7 @@ const Projects = () => {
   const [budgetHomes, setBudgetHomes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('our-projects');
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     location: '',
     price_range: '',
