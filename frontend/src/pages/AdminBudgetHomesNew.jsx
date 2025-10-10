@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { adminApi } from '../services/api';
 
-const AdminOurProjects = () => {
+const AdminBudgetHomes = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -39,6 +39,7 @@ const AdminOurProjects = () => {
     youtube_link: '',
     enquiry_link: '',
     map_link: '',
+    builder_name: '',
     featured: false,
     display_order: 1
   });
