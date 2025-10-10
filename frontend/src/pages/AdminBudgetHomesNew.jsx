@@ -641,7 +641,7 @@ const AdminBudgetHomes = () => {
                   disabled={uploading}
                 >
                   <Save size={16} className="mr-2" />
-                  {editingProject ? 'Update Project' : 'Create Project'}
+                  {editingProject ? 'Update Home' : 'Create Home'}
                 </Button>
               </div>
             </form>
