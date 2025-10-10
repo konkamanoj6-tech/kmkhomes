@@ -428,8 +428,27 @@ const AdminBudgetHomes = () => {
                   value={formData.description}
                   onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                  placeholder="Detailed description of the project..."
+                  placeholder="Detailed description of the home..."
                 />
+              </div>
+
+              {/* Builder Name */}
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Builder Information</h3>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Builder Name * (Internal use - not displayed publicly)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.builder_name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, builder_name: e.target.value }))}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    placeholder="e.g., ABC Constructions"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">This is for internal tracking only and won't be shown to customers</p>
+                </div>
               </div>
 
               {/* Images */}
