@@ -28,19 +28,38 @@ const Home = () => {
   // Filters for each section
   const [ourProjectsFilters, setOurProjectsFilters] = useState({
     location: '',
-    property_type: '',
+    facing: '',
+    plot_size: '',
+    built_up_area: '',
     status: ''
   });
   
   const [budgetHomesFilters, setBudgetHomesFilters] = useState({
-    price_range: '',
+    price: '',
     property_type: ''
   });
   
   const [plotsFilters, setPlotsFilters] = useState({
     location: '',
-    status: ''
+    facing: '',
+    status: '',
+    plot_size: ''
   });
+
+  // Dynamic filter options from actual data
+  const ourProjectLocations = [...new Set(ourProjects.map(p => p.location))].filter(Boolean).sort();
+  const ourProjectFacings = [...new Set(ourProjects.map(p => p.facing))].filter(Boolean).sort();
+  const ourProjectStatuses = [...new Set(ourProjects.map(p => p.status))].filter(Boolean).sort();
+  const ourProjectPlotSizes = [...new Set(ourProjects.map(p => p.plot_size))].filter(Boolean).sort((a,b) => a-b);
+  const ourProjectBuiltUpAreas = [...new Set(ourProjects.map(p => p.built_up_area))].filter(Boolean).sort((a,b) => a-b);
+
+  const budgetHomePrices = [...new Set(budgetHomes.map(p => p.price))].filter(Boolean).sort();
+  const budgetHomePropertyTypes = [...new Set(budgetHomes.map(p => p.property_type))].filter(Boolean).sort();
+
+  const plotLocations = [...new Set(plots.map(p => p.location))].filter(Boolean).sort();
+  const plotFacings = [...new Set(plots.map(p => p.facing))].filter(Boolean).sort();
+  const plotStatuses = [...new Set(plots.map(p => p.status))].filter(Boolean).sort();
+  const plotSizes = [...new Set(plots.map(p => p.area_sqyds))].filter(Boolean).sort((a,b) => a-b);
 
   useEffect(() => {
     fetchHomeData();
