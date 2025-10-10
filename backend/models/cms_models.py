@@ -277,6 +277,7 @@ class OurProject(BaseDocument):
     plot_size: Optional[int] = Field(None, description="Plot size in Sq. Yds")
     built_up_area: Optional[int] = Field(None, description="Built-up area in Sq. Ft")
     facing: Optional[str] = Field(None, description="East, West, North, South-East")
+    price: str = Field(..., description="Actual price e.g., ₹2.5 Cr")
     price_range: str = Field(..., description="Affordable, Mid-range, Premium")
     property_type: str = Field(..., description="Apartment, Villa, Plot, Commercial")
     description: str
@@ -297,6 +298,7 @@ class OurProjectCreate(BaseModel):
     plot_size: Optional[int] = None
     built_up_area: Optional[int] = None
     facing: Optional[str] = None
+    price: str
     price_range: str
     property_type: str
     description: str
