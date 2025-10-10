@@ -149,7 +149,7 @@ const AdminPlots = () => {
     setNewGalleryImage('');
   };
 
-  const handleImageUpload = async (e, fieldName = 'thumbnail_image') => {
+  const handleImageUpload = async (e, fieldName = 'main_image') => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -164,10 +164,10 @@ const AdminPlots = () => {
       const response = await adminApi.uploadFile(file);
       const imageUrl = response.data.file_url;
       
-      if (fieldName === 'thumbnail_image') {
+      if (fieldName === 'main_image') {
         setFormData(prev => ({
           ...prev,
-          thumbnail_image: imageUrl
+          main_image: imageUrl
         }));
       }
       alert('Image uploaded successfully!');
