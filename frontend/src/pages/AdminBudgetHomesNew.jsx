@@ -253,7 +253,7 @@ const AdminBudgetHomes = () => {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>
-                {editingProject ? 'Edit Project' : 'Add New Project'}
+                {editingProject ? 'Edit Home' : 'Add New Home'}
               </CardTitle>
               <Button onClick={resetForm} variant="outline" size="sm">
                 <X size={16} />
