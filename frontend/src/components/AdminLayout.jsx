@@ -36,6 +36,16 @@ const AdminLayout = () => {
       icon: Building2
     },
     {
+      name: 'Our Projects',
+      href: '/admin/our-projects',
+      icon: Building2
+    },
+    {
+      name: 'Budget Homes',
+      href: '/admin/budget-homes',
+      icon: HomeIcon
+    },
+    {
       name: 'Home Banners',
       href: '/admin/banners',
       icon: Image
