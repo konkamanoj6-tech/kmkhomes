@@ -121,23 +121,10 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Search and Filters */}
+      {/* Filters */}
       <section className="py-8 bg-white border-b">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
-            {/* Search Bar */}
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-              <input
-                type="text"
-                placeholder="Search by villa number, location..."
-                value={filters.searchTerm}
-                onChange={(e) => handleFilterChange('searchTerm', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold focus:border-transparent"
-              />
-            </div>
-
-            {/* Filter Toggle */}
+          <div className="flex justify-center mb-6">
             <Button
               onClick={() => setShowFilters(!showFilters)}
               variant="outline"
