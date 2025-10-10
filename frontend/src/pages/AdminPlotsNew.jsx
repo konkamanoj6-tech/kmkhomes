@@ -675,4 +675,4 @@ const AdminPlots = () => {
   );
 };
 
-export default AdminOurProjects;
+export default AdminPlots;
