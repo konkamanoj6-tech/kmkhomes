@@ -88,14 +88,14 @@ const AdminPlots = () => {
   };
 
   const handleDelete = async (projectId) => {
-    if (window.confirm('Are you sure you want to delete this project?')) {
+    if (window.confirm('Are you sure you want to delete this plot?')) {
       try {
-        await adminApi.deleteOurProject(projectId);
+        await adminApi.deletePlot(projectId);
         await fetchProjects();
-        alert('Project deleted successfully!');
+        alert('Plot deleted successfully!');
       } catch (error) {
-        console.error('Error deleting project:', error);
-        alert('Error deleting project. Please try again.');
+        console.error('Error deleting plot:', error);
+        alert('Error deleting plot. Please try again.');
       }
     }
   };
