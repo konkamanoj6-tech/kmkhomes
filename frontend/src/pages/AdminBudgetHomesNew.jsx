@@ -145,6 +145,7 @@ const AdminBudgetHomes = () => {
       youtube_link: '',
       enquiry_link: '',
       map_link: '',
+      builder_name: '',
       featured: false,
       display_order: 1
     });
