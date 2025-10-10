@@ -309,6 +309,20 @@ const AdminOurProjects = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Price *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.price}
+                      onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., ₹2.5 Cr or ₹50 Lakhs"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Price Range *
                     </label>
                     <select
