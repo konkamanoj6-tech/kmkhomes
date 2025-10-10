@@ -203,7 +203,7 @@ const AdminPlots = () => {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64">Loading our projects...</div>;
+    return <div className="flex items-center justify-center h-64">Loading plots...</div>;
   }
 
   return (
