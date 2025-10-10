@@ -238,7 +238,8 @@ const Projects = () => {
           {/* Filter Panel */}
           {showFilters && (
             <div className="bg-gray-50 p-6 rounded-lg mb-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/* Location */}
                 <select
                   value={filters.location}
                   onChange={(e) => handleFilterChange('location', e.target.value)}
@@ -250,22 +251,70 @@ const Projects = () => {
                   ))}
                 </select>
 
-                {/* Price Range filter - not shown for plots */}
+                {/* Status */}
+                <select
+                  value={filters.status}
+                  onChange={(e) => handleFilterChange('status', e.target.value)}
+                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                >
+                  <option value="">All Status</option>
+                  {statusOptions.map(status => (
+                    <option key={status} value={status}>{status}</option>
+                  ))}
+                </select>
+
+                {/* Facing */}
+                <select
+                  value={filters.facing}
+                  onChange={(e) => handleFilterChange('facing', e.target.value)}
+                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                >
+                  <option value="">All Facing</option>
+                  {facingOptions.map(facing => (
+                    <option key={facing} value={facing}>{facing}</option>
+                  ))}
+                </select>
+
+                {/* Plot Size */}
+                <select
+                  value={filters.plot_size}
+                  onChange={(e) => handleFilterChange('plot_size', e.target.value)}
+                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                >
+                  <option value="">All Plot Sizes</option>
+                  {plotSizeOptions.map(size => (
+                    <option key={size} value={size}>{size} {activeTab === 'plots' ? 'Sq.Yds' : 'Sq.Yds'}</option>
+                  ))}
+                </select>
+
+                {/* Built-up Area - not for plots */}
                 {activeTab !== 'plots' && (
                   <select
-                    value={filters.price_range}
-                    onChange={(e) => handleFilterChange('price_range', e.target.value)}
+                    value={filters.built_up_area}
+                    onChange={(e) => handleFilterChange('built_up_area', e.target.value)}
                     className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
                   >
-                    <option value="">All Price Ranges</option>
-                    {priceRangeOptions.map(range => (
-                      <option key={range} value={range}>{range}</option>
+                    <option value="">All Built-up Areas</option>
+                    {builtUpAreaOptions.map(area => (
+                      <option key={area} value={area}>{area} Sq.Ft</option>
                     ))}
                   </select>
                 )}
 
-                {/* Property Type filter - not shown for plots */}
-                {activeTab !== 'plots' && (
+                {/* Price (actual price) */}
+                <select
+                  value={filters.price}
+                  onChange={(e) => handleFilterChange('price', e.target.value)}
+                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                >
+                  <option value="">All Prices</option>
+                  {priceOptions.map(price => (
+                    <option key={price} value={price}>{price}</option>
+                  ))}
+                </select>
+
+                {/* Property Type - only for budget homes */}
+                {activeTab === 'budget-homes' && (
                   <select
                     value={filters.property_type}
                     onChange={(e) => handleFilterChange('property_type', e.target.value)}
@@ -274,20 +323,6 @@ const Projects = () => {
                     <option value="">All Property Types</option>
                     {propertyTypeOptions.map(type => (
                       <option key={type} value={type}>{type}</option>
-                    ))}
-                  </select>
-                )}
-
-                {/* Status filter - only for plots */}
-                {activeTab === 'plots' && (
-                  <select
-                    value={filters.status}
-                    onChange={(e) => handleFilterChange('status', e.target.value)}
-                    className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                  >
-                    <option value="">All Status</option>
-                    {statusOptions.map(status => (
-                      <option key={status} value={status}>{status}</option>
                     ))}
                   </select>
                 )}
