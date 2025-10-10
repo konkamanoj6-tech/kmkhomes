@@ -338,19 +338,49 @@ const Home = () => {
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
               <option value="">All Locations</option>
-              <option value="Gachibowli">Gachibowli</option>
-              <option value="Kondapur">Kondapur</option>
-              <option value="Jubilee Hills">Jubilee Hills</option>
+              {ourProjectLocations.map(loc => (
+                <option key={loc} value={loc}>{loc}</option>
+              ))}
             </select>
             <select
-              value={ourProjectsFilters.property_type}
-              onChange={(e) => setOurProjectsFilters(prev => ({...prev, property_type: e.target.value}))}
+              value={ourProjectsFilters.facing}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, facing: e.target.value}))}
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
-              <option value="">All Types</option>
-              <option value="Villa">Villa</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Commercial">Commercial</option>
+              <option value="">All Facing</option>
+              {ourProjectFacings.map(facing => (
+                <option key={facing} value={facing}>{facing}</option>
+              ))}
+            </select>
+            <select
+              value={ourProjectsFilters.status}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, status: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Status</option>
+              {ourProjectStatuses.map(status => (
+                <option key={status} value={status}>{status}</option>
+              ))}
+            </select>
+            <select
+              value={ourProjectsFilters.plot_size}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, plot_size: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Plot Sizes</option>
+              {ourProjectPlotSizes.map(size => (
+                <option key={size} value={size}>{size} Sq.Yds</option>
+              ))}
+            </select>
+            <select
+              value={ourProjectsFilters.built_up_area}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, built_up_area: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Built-up Areas</option>
+              {ourProjectBuiltUpAreas.map(area => (
+                <option key={area} value={area}>{area} Sq.Ft</option>
+              ))}
             </select>
           </div>
 
