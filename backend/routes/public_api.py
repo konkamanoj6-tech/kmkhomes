@@ -4,7 +4,7 @@ from services.database import (
     properties_db, home_banners_db, about_sections_db, team_members_db,
     amenities_db, upcoming_projects_db, testimonials_db, news_events_db,
     nri_content_db, contact_info_db, site_settings_db, contact_submissions_db,
-    our_projects_db, budget_homes_db
+    our_projects_db, budget_homes_db, plots_db
 )
 from models.cms_models import Property, ContactSubmissionCreate, ContactSubmission
 from datetime import datetime
