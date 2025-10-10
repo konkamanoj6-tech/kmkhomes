@@ -47,6 +47,11 @@ const AdminLayout = () => {
       icon: HomeIcon
     },
     {
+      name: 'Plots',
+      href: '/admin/plots',
+      icon: Square
+    },
+    {
       name: 'Home Banners',
       href: '/admin/banners',
       icon: Image
