@@ -233,6 +233,31 @@ async def get_plots(
     )
     return plots
 
+
+@router.get("/our-projects/{project_id}")
+async def get_our_project_detail(project_id: str):
+    """Get single our project details."""
+    project = await our_projects_db.get_by_id(project_id)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return project
+
+@router.get("/budget-homes/{home_id}")
+async def get_budget_home_detail(home_id: str):
+    """Get single budget home details."""
+    home = await budget_homes_db.get_by_id(home_id)
+    if not home:
+        raise HTTPException(status_code=404, detail="Home not found")
+    return home
+
+@router.get("/plots/{plot_id}")
+async def get_plot_detail(plot_id: str):
+    """Get single plot details."""
+    plot = await plots_db.get_by_id(plot_id)
+    if not plot:
+        raise HTTPException(status_code=404, detail="Plot not found")
+    return plot
+
 @router.post("/contact-form")
 async def submit_contact_form(submission: ContactSubmissionCreate):
     """Submit contact form."""
