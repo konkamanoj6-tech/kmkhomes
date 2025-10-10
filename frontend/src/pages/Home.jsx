@@ -48,19 +48,31 @@ const Home = () => {
 
   const fetchHomeData = async () => {
     try {
-      const [bannersRes, allPropertiesRes, testimonialsRes] = await Promise.all([
+      const [
+        bannersRes, 
+        allPropertiesRes, 
+        ourProjectsRes,
+        budgetHomesRes,
+        plotsRes,
+        testimonialsRes
+      ] = await Promise.all([
         publicApi.getHomeBanners(),
         publicApi.getProperties(),
+        publicApi.getOurProjects({ featured: true }),
+        publicApi.getBudgetHomes({ featured: true }),
+        publicApi.getPlots({ featured: true }),
         publicApi.getTestimonials({ featured: true, limit: 3 })
       ]);
 
       const properties = allPropertiesRes.data || [];
       setHomeBanners(bannersRes.data);
       setAllProperties(properties);
-      setFeaturedProperties(properties.filter(p => p.featured).slice(0, 6));
+      setOurProjects((ourProjectsRes.data || []).slice(0, 4));
+      setBudgetHomes((budgetHomesRes.data || []).slice(0, 4));
+      setPlots((plotsRes.data || []).slice(0, 4));
       setTestimonials(testimonialsRes.data);
 
-      // Calculate dynamic ranges from actual property data
+      // Calculate dynamic ranges from actual property data for villa finder
       if (properties.length > 0) {
         const plotSizes = properties.map(p => p.plot_size).filter(size => size);
         const builtUpAreas = properties.map(p => p.built_up_area).filter(area => area);
