@@ -43,22 +43,11 @@ const Projects = () => {
     }
   };
 
-  // Filter options
-  const statusOptions = [...new Set(properties.map(p => p.status))];
-  const facingOptions = [...new Set(properties.map(p => p.facing))];
-  const locationOptions = [...new Set(properties.map(p => p.location))];
-
-  const plotSizeRanges = [
-    { label: '1500-2000 Sq.Yds', value: '1500-2000' },
-    { label: '2000-2500 Sq.Yds', value: '2000-2500' },
-    { label: '2500+ Sq.Yds', value: '2500+' }
-  ];
-
-  const builtUpAreaRanges = [
-    { label: '2000-2500 Sq.Ft', value: '2000-2500' },
-    { label: '2500-3000 Sq.Ft', value: '2500-3000' },
-    { label: '3000+ Sq.Ft', value: '3000+' }
-  ];
+  // Get current data based on active tab
+  const currentData = activeTab === 'our-projects' ? ourProjects : budgetHomes;
+  
+  // Filter options based on current data
+  const locationOptions = [...new Set(currentData.map(p => p.location))].filter(Boolean);
 
   // Filter properties based on selected filters
   const filteredProperties = useMemo(() => {
