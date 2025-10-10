@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, ArrowRight, Filter, Building2, Ruler } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { MapPin, ArrowRight, Filter, Building2, Ruler, Square, Play } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -8,44 +8,80 @@ import { publicApi } from '../services/api';
 import { getImageUrl } from '../utils/imageUtils';
 
 const Projects = () => {
+  const location = useLocation();
   const [ourProjects, setOurProjects] = useState([]);
   const [budgetHomes, setBudgetHomes] = useState([]);
+  const [plots, setPlots] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('our-projects');
+  
+  // Check if there's a tab parameter in URL hash or default to 'our-projects'
+  const getInitialTab = () => {
+    const hash = location.hash.replace('#', '');
+    if (['our-projects', 'budget-homes', 'plots'].includes(hash)) {
+      return hash;
+    }
+    return 'our-projects';
+  };
+  
+  const [activeTab, setActiveTab] = useState(getInitialTab());
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     location: '',
     price_range: '',
-    property_type: ''
+    property_type: '',
+    status: ''
   });
 
   const priceRangeOptions = ['Affordable', 'Mid-range', 'Premium'];
   const propertyTypeOptions = ['Apartment', 'Villa', 'Plot', 'Commercial'];
+  const statusOptions = ['Available', 'Sold', 'Upcoming'];
 
   useEffect(() => {
     fetchProjectsData();
   }, []);
 
+  // Update tab when location hash changes
+  useEffect(() => {
+    const hash = location.hash.replace('#', '');
+    if (['our-projects', 'budget-homes', 'plots'].includes(hash)) {
+      setActiveTab(hash);
+      // Clear filters when tab changes
+      setFilters({
+        location: '',
+        price_range: '',
+        property_type: '',
+        status: ''
+      });
+    }
+  }, [location.hash]);
+
   const fetchProjectsData = async () => {
     try {
-      const [ourProjectsRes, budgetHomesRes] = await Promise.all([
+      const [ourProjectsRes, budgetHomesRes, plotsRes] = await Promise.all([
         publicApi.getOurProjects(),
-        publicApi.getBudgetHomes()
+        publicApi.getBudgetHomes(),
+        publicApi.getPlots()
       ]);
       
       setOurProjects(ourProjectsRes.data || []);
       setBudgetHomes(budgetHomesRes.data || []);
+      setPlots(plotsRes.data || []);
     } catch (error) {
       console.error('Error fetching projects data:', error);
       setOurProjects([]);
       setBudgetHomes([]);
+      setPlots([]);
     } finally {
       setLoading(false);
     }
   };
 
   // Get current data based on active tab
-  const currentData = activeTab === 'our-projects' ? ourProjects : budgetHomes;
+  const currentData = activeTab === 'our-projects' 
+    ? ourProjects 
+    : activeTab === 'budget-homes' 
+    ? budgetHomes 
+    : plots;
   
   // Filter options based on current data
   const locationOptions = [...new Set(currentData.map(p => p.location))].filter(Boolean);
