@@ -113,7 +113,8 @@ const Projects = () => {
     setFilters({
       location: '',
       price_range: '',
-      property_type: ''
+      property_type: '',
+      status: ''
     });
   };
 
