@@ -301,65 +301,92 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Featured Properties */}
-      <section className="py-20 bg-kmk-background">
+      {/* Our Projects Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-kmk-navy mb-4">Featured Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-kmk-navy mb-4">Our Projects</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Discover our premium villa collection with exceptional designs, 
-              modern amenities, and prime locations.
+              Discover our flagship developments designed with modern architecture and premium amenities.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProperties.map((property) => (
-              <Card key={property._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0">
+          {/* Mini Filters for Our Projects */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <select
+              value={ourProjectsFilters.location}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, location: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Locations</option>
+              <option value="Gachibowli">Gachibowli</option>
+              <option value="Kondapur">Kondapur</option>
+              <option value="Jubilee Hills">Jubilee Hills</option>
+            </select>
+            <select
+              value={ourProjectsFilters.property_type}
+              onChange={(e) => setOurProjectsFilters(prev => ({...prev, property_type: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Types</option>
+              <option value="Villa">Villa</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {ourProjects.map((project) => (
+              <Card key={project._id} className="group overflow-hidden border-0 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" 
+                    style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                 <div className="relative overflow-hidden">
                   <img
-                    src={getImageUrl(property.gallery_images[0])}
-                    alt={property.villa_number}
-                    className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                    src={getImageUrl(project.thumbnail_image)}
+                    alt={project.project_name}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                    style={{ transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' }}
                   />
-                  <Badge className={`absolute top-4 left-4 ${
-                    property.status === 'Available' 
-                      ? 'bg-green-500 hover:bg-green-600' 
-                      : 'bg-gray-500 hover:bg-gray-600'
+                  <Badge className={`absolute top-3 left-3 ${
+                    project.price_range === 'Affordable' ? 'bg-green-500' :
+                    project.price_range === 'Mid-range' ? 'bg-blue-500' :
+                    'bg-purple-500'
                   }`}>
-                    {property.status}
+                    {project.price_range}
                   </Badge>
+                  
+                  {project.youtube_link && (
+                    <Button
+                      onClick={() => window.open(project.youtube_link, '_blank')}
+                      size="sm"
+                      className="absolute bottom-3 right-3 bg-red-600 hover:bg-red-700 text-white shadow-lg transform hover:scale-110 transition-all duration-300"
+                    >
+                      <Play size={12} className="mr-1" />
+                      Tour
+                    </Button>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
                 
                 <CardContent className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-bold text-kmk-navy">{property.villa_number}</h3>
-                    <span className="text-lg font-bold text-kmk-gold">{property.price_range}</span>
+                  <h3 className="text-lg font-bold text-kmk-navy mb-2 group-hover:text-kmk-gold transition-colors duration-300">
+                    {project.project_name}
+                  </h3>
+                  
+                  <div className="flex items-center text-gray-600 mb-3">
+                    <MapPin size={14} className="mr-2 text-kmk-gold" />
+                    <span className="text-sm">{project.location}</span>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 mb-4">
-                    <MapPin size={16} className="mr-2 flex-shrink-0" />
-                    <span className="text-sm">{property.location}</span>
-                  </div>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                    {project.short_description}
+                  </p>
                   
-                  <div className="grid grid-cols-2 gap-4 mb-6 text-sm">
-                    <div className="flex items-center">
-                      <Ruler size={16} className="mr-2 text-kmk-gold" />
-                      <span>{property.plot_size} Sq.Yds</span>
-                    </div>
-                    <div className="flex items-center">
-                      <HomeIcon size={16} className="mr-2 text-kmk-gold" />
-                      <span>{property.built_up_area} Sq.Ft</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Compass size={16} className="mr-2 text-kmk-gold" />
-                      <span>{property.facing} Facing</span>
-                    </div>
-                  </div>
-                  
-                  <Button asChild className="w-full bg-kmk-navy hover:bg-kmk-navy/90">
-                    <Link to={`/property/${property._id}`}>
-                      View Details <ArrowRight size={16} className="ml-2" />
-                    </Link>
+                  <Button 
+                    asChild 
+                    className="w-full bg-kmk-navy hover:bg-kmk-navy/90 text-white transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Link to="/contact">Get Details</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -369,6 +396,215 @@ const Home = () => {
           <div className="text-center mt-12">
             <Button asChild size="lg" variant="outline" className="border-kmk-navy text-kmk-navy hover:bg-kmk-navy hover:text-white">
               <Link to="/projects">View All Projects</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Homes for Every Budget Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-kmk-navy mb-4">Homes for Every Budget</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Explore carefully curated homes from trusted builders that offer great value for money.
+            </p>
+          </div>
+
+          {/* Mini Filters for Budget Homes */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <select
+              value={budgetHomesFilters.price_range}
+              onChange={(e) => setBudgetHomesFilters(prev => ({...prev, price_range: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Price Ranges</option>
+              <option value="Affordable">Affordable</option>
+              <option value="Mid-range">Mid-range</option>
+              <option value="Premium">Premium</option>
+            </select>
+            <select
+              value={budgetHomesFilters.property_type}
+              onChange={(e) => setBudgetHomesFilters(prev => ({...prev, property_type: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Types</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="Plot">Plot</option>
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {budgetHomes.map((home) => (
+              <Card key={home._id} className="group overflow-hidden border-0 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" 
+                    style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={getImageUrl(home.thumbnail_image)}
+                    alt={home.project_name}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                    style={{ transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  />
+                  <Badge className={`absolute top-3 left-3 ${
+                    home.price_range === 'Affordable' ? 'bg-green-500' :
+                    home.price_range === 'Mid-range' ? 'bg-blue-500' :
+                    'bg-purple-500'
+                  }`}>
+                    {home.price_range}
+                  </Badge>
+                  
+                  {home.youtube_link && (
+                    <Button
+                      onClick={() => window.open(home.youtube_link, '_blank')}
+                      size="sm"
+                      className="absolute bottom-3 right-3 bg-red-600 hover:bg-red-700 text-white shadow-lg transform hover:scale-110 transition-all duration-300"
+                    >
+                      <Play size={12} className="mr-1" />
+                      Tour
+                    </Button>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold text-kmk-navy mb-2 group-hover:text-kmk-gold transition-colors duration-300">
+                    {home.project_name}
+                  </h3>
+                  
+                  <div className="flex items-center text-gray-600 mb-3">
+                    <MapPin size={14} className="mr-2 text-kmk-gold" />
+                    <span className="text-sm">{home.location}</span>
+                  </div>
+                  
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                    {home.short_description}
+                  </p>
+                  
+                  <Button 
+                    asChild 
+                    className="w-full bg-kmk-gold hover:bg-kmk-gold/90 text-white transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Link to="/contact">Get Details</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button asChild size="lg" variant="outline" className="border-kmk-gold text-kmk-gold hover:bg-kmk-gold hover:text-white">
+              <Link to="/projects">View More Homes</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Find Your Perfect Plot Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-kmk-navy mb-4">Find Your Perfect Plot</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Discover premium plots and land investments in prime locations with excellent connectivity.
+            </p>
+          </div>
+
+          {/* Mini Filters for Plots */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <select
+              value={plotsFilters.location}
+              onChange={(e) => setPlotsFilters(prev => ({...prev, location: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Locations</option>
+              <option value="Gachibowli">Gachibowli</option>
+              <option value="Kondapur">Kondapur</option>
+              <option value="Shamshabad">Shamshabad</option>
+            </select>
+            <select
+              value={plotsFilters.status}
+              onChange={(e) => setPlotsFilters(prev => ({...prev, status: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Status</option>
+              <option value="Available">Available</option>
+              <option value="Upcoming">Upcoming</option>
+            </select>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {plots.map((plot) => (
+              <Card key={plot._id} className="group overflow-hidden border-0 bg-white shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2" 
+                    style={{ transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={getImageUrl(plot.main_image)}
+                    alt={plot.title}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                    style={{ transition: 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  />
+                  <Badge className={`absolute top-3 left-3 ${
+                    plot.status === 'Available' ? 'bg-green-500' :
+                    plot.status === 'Sold' ? 'bg-red-500' :
+                    'bg-blue-500'
+                  }`}>
+                    {plot.status}
+                  </Badge>
+                  
+                  {plot.youtube_link && (
+                    <Button
+                      onClick={() => window.open(plot.youtube_link, '_blank')}
+                      size="sm"
+                      className="absolute bottom-3 right-3 bg-red-600 hover:bg-red-700 text-white shadow-lg transform hover:scale-110 transition-all duration-300"
+                    >
+                      <Play size={12} className="mr-1" />
+                      Tour
+                    </Button>
+                  )}
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-bold text-kmk-navy mb-2 group-hover:text-kmk-gold transition-colors duration-300">
+                    {plot.title}
+                  </h3>
+                  
+                  <div className="flex items-center text-gray-600 mb-3">
+                    <MapPin size={14} className="mr-2 text-kmk-gold" />
+                    <span className="text-sm">{plot.location}</span>
+                  </div>
+
+                  <div className="space-y-1 mb-4 text-sm">
+                    {plot.area_sqyds && (
+                      <div className="flex items-center text-gray-600">
+                        <Ruler size={14} className="mr-2 text-kmk-gold" />
+                        <span>{plot.area_sqyds} Sq.Yds</span>
+                      </div>
+                    )}
+                    <div className="font-semibold text-kmk-gold">{plot.price_range}</div>
+                  </div>
+                  
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-2 opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                    {plot.short_description}
+                  </p>
+                  
+                  <Button 
+                    asChild 
+                    className="w-full bg-green-600 hover:bg-green-700 text-white transform hover:scale-105 transition-all duration-300"
+                  >
+                    <Link to="/contact">Get Details</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button asChild size="lg" variant="outline" className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
+              <Link to="/projects">Explore Plots</Link>
             </Button>
           </div>
         </div>
