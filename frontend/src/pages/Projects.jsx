@@ -369,13 +369,32 @@ const Projects = () => {
                   <CardContent className="p-6">
                     <div className="mb-4">
                       <h3 className="text-xl font-bold text-kmk-navy mb-2 group-hover:text-kmk-gold transition-colors duration-200">
-                        {project.project_name}
+                        {activeTab === 'plots' ? project.title : project.project_name}
                       </h3>
                       
                       <div className="flex items-center text-gray-600 mb-3">
                         <MapPin size={16} className="mr-2 flex-shrink-0 text-kmk-gold" />
                         <span className="text-sm">{project.location}</span>
                       </div>
+
+                      {/* Show plot details for plots */}
+                      {activeTab === 'plots' && (
+                        <div className="space-y-1 mb-3 text-sm text-gray-600">
+                          {project.area_sqyds && (
+                            <div className="flex items-center">
+                              <Square size={14} className="mr-2 text-kmk-gold" />
+                              <span>{project.area_sqyds} Sq.Yds</span>
+                            </div>
+                          )}
+                          {project.area_sqft && (
+                            <div className="flex items-center">
+                              <Ruler size={14} className="mr-2 text-kmk-gold" />
+                              <span>{project.area_sqft} Sq.Ft</span>
+                            </div>
+                          )}
+                          <div className="font-semibold text-kmk-gold">{project.price_range}</div>
+                        </div>
+                      )}
                     </div>
                     
                     <p className="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity duration-200">
