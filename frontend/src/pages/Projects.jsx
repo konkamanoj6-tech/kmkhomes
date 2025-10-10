@@ -8,30 +8,36 @@ import { publicApi } from '../services/api';
 import { getImageUrl } from '../utils/imageUtils';
 
 const Projects = () => {
-  const [filters, setFilters] = useState({
-    status: '',
-    facing: '',
-    plotSizeRange: '',
-    builtUpAreaRange: '',
-    location: '',
-    searchTerm: ''
-  });
-  const [showFilters, setShowFilters] = useState(false);
-  const [properties, setProperties] = useState([]);
+  const [ourProjects, setOurProjects] = useState([]);
+  const [budgetHomes, setBudgetHomes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('our-projects');
+  const [filters, setFilters] = useState({
+    location: '',
+    price_range: '',
+    property_type: ''
+  });
+
+  const priceRangeOptions = ['Affordable', 'Mid-range', 'Premium'];
+  const propertyTypeOptions = ['Apartment', 'Villa', 'Plot', 'Commercial'];
 
   useEffect(() => {
-    fetchProperties();
+    fetchProjectsData();
   }, []);
 
-  const fetchProperties = async () => {
+  const fetchProjectsData = async () => {
     try {
-      const response = await publicApi.getProperties();
-      console.log('Properties API response:', response.data);
-      setProperties(response.data || []);
+      const [ourProjectsRes, budgetHomesRes] = await Promise.all([
+        publicApi.getOurProjects(),
+        publicApi.getBudgetHomes()
+      ]);
+      
+      setOurProjects(ourProjectsRes.data || []);
+      setBudgetHomes(budgetHomesRes.data || []);
     } catch (error) {
-      console.error('Error fetching properties:', error);
-      setProperties([]);
+      console.error('Error fetching projects data:', error);
+      setOurProjects([]);
+      setBudgetHomes([]);
     } finally {
       setLoading(false);
     }
