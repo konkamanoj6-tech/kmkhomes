@@ -568,9 +568,19 @@ const Home = () => {
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
               <option value="">All Locations</option>
-              <option value="Gachibowli">Gachibowli</option>
-              <option value="Kondapur">Kondapur</option>
-              <option value="Shamshabad">Shamshabad</option>
+              {plotLocations.map(loc => (
+                <option key={loc} value={loc}>{loc}</option>
+              ))}
+            </select>
+            <select
+              value={plotsFilters.facing}
+              onChange={(e) => setPlotsFilters(prev => ({...prev, facing: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Facing</option>
+              {plotFacings.map(facing => (
+                <option key={facing} value={facing}>{facing}</option>
+              ))}
             </select>
             <select
               value={plotsFilters.status}
@@ -578,8 +588,19 @@ const Home = () => {
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
               <option value="">All Status</option>
-              <option value="Available">Available</option>
-              <option value="Upcoming">Upcoming</option>
+              {plotStatuses.map(status => (
+                <option key={status} value={status}>{status}</option>
+              ))}
+            </select>
+            <select
+              value={plotsFilters.plot_size}
+              onChange={(e) => setPlotsFilters(prev => ({...prev, plot_size: e.target.value}))}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+            >
+              <option value="">All Plot Sizes</option>
+              {plotSizes.map(size => (
+                <option key={size} value={size}>{size} Sq.Yds</option>
+              ))}
             </select>
           </div>
 
