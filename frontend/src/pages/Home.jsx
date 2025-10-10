@@ -16,12 +16,31 @@ const Home = () => {
     builtUpArea: ''
   });
   const [homeBanners, setHomeBanners] = useState([]);
-  const [featuredProperties, setFeaturedProperties] = useState([]);
+  const [ourProjects, setOurProjects] = useState([]);
+  const [budgetHomes, setBudgetHomes] = useState([]);
+  const [plots, setPlots] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [allProperties, setAllProperties] = useState([]);
   const [plotSizeRanges, setPlotSizeRanges] = useState([]);
   const [builtUpAreaRanges, setBuiltUpAreaRanges] = useState([]);
   const [loading, setLoading] = useState(true);
+  
+  // Filters for each section
+  const [ourProjectsFilters, setOurProjectsFilters] = useState({
+    location: '',
+    property_type: '',
+    status: ''
+  });
+  
+  const [budgetHomesFilters, setBudgetHomesFilters] = useState({
+    price_range: '',
+    property_type: ''
+  });
+  
+  const [plotsFilters, setPlotsFilters] = useState({
+    location: '',
+    status: ''
+  });
 
   useEffect(() => {
     fetchHomeData();
