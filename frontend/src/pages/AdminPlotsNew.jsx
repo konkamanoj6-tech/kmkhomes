@@ -42,7 +42,6 @@ const AdminPlots = () => {
     display_order: 1
   });
   const [uploading, setUploading] = useState(false);
-  const [newAmenity, setNewAmenity] = useState('');
   const [newGalleryImage, setNewGalleryImage] = useState('');
 
   useEffect(() => {
