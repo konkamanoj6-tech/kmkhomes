@@ -268,3 +268,71 @@ class ContactSubmissionCreate(BaseModel):
     property_interest: Optional[str] = None
     visit_date: Optional[str] = None
     message: str
+
+# Our Projects Model (In-house projects)
+class OurProject(BaseDocument):
+    project_name: str
+    location: str
+    price_range: str = Field(..., description="Affordable, Mid-range, Premium")
+    property_type: str = Field(..., description="Apartment, Villa, Plot, Commercial")
+    short_description: str
+    thumbnail_image: str
+    youtube_link: Optional[str] = None
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+    active: bool = Field(default=True)
+
+class OurProjectCreate(BaseModel):
+    project_name: str
+    location: str
+    price_range: str
+    property_type: str
+    short_description: str
+    thumbnail_image: str
+    youtube_link: Optional[str] = None
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+
+# Homes for Every Budget Model (External projects)
+class BudgetHome(BaseDocument):
+    project_name: str
+    location: str
+    price_range: str = Field(..., description="Affordable, Mid-range, Premium")
+    property_type: str = Field(..., description="Apartment, Villa, Plot, Commercial")
+    short_description: str
+    thumbnail_image: str
+    youtube_link: Optional[str] = None
+    builder_name: str = Field(..., description="Internal use only - not displayed")
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+    active: bool = Field(default=True)
+
+class BudgetHomeCreate(BaseModel):
+    project_name: str
+    location: str
+    price_range: str
+    property_type: str
+    short_description: str
+    thumbnail_image: str
+    youtube_link: Optional[str] = None
+    builder_name: str
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+
+# Amenity Model
+class Amenity(BaseDocument):
+    name: str
+    description: Optional[str] = None
+    icon_url: Optional[str] = None
+    category: str = Field(default="general")
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+    active: bool = Field(default=True)
+
+class AmenityCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+    icon_url: Optional[str] = None
+    category: str = Field(default="general")
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
