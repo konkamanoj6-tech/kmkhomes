@@ -152,6 +152,54 @@ async def get_site_setting(key: str):
     setting = await site_settings_db.get_one({"setting_key": key})
     return setting
 
+@router.get("/our-projects")
+async def get_our_projects(
+    location: Optional[str] = Query(None),
+    price_range: Optional[str] = Query(None),
+    property_type: Optional[str] = Query(None),
+    featured: Optional[bool] = Query(None)
+):
+    """Get our projects with optional filters."""
+    filters = {"active": True}
+    if location:
+        filters["location"] = {"$regex": location, "$options": "i"}
+    if price_range:
+        filters["price_range"] = price_range
+    if property_type:
+        filters["property_type"] = property_type
+    if featured is not None:
+        filters["featured"] = featured
+    
+    projects = await our_projects_db.get_all(
+        filters=filters,
+        sort=[("featured", -1), ("display_order", 1)]
+    )
+    return projects
+
+@router.get("/budget-homes")
+async def get_budget_homes(
+    location: Optional[str] = Query(None),
+    price_range: Optional[str] = Query(None),
+    property_type: Optional[str] = Query(None),
+    featured: Optional[bool] = Query(None)
+):
+    """Get budget homes with optional filters."""
+    filters = {"active": True}
+    if location:
+        filters["location"] = {"$regex": location, "$options": "i"}
+    if price_range:
+        filters["price_range"] = price_range
+    if property_type:
+        filters["property_type"] = property_type
+    if featured is not None:
+        filters["featured"] = featured
+    
+    homes = await budget_homes_db.get_all(
+        filters=filters,
+        sort=[("featured", -1), ("display_order", 1)]
+    )
+    return homes
+
 @router.post("/contact-form")
 async def submit_contact_form(submission: ContactSubmissionCreate):
     """Submit contact form."""
