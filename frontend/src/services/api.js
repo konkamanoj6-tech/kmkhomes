@@ -40,12 +40,15 @@ export const publicApi = {
 
   // Our Projects (Public)
   getOurProjects: (params) => api.get('/our-projects', { params }),
+  getOurProjectDetail: (id) => api.get(`/our-projects/${id}`),
 
   // Budget Homes (Public) 
   getBudgetHomes: (params) => api.get('/budget-homes', { params }),
+  getBudgetHomeDetail: (id) => api.get(`/budget-homes/${id}`),
 
   // Plots (Public)
   getPlots: (params) => api.get('/plots', { params }),
+  getPlotDetail: (id) => api.get(`/plots/${id}`),
 };
 
 // Admin API calls (requires authentication)
