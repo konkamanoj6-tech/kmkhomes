@@ -494,38 +494,6 @@ const AdminPlots = () => {
                 </div>
               </div>
 
-              {/* Amenities */}
-              <div className="border-b pb-4">
-                <h3 className="text-lg font-semibold mb-4">Amenities</h3>
-                <div className="flex gap-2 mb-2">
-                  <input
-                    type="text"
-                    value={newAmenity}
-                    onChange={(e) => setNewAmenity(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addAmenity())}
-                    className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., Swimming Pool"
-                  />
-                  <Button type="button" onClick={addAmenity} variant="outline">
-                    <Plus size={16} />
-                  </Button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {formData.amenities.map((amenity, index) => (
-                    <Badge key={index} variant="outline" className="px-3 py-1">
-                      {amenity}
-                      <button
-                        type="button"
-                        onClick={() => removeAmenity(index)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        <X size={12} />
-                      </button>
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
               {/* Links */}
               <div className="border-b pb-4">
                 <h3 className="text-lg font-semibold mb-4">Links</h3>
