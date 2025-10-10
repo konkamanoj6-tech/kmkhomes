@@ -7,7 +7,7 @@ import requests
 import json
 
 def test_specific_issues():
-    base_url = "https://home-listing-cms.preview.emergentagent.com/api"
+    base_url = "https://realestate-admin-10.preview.emergentagent.com/api"
     
     print("Testing specific issues mentioned in review request...")
     print("=" * 60)
