@@ -116,9 +116,13 @@ const Projects = () => {
   const clearFilters = () => {
     setFilters({
       location: '',
+      status: '',
+      plot_size: '',
+      built_up_area: '',
+      facing: '',
+      price: '',
       price_range: '',
-      property_type: '',
-      status: ''
+      property_type: ''
     });
   };
 
