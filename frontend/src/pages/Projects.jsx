@@ -27,9 +27,13 @@ const Projects = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     location: '',
+    status: '',
+    plot_size: '',
+    built_up_area: '',
+    facing: '',
+    price: '',
     price_range: '',
-    property_type: '',
-    status: ''
+    property_type: ''
   });
 
   const priceRangeOptions = ['Affordable', 'Mid-range', 'Premium'];
