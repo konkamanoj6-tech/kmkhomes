@@ -740,14 +740,14 @@ const AdminBudgetHomes = () => {
         <Card className="border-0 shadow-lg">
           <CardContent className="p-12 text-center">
             <Building2 size={48} className="mx-auto text-gray-400 mb-4" />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">No Projects Yet</h3>
-            <p className="text-gray-500 mb-6">Add your first in-house project to showcase KMK Homes portfolio.</p>
+            <h3 className="text-xl font-semibold text-gray-600 mb-2">No Budget Homes Yet</h3>
+            <p className="text-gray-500 mb-6">Add your first budget home from partner builders.</p>
             <Button
               onClick={() => setShowForm(true)}
               className="bg-kmk-navy hover:bg-kmk-navy/90"
             >
               <Plus size={16} className="mr-2" />
-              Add First Project
+              Add First Home
             </Button>
           </CardContent>
         </Card>
