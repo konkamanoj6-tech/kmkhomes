@@ -279,12 +279,19 @@ const Projects = () => {
           {/* Section Header */}
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              {activeTab === 'our-projects' ? 'Our Premium Projects' : 'Homes for Every Budget'}
+              {activeTab === 'our-projects' 
+                ? 'Our Premium Projects' 
+                : activeTab === 'budget-homes'
+                ? 'Homes for Every Budget'
+                : 'Available Plots'
+              }
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {activeTab === 'our-projects' 
                 ? 'Discover our flagship developments designed with modern architecture and premium amenities.'
-                : 'Explore carefully curated homes from trusted builders that offer great value for money.'
+                : activeTab === 'budget-homes'
+                ? 'Explore carefully curated homes from trusted builders that offer great value for money.'
+                : 'Find premium plots and land investments in prime locations with excellent connectivity.'
               }
             </p>
           </div>
