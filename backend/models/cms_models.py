@@ -313,11 +313,19 @@ class OurProjectCreate(BaseModel):
 class BudgetHome(BaseDocument):
     project_name: str
     location: str
+    status: str = Field(..., description="Available, Sold Out, Coming Soon")
+    plot_size: Optional[int] = Field(None, description="Plot size in Sq. Yds")
+    built_up_area: Optional[int] = Field(None, description="Built-up area in Sq. Ft")
+    facing: Optional[str] = Field(None, description="East, West, North, South-East")
     price_range: str = Field(..., description="Affordable, Mid-range, Premium")
     property_type: str = Field(..., description="Apartment, Villa, Plot, Commercial")
-    short_description: str
+    description: str
     thumbnail_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    amenities: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
+    enquiry_link: Optional[str] = None
+    map_link: Optional[str] = None
     builder_name: str = Field(..., description="Internal use only - not displayed")
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
@@ -326,11 +334,19 @@ class BudgetHome(BaseDocument):
 class BudgetHomeCreate(BaseModel):
     project_name: str
     location: str
+    status: str
+    plot_size: Optional[int] = None
+    built_up_area: Optional[int] = None
+    facing: Optional[str] = None
     price_range: str
     property_type: str
-    short_description: str
+    description: str
     thumbnail_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    amenities: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
+    enquiry_link: Optional[str] = None
+    map_link: Optional[str] = None
     builder_name: str
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
