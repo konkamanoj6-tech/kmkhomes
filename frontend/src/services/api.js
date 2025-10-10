@@ -94,6 +94,18 @@ export const adminApi = {
   createAmenity: (data) => api.post('/admin/amenities', data),
   updateAmenity: (id, data) => api.put(`/admin/amenities/${id}`, data),
   deleteAmenity: (id) => api.delete(`/admin/amenities/${id}`),
+
+  // Our Projects
+  getOurProjects: () => api.get('/admin/our-projects'),
+  createOurProject: (data) => api.post('/admin/our-projects', data),
+  updateOurProject: (id, data) => api.put(`/admin/our-projects/${id}`, data),
+  deleteOurProject: (id) => api.delete(`/admin/our-projects/${id}`),
+
+  // Budget Homes
+  getBudgetHomes: () => api.get('/admin/budget-homes'),
+  createBudgetHome: (data) => api.post('/admin/budget-homes', data),
+  updateBudgetHome: (id, data) => api.put(`/admin/budget-homes/${id}`, data),
+  deleteBudgetHome: (id) => api.delete(`/admin/budget-homes/${id}`),
   
   // File Upload
   uploadFile: (file) => {
