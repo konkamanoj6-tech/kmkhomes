@@ -358,10 +358,14 @@ class Plot(BaseDocument):
     price_range: str
     area_sqyds: Optional[float] = Field(None, description="Area in Square Yards")
     area_sqft: Optional[float] = Field(None, description="Area in Square Feet")
-    short_description: str
+    price_per_sqyd: Optional[float] = Field(None, description="Price per Square Yard")
+    facing: Optional[str] = Field(None, description="East, West, North, South-East")
+    description: str
     main_image: str
     gallery_images: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
+    enquiry_link: Optional[str] = None
+    map_link: Optional[str] = None
     status: str = Field(default="Available", description="Available, Sold, Upcoming")
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
@@ -373,10 +377,14 @@ class PlotCreate(BaseModel):
     price_range: str
     area_sqyds: Optional[float] = None
     area_sqft: Optional[float] = None
-    short_description: str
+    price_per_sqyd: Optional[float] = None
+    facing: Optional[str] = None
+    description: str
     main_image: str
     gallery_images: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
+    enquiry_link: Optional[str] = None
+    map_link: Optional[str] = None
     status: str = Field(default="Available")
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
