@@ -109,6 +109,7 @@ const AdminOurProjects = () => {
       plot_size: project.plot_size || '',
       built_up_area: project.built_up_area || '',
       facing: project.facing || 'East',
+      price: project.price || '',
       price_range: project.price_range,
       property_type: project.property_type,
       description: project.description,
