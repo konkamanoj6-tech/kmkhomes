@@ -547,7 +547,7 @@ const AdminPlots = () => {
                   className="rounded border-gray-300 text-kmk-gold focus:ring-kmk-gold"
                 />
                 <label htmlFor="featured" className="text-sm font-medium text-gray-700">
-                  Featured Project (Show on homepage)
+                  Featured Plot (Show on homepage)
                 </label>
               </div>
 
