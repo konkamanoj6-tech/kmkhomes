@@ -454,3 +454,87 @@ async def admin_delete_amenity(
     if not success:
         raise HTTPException(status_code=404, detail="Amenity not found")
     return {"message": "Amenity deleted successfully"}
+
+# Our Projects CRUD
+@router.get("/our-projects")
+async def admin_get_our_projects(current_user: dict = Depends(get_current_admin_user)):
+    """Get all our projects."""
+    projects = await our_projects_db.get_all(sort=[("display_order", 1), ("created_at", -1)])
+    return projects
+
+@router.post("/our-projects")
+async def admin_create_our_project(
+    data: OurProjectCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create our project."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    project_id = await our_projects_db.create(data_dict)
+    return {"id": project_id, "message": "Project created successfully"}
+
+@router.put("/our-projects/{item_id}")
+async def admin_update_our_project(
+    item_id: str,
+    data: OurProjectCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update our project."""
+    success = await our_projects_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return {"message": "Project updated successfully"}
+
+@router.delete("/our-projects/{item_id}")
+async def admin_delete_our_project(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete our project."""
+    success = await our_projects_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Project not found")
+    return {"message": "Project deleted successfully"}
+
+# Budget Homes CRUD
+@router.get("/budget-homes")
+async def admin_get_budget_homes(current_user: dict = Depends(get_current_admin_user)):
+    """Get all budget homes."""
+    homes = await budget_homes_db.get_all(sort=[("display_order", 1), ("created_at", -1)])
+    return homes
+
+@router.post("/budget-homes")
+async def admin_create_budget_home(
+    data: BudgetHomeCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create budget home."""
+    data_dict = data.dict()
+    data_dict["created_at"] = datetime.utcnow()
+    data_dict["active"] = True
+    home_id = await budget_homes_db.create(data_dict)
+    return {"id": home_id, "message": "Budget home created successfully"}
+
+@router.put("/budget-homes/{item_id}")
+async def admin_update_budget_home(
+    item_id: str,
+    data: BudgetHomeCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update budget home."""
+    success = await budget_homes_db.update_by_id(item_id, data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Budget home not found")
+    return {"message": "Budget home updated successfully"}
+
+@router.delete("/budget-homes/{item_id}")
+async def admin_delete_budget_home(
+    item_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete budget home."""
+    success = await budget_homes_db.delete_by_id(item_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Budget home not found")
+    return {"message": "Budget home deleted successfully"}
