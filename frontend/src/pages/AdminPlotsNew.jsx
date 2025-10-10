@@ -579,8 +579,8 @@ const AdminPlots = () => {
           <Card key={project._id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
             <div className="relative">
               <img
-                src={getImageUrl(project.thumbnail_image)}
-                alt={project.project_name}
+                src={getImageUrl(project.main_image)}
+                alt={project.title}
                 className="w-full h-48 object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
