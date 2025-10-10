@@ -229,7 +229,7 @@ const AdminPlots = () => {
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>
-                {editingProject ? 'Edit Project' : 'Add New Project'}
+                {editingProject ? 'Edit Plot' : 'Add New Plot'}
               </CardTitle>
               <Button onClick={resetForm} variant="outline" size="sm">
                 <X size={16} />
