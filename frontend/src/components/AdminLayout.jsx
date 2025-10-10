@@ -16,7 +16,8 @@ import {
   Mail,
   Newspaper,
   Globe,
-  Zap
+  Zap,
+  Home as HomeIcon
 } from 'lucide-react';
 
 const AdminLayout = () => {
