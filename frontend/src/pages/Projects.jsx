@@ -84,11 +84,40 @@ const Projects = () => {
       {/* Header */}
       <section className="bg-kmk-navy text-white py-20">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Premium Projects</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">Our Projects</h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Discover our collection of luxury villas designed with modern architecture, 
-            premium amenities, and prime locations across Hyderabad.
+            Explore our premium developments and budget-friendly homes designed for modern living.
           </p>
+        </div>
+      </section>
+
+      {/* Tabs */}
+      <section className="bg-white border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex justify-center">
+            <div className="flex bg-gray-100 rounded-lg p-1">
+              <button
+                onClick={() => setActiveTab('our-projects')}
+                className={`px-6 py-3 rounded-md font-medium transition-all ${
+                  activeTab === 'our-projects'
+                    ? 'bg-kmk-navy text-white shadow-md'
+                    : 'text-gray-600 hover:text-kmk-navy'
+                }`}
+              >
+                Our Projects
+              </button>
+              <button
+                onClick={() => setActiveTab('budget-homes')}
+                className={`px-6 py-3 rounded-md font-medium transition-all ${
+                  activeTab === 'budget-homes'
+                    ? 'bg-kmk-navy text-white shadow-md'
+                    : 'text-gray-600 hover:text-kmk-navy'
+                }`}
+              >
+                Budget Homes
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
