@@ -612,29 +612,24 @@ const AdminPlots = () => {
             </div>
 
             <CardContent className="p-6">
-              <h3 className="text-lg font-bold text-kmk-navy mb-2">{project.project_name}</h3>
+              <h3 className="text-lg font-bold text-kmk-navy mb-2">{project.title}</h3>
               
               <div className="flex items-center text-gray-600 mb-3">
                 <MapPin size={14} className="mr-1" />
                 <span className="text-sm">{project.location}</span>
               </div>
 
-              {(project.plot_size || project.built_up_area) && (
+              {(project.area_sqyds || project.area_sqft) && (
                 <div className="text-sm text-gray-600 mb-3">
-                  {project.plot_size && <div>Plot: {project.plot_size} Sq.Yds</div>}
-                  {project.built_up_area && <div>Built-up: {project.built_up_area} Sq.Ft</div>}
+                  {project.area_sqyds && <div>Area: {project.area_sqyds} Sq.Yds</div>}
+                  {project.area_sqft && <div>Area: {project.area_sqft} Sq.Ft</div>}
+                  {project.price_per_sqyd && <div>Price/Sq.Yd: ₹{project.price_per_sqyd}</div>}
                 </div>
               )}
 
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                 {project.description}
               </p>
-
-              {project.amenities && project.amenities.length > 0 && (
-                <div className="mb-3">
-                  <p className="text-xs text-gray-500">Amenities: {project.amenities.length}</p>
-                </div>
-              )}
 
               <div className="flex space-x-2">
                 <Button
