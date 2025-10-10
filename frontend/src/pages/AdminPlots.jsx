@@ -6,48 +6,55 @@ import {
   Plus, 
   Edit, 
   Trash2, 
-  MapPin,
+  Building2,
   Save,
   X,
   Upload,
   Eye,
   Play,
-  Square
+  MapPin,
+  Image as ImageIcon
 } from 'lucide-react';
 import { adminApi } from '../services/api';
 
 const AdminPlots = () => {
-  const [plots, setPlots] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [editingPlot, setEditingPlot] = useState(null);
+  const [editingProject, setEditingProject] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     location: '',
-    price_range: '',
+    status: 'Available',
     area_sqyds: '',
     area_sqft: '',
-    short_description: '',
+    price_per_sqyd: '',
+    facing: 'East',
+    price: '',
+    price_range: 'Mid-range',
+    description: '',
     main_image: '',
     gallery_images: [],
     youtube_link: '',
-    status: 'Available',
+    enquiry_link: '',
+    map_link: '',
     featured: false,
     display_order: 1
   });
   const [uploading, setUploading] = useState(false);
+  const [newGalleryImage, setNewGalleryImage] = useState('');
 
   useEffect(() => {
-    fetchPlots();
+    fetchProjects();
   }, []);
 
-  const fetchPlots = async () => {
+  const fetchProjects = async () => {
     try {
       const response = await adminApi.getPlots();
-      setPlots(response.data || []);
+      setProjects(response.data || []);
     } catch (error) {
       console.error('Error fetching plots:', error);
-      setPlots([]);
+      setProjects([]);
     } finally {
       setLoading(false);
     }
@@ -60,28 +67,31 @@ const AdminPlots = () => {
       const submitData = {
         ...formData,
         area_sqyds: formData.area_sqyds ? parseFloat(formData.area_sqyds) : null,
-        area_sqft: formData.area_sqft ? parseFloat(formData.area_sqft) : null
+        area_sqft: formData.area_sqft ? parseFloat(formData.area_sqft) : null,
+        price_per_sqyd: formData.price_per_sqyd ? parseFloat(formData.price_per_sqyd) : null
       };
 
-      if (editingPlot) {
-        await adminApi.updatePlot(editingPlot._id, submitData);
+      if (editingProject) {
+        await adminApi.updatePlot(editingProject._id, submitData);
       } else {
         await adminApi.createPlot(submitData);
       }
 
-      await fetchPlots();
+      await fetchProjects();
       resetForm();
+      alert('Project saved successfully!');
     } catch (error) {
-      console.error('Error saving plot:', error);
-      alert('Error saving plot. Please try again.');
+      console.error('Error saving our project:', error);
+      alert('Error saving project: ' + (error.response?.data?.detail || error.message));
     }
   };
 
-  const handleDelete = async (plotId) => {
+  const handleDelete = async (projectId) => {
     if (window.confirm('Are you sure you want to delete this plot?')) {
       try {
-        await adminApi.deletePlot(plotId);
-        await fetchPlots();
+        await adminApi.deletePlot(projectId);
+        await fetchProjects();
+        alert('Plot deleted successfully!');
       } catch (error) {
         console.error('Error deleting plot:', error);
         alert('Error deleting plot. Please try again.');
@@ -89,21 +99,26 @@ const AdminPlots = () => {
     }
   };
 
-  const handleEdit = (plot) => {
-    setEditingPlot(plot);
+  const handleEdit = (project) => {
+    setEditingProject(project);
     setFormData({
-      title: plot.title,
-      location: plot.location,
-      price_range: plot.price_range,
-      area_sqyds: plot.area_sqyds || '',
-      area_sqft: plot.area_sqft || '',
-      short_description: plot.short_description,
-      main_image: plot.main_image,
-      gallery_images: plot.gallery_images || [],
-      youtube_link: plot.youtube_link || '',
-      status: plot.status,
-      featured: plot.featured,
-      display_order: plot.display_order
+      title: project.title,
+      location: project.location,
+      status: project.status,
+      area_sqyds: project.area_sqyds || '',
+      area_sqft: project.area_sqft || '',
+      price_per_sqyd: project.price_per_sqyd || '',
+      facing: project.facing || 'East',
+      price: project.price || '',
+      price_range: project.price_range,
+      description: project.description,
+      main_image: project.main_image,
+      gallery_images: project.gallery_images || [],
+      youtube_link: project.youtube_link || '',
+      enquiry_link: project.enquiry_link || '',
+      map_link: project.map_link || '',
+      featured: project.featured,
+      display_order: project.display_order
     });
     setShowForm(true);
   };
@@ -112,44 +127,79 @@ const AdminPlots = () => {
     setFormData({
       title: '',
       location: '',
-      price_range: '',
+      status: 'Available',
       area_sqyds: '',
       area_sqft: '',
-      short_description: '',
+      price_per_sqyd: '',
+      facing: 'East',
+      price: '',
+      price_range: 'Mid-range',
+      description: '',
       main_image: '',
       gallery_images: [],
       youtube_link: '',
-      status: 'Available',
+      enquiry_link: '',
+      map_link: '',
       featured: false,
       display_order: 1
     });
-    setEditingPlot(null);
+    setEditingProject(null);
     setShowForm(false);
+    setNewGalleryImage('');
   };
 
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = async (e, fieldName = 'main_image') => {
     const file = e.target.files[0];
     if (!file) return;
+
+    // Check file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert('File size should not exceed 5MB');
+      return;
+    }
 
     setUploading(true);
     try {
       const response = await adminApi.uploadFile(file);
-      setFormData(prev => ({
-        ...prev,
-        main_image: response.data.file_url
-      }));
+      const imageUrl = response.data.file_url;
+      
+      if (fieldName === 'main_image') {
+        setFormData(prev => ({
+          ...prev,
+          main_image: imageUrl
+        }));
+      }
+      alert('Image uploaded successfully!');
     } catch (error) {
       console.error('Error uploading image:', error);
-      alert('Error uploading image. Please try again.');
+      alert('Error uploading image: ' + (error.response?.data?.detail || error.message));
     } finally {
       setUploading(false);
     }
   };
 
-  const openYouTube = (url) => {
-    if (url) {
-      window.open(url, '_blank');
+  const addGalleryImage = () => {
+    if (newGalleryImage.trim()) {
+      setFormData(prev => ({
+        ...prev,
+        gallery_images: [...prev.gallery_images, newGalleryImage.trim()]
+      }));
+      setNewGalleryImage('');
     }
+  };
+
+  const removeGalleryImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      gallery_images: prev.gallery_images.filter((_, i) => i !== index)
+    }));
+  };
+
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return null;
+    if (imageUrl.startsWith('http')) return imageUrl;
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || window.location.origin;
+    return `${backendUrl}${imageUrl}`;
   };
 
   if (loading) {
@@ -161,8 +211,8 @@ const AdminPlots = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Plot Listings</h1>
-          <p className="text-gray-600 mt-2">Manage land and plot listings</p>
+          <h1 className="text-3xl font-bold text-gray-900">Plots</h1>
+          <p className="text-gray-600 mt-2">Manage premium plots and land investments</p>
         </div>
         <Button
           onClick={() => setShowForm(true)}
@@ -173,13 +223,13 @@ const AdminPlots = () => {
         </Button>
       </div>
 
-      {/* Plot Form Modal */}
+      {/* Project Form Modal */}
       {showForm && (
         <Card className="border-0 shadow-xl">
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>
-                {editingPlot ? 'Edit Plot' : 'Add New Plot'}
+                {editingProject ? 'Edit Plot' : 'Add New Plot'}
               </CardTitle>
               <Button onClick={resetForm} variant="outline" size="sm">
                 <X size={16} />
@@ -188,142 +238,203 @@ const AdminPlots = () => {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Plot Title *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.title}
-                    onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., Premium Plot in Gachibowli"
-                  />
-                </div>
+              {/* Basic Information */}
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Basic Information</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Plot Title *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.title}
+                      onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., Prime Plot in Gachibowli"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Location *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.location}
-                    onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., Gachibowli, Hyderabad"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Location *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.location}
+                      onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., Gachibowli, Hyderabad"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Price Range *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.price_range}
-                    onChange={(e) => setFormData(prev => ({ ...prev, price_range: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., ₹2.5 cr - ₹3.5 cr"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Status *
+                    </label>
+                    <select
+                      required
+                      value={formData.status}
+                      onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    >
+                      <option value="Available">Available</option>
+                      <option value="Sold Out">Sold Out</option>
+                      <option value="Coming Soon">Coming Soon</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Status *
-                  </label>
-                  <select
-                    required
-                    value={formData.status}
-                    onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                  >
-                    <option value="Available">Available</option>
-                    <option value="Sold">Sold</option>
-                    <option value="Upcoming">Upcoming</option>
-                  </select>
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Price *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.price}
+                      onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., ₹2.5 Cr or ₹50 Lakhs"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Area (Sq. Yards)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={formData.area_sqyds}
-                    onChange={(e) => setFormData(prev => ({ ...prev, area_sqyds: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., 300"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Price Range *
+                    </label>
+                    <select
+                      required
+                      value={formData.price_range}
+                      onChange={(e) => setFormData(prev => ({ ...prev, price_range: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    >
+                      <option value="Affordable">Affordable</option>
+                      <option value="Mid-range">Mid-range</option>
+                      <option value="Premium">Premium</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Area (Sq. Feet)
-                  </label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    value={formData.area_sqft}
-                    onChange={(e) => setFormData(prev => ({ ...prev, area_sqft: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="e.g., 2700"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Facing
+                    </label>
+                    <select
+                      value={formData.facing}
+                      onChange={(e) => setFormData(prev => ({ ...prev, facing: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    >
+                      <option value="East">East</option>
+                      <option value="West">West</option>
+                      <option value="North">North</option>
+                      <option value="South">South</option>
+                      <option value="South-East">South-East</option>
+                      <option value="North-East">North-East</option>
+                      <option value="South-West">South-West</option>
+                      <option value="North-West">North-West</option>
+                    </select>
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Display Order
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={formData.display_order}
-                    onChange={(e) => setFormData(prev => ({ ...prev, display_order: parseInt(e.target.value) }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="1"
-                  />
-                </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Area (Sq. Yards)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.area_sqyds}
+                      onChange={(e) => setFormData(prev => ({ ...prev, area_sqyds: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., 300"
+                    />
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    YouTube Link
-                  </label>
-                  <input
-                    type="url"
-                    value={formData.youtube_link}
-                    onChange={(e) => setFormData(prev => ({ ...prev, youtube_link: e.target.value }))}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="https://www.youtube.com/watch?v=..."
-                  />
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Area (Sq. Feet)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.area_sqft}
+                      onChange={(e) => setFormData(prev => ({ ...prev, area_sqft: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., 2700"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Price per Sq. Yard
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.price_per_sqyd}
+                      onChange={(e) => setFormData(prev => ({ ...prev, price_per_sqyd: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., 15000"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Display Order
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={formData.display_order}
+                      onChange={(e) => setFormData(prev => ({ ...prev, display_order: parseInt(e.target.value) }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="1"
+                    />
+                  </div>
                 </div>
               </div>
 
-              {/* Main Image Upload */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Main Image *
-                </label>
-                <div className="space-y-4">
+              {/* Description */}
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Description</h3>
+                <textarea
+                  required
+                  rows="4"
+                  value={formData.description}
+                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                  placeholder="Detailed description of the project..."
+                />
+              </div>
+
+              {/* Images */}
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Images</h3>
+                
+                {/* Thumbnail */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Main Image * (Max 5MB)
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageUpload}
                     disabled={uploading}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg"
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg mb-2"
                   />
-                  {uploading && <p className="text-sm text-gray-600">Uploading image...</p>}
+                  {uploading && <p className="text-sm text-blue-600">Uploading image...</p>}
                   
                   {formData.main_image && (
-                    <div className="relative">
+                    <div className="relative mt-2">
                       <img
-                        src={formData.main_image}
+                        src={getImageUrl(formData.main_image)}
                         alt="Main image preview"
                         className="w-full h-48 object-cover rounded-lg"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'https://via.placeholder.com/400x300?text=Image+Not+Found';
+                        }}
                       />
                       <Button
                         type="button"
@@ -334,26 +445,99 @@ const AdminPlots = () => {
                       >
                         <Trash2 size={12} />
                       </Button>
+                      <p className="text-xs text-gray-500 mt-1 break-all">{formData.main_image}</p>
                     </div>
                   )}
                 </div>
+
+                {/* Gallery Images */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Gallery Images (Enter full URL)
+                  </label>
+                  <div className="flex gap-2 mb-2">
+                    <input
+                      type="url"
+                      value={newGalleryImage}
+                      onChange={(e) => setNewGalleryImage(e.target.value)}
+                      className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="https://example.com/image.jpg"
+                    />
+                    <Button type="button" onClick={addGalleryImage} variant="outline">
+                      <Plus size={16} />
+                    </Button>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2">
+                    {formData.gallery_images.map((img, index) => (
+                      <div key={index} className="relative">
+                        <img
+                          src={getImageUrl(img)}
+                          alt={`Gallery ${index + 1}`}
+                          className="w-full h-24 object-cover rounded"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://via.placeholder.com/150?text=Error';
+                          }}
+                        />
+                        <Button
+                          type="button"
+                          onClick={() => removeGalleryImage(index)}
+                          size="sm"
+                          variant="destructive"
+                          className="absolute top-1 right-1 p-1 h-6 w-6"
+                        >
+                          <X size={12} />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Short Description *
-                </label>
-                <textarea
-                  required
-                  rows="3"
-                  value={formData.short_description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, short_description: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                  placeholder="Brief description of the plot..."
-                />
+              {/* Links */}
+              <div className="border-b pb-4">
+                <h3 className="text-lg font-semibold mb-4">Links</h3>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      YouTube Link
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.youtube_link}
+                      onChange={(e) => setFormData(prev => ({ ...prev, youtube_link: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="https://www.youtube.com/watch?v=..."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Enquiry Link (WhatsApp/Contact)
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.enquiry_link}
+                      onChange={(e) => setFormData(prev => ({ ...prev, enquiry_link: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="https://wa.me/..."
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Google Maps Link
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.map_link}
+                      onChange={(e) => setFormData(prev => ({ ...prev, map_link: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="https://maps.google.com/..."
+                    />
+                  </div>
+                </div>
               </div>
 
+              {/* Options */}
               <div className="flex items-center space-x-2">
                 <input
                   type="checkbox"
@@ -363,11 +547,11 @@ const AdminPlots = () => {
                   className="rounded border-gray-300 text-kmk-gold focus:ring-kmk-gold"
                 />
                 <label htmlFor="featured" className="text-sm font-medium text-gray-700">
-                  Featured Plot
+                  Featured Plot (Show on homepage)
                 </label>
               </div>
 
-              <div className="flex justify-end space-x-4">
+              <div className="flex justify-end space-x-4 pt-4">
                 <Button
                   type="button"
                   variant="outline"
@@ -378,9 +562,10 @@ const AdminPlots = () => {
                 <Button
                   type="submit"
                   className="bg-kmk-navy hover:bg-kmk-navy/90"
+                  disabled={uploading}
                 >
                   <Save size={16} className="mr-2" />
-                  {editingPlot ? 'Update Plot' : 'Create Plot'}
+                  {editingProject ? 'Update Plot' : 'Create Plot'}
                 </Button>
               </div>
             </form>
@@ -388,77 +573,67 @@ const AdminPlots = () => {
         </Card>
       )}
 
-      {/* Plots List */}
+      {/* Projects List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {plots.map((plot) => (
-          <Card key={plot._id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+        {projects.map((project) => (
+          <Card key={project._id} className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
             <div className="relative">
               <img
-                src={plot.main_image}
-                alt={plot.title}
+                src={getImageUrl(project.main_image)}
+                alt={project.title}
                 className="w-full h-48 object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/400x300?text=No+Image';
+                }}
               />
-              <Badge className={`absolute top-3 left-3 ${
-                plot.status === 'Available' ? 'bg-green-500' :
-                plot.status === 'Sold' ? 'bg-red-500' :
-                'bg-blue-500'
-              }`}>
-                {plot.status}
-              </Badge>
+              <div className="absolute top-3 left-3 space-x-2">
+                <Badge className={`${
+                  project.status === 'Available' ? 'bg-green-500' :
+                  project.status === 'Sold Out' ? 'bg-red-500' :
+                  'bg-blue-500'
+                }`}>
+                  {project.status}
+                </Badge>
+                <Badge className={`${
+                  project.price_range === 'Affordable' ? 'bg-green-500' :
+                  project.price_range === 'Mid-range' ? 'bg-blue-500' :
+                  'bg-purple-500'
+                }`}>
+                  {project.price_range}
+                </Badge>
+              </div>
               
-              {plot.featured && (
+              {project.featured && (
                 <Badge className="absolute top-3 right-3 bg-kmk-gold">
                   Featured
                 </Badge>
               )}
-
-              {plot.youtube_link && (
-                <Button
-                  onClick={() => openYouTube(plot.youtube_link)}
-                  size="sm"
-                  className="absolute bottom-3 right-3 bg-red-600 hover:bg-red-700 text-white"
-                >
-                  <Play size={12} className="mr-1" />
-                  Tour
-                </Button>
-              )}
             </div>
 
             <CardContent className="p-6">
-              <h3 className="text-lg font-bold text-kmk-navy mb-2">{plot.title}</h3>
+              <h3 className="text-lg font-bold text-kmk-navy mb-2">{project.title}</h3>
               
               <div className="flex items-center text-gray-600 mb-3">
                 <MapPin size={14} className="mr-1" />
-                <span className="text-sm">{plot.location}</span>
+                <span className="text-sm">{project.location}</span>
               </div>
 
-              <div className="space-y-2 mb-4 text-sm text-gray-600">
-                {plot.area_sqyds && (
-                  <div className="flex items-center">
-                    <Square size={14} className="mr-2 text-kmk-gold" />
-                    <span>{plot.area_sqyds} Sq.Yds</span>
-                  </div>
-                )}
-                {plot.area_sqft && (
-                  <div className="flex items-center">
-                    <Square size={14} className="mr-2 text-kmk-gold" />
-                    <span>{plot.area_sqft} Sq.Ft</span>
-                  </div>
-                )}
-                <div className="font-semibold text-kmk-gold">{plot.price_range}</div>
-              </div>
+              {(project.area_sqyds || project.area_sqft) && (
+                <div className="text-sm text-gray-600 mb-3">
+                  {project.area_sqyds && <div>Area: {project.area_sqyds} Sq.Yds</div>}
+                  {project.area_sqft && <div>Area: {project.area_sqft} Sq.Ft</div>}
+                  {project.price_per_sqyd && <div>Price/Sq.Yd: ₹{project.price_per_sqyd}</div>}
+                </div>
+              )}
 
-              <p className="text-gray-600 text-sm mb-4 line-clamp-3">
-                {plot.short_description}
+              <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                {project.description}
               </p>
-
-              <div className="text-xs text-gray-500 mb-4">
-                Order: {plot.display_order}
-              </div>
 
               <div className="flex space-x-2">
                 <Button
-                  onClick={() => handleEdit(plot)}
+                  onClick={() => handleEdit(project)}
                   variant="outline"
                   size="sm"
                   className="flex-1"
@@ -467,34 +642,25 @@ const AdminPlots = () => {
                   Edit
                 </Button>
                 <Button
-                  onClick={() => handleDelete(plot._id)}
+                  onClick={() => handleDelete(project._id)}
                   variant="outline"
                   size="sm"
                   className="text-red-600 border-red-200 hover:bg-red-50"
                 >
                   <Trash2 size={12} />
                 </Button>
-                {plot.youtube_link && (
-                  <Button
-                    onClick={() => openYouTube(plot.youtube_link)}
-                    variant="outline"
-                    size="sm"
-                  >
-                    <Eye size={12} />
-                  </Button>
-                )}
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {plots.length === 0 && (
+      {projects.length === 0 && (
         <Card className="border-0 shadow-lg">
           <CardContent className="p-12 text-center">
-            <Square size={48} className="mx-auto text-gray-400 mb-4" />
+            <Building2 size={48} className="mx-auto text-gray-400 mb-4" />
             <h3 className="text-xl font-semibold text-gray-600 mb-2">No Plots Yet</h3>
-            <p className="text-gray-500 mb-6">Add your first plot listing to get started.</p>
+            <p className="text-gray-500 mb-6">Add your first plot listing to start.</p>
             <Button
               onClick={() => setShowForm(true)}
               className="bg-kmk-navy hover:bg-kmk-navy/90"
