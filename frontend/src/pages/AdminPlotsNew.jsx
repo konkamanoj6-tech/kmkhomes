@@ -67,14 +67,15 @@ const AdminPlots = () => {
     try {
       const submitData = {
         ...formData,
-        plot_size: formData.plot_size ? parseInt(formData.plot_size) : null,
-        built_up_area: formData.built_up_area ? parseInt(formData.built_up_area) : null
+        area_sqyds: formData.area_sqyds ? parseFloat(formData.area_sqyds) : null,
+        area_sqft: formData.area_sqft ? parseFloat(formData.area_sqft) : null,
+        price_per_sqyd: formData.price_per_sqyd ? parseFloat(formData.price_per_sqyd) : null
       };
 
       if (editingProject) {
-        await adminApi.updateOurProject(editingProject._id, submitData);
+        await adminApi.updatePlot(editingProject._id, submitData);
       } else {
-        await adminApi.createOurProject(submitData);
+        await adminApi.createPlot(submitData);
       }
 
       await fetchProjects();
