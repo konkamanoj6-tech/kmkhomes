@@ -285,9 +285,9 @@ const Projects = () => {
       {/* CTA Section */}
       <section className="py-20 bg-kmk-navy text-white">
         <div className="max-w-4xl mx-auto text-center px-4">
-          <h2 className="text-4xl font-bold mb-6">Didn't Find What You're Looking For?</h2>
+          <h2 className="text-4xl font-bold mb-6">Interested in Our Projects?</h2>
           <p className="text-xl mb-8 text-gray-300">
-            Let us help you find your perfect villa. Contact our expert team for personalized assistance.
+            Get in touch with our team to learn more about our premium developments and budget-friendly homes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg" className="bg-kmk-gold hover:bg-kmk-gold/90 text-white px-8 py-4">
