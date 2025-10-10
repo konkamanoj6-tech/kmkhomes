@@ -51,10 +51,10 @@ const AdminPlots = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await adminApi.getOurProjects();
+      const response = await adminApi.getPlots();
       setProjects(response.data || []);
     } catch (error) {
-      console.error('Error fetching our projects:', error);
+      console.error('Error fetching plots:', error);
       setProjects([]);
     } finally {
       setLoading(false);
