@@ -197,6 +197,19 @@ const Projects = () => {
       {/* Projects Grid */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4">
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              {activeTab === 'our-projects' ? 'Our Premium Projects' : 'Homes for Every Budget'}
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {activeTab === 'our-projects' 
+                ? 'Discover our flagship developments designed with modern architecture and premium amenities.'
+                : 'Explore carefully curated homes from trusted builders that offer great value for money.'
+              }
+            </p>
+          </div>
+
           {loading ? (
             <div className="text-center py-20">
               <div className="text-6xl text-gray-300 mb-4">⏳</div>
@@ -214,66 +227,84 @@ const Projects = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <Card key={project._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
+                <Card key={project._id} className="group overflow-hidden border-0 bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2" 
+                      style={{ transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}>
                   <div className="relative overflow-hidden">
                     <img
-                      src={project.images && project.images.length > 0 ? getImageUrl(project.images[0]) : '/placeholder-project.jpg'}
-                      alt={project.title}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                      src={getImageUrl(project.thumbnail_image)}
+                      alt={project.project_name}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{ transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
                     />
-                    <Badge className="absolute top-4 left-4 bg-kmk-gold hover:bg-kmk-gold/90">
+                    
+                    {/* Price Range Badge */}
+                    <Badge className={`absolute top-4 left-4 ${
+                      project.price_range === 'Affordable' ? 'bg-green-500' :
+                      project.price_range === 'Mid-range' ? 'bg-blue-500' :
+                      'bg-purple-500'
+                    } hover:bg-opacity-90 transition-colors duration-200`}>
+                      {project.price_range}
+                    </Badge>
+                    
+                    {/* Property Type Badge */}
+                    <Badge variant="outline" className="absolute top-4 right-4 bg-white/90 text-gray-700">
                       {project.property_type}
                     </Badge>
-                    <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                      {project.images ? project.images.length : 0} Photos
-                    </div>
+
+                    {/* YouTube Button */}
+                    {project.youtube_link && (
+                      <Button
+                        onClick={() => window.open(project.youtube_link, '_blank')}
+                        size="sm"
+                        className="absolute bottom-4 right-4 bg-red-600 hover:bg-red-700 text-white shadow-lg transform hover:scale-110 transition-all duration-200"
+                        style={{ transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                      >
+                        <Play size={14} className="mr-1" />
+                        Watch Tour
+                      </Button>
+                    )}
+
+                    {/* Overlay for hover effect */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   
                   <CardContent className="p-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-kmk-navy">{project.title}</h3>
-                      <span className="text-lg font-bold text-kmk-gold">{project.price_range}</span>
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-kmk-navy mb-2 group-hover:text-kmk-gold transition-colors duration-200">
+                        {project.project_name}
+                      </h3>
+                      
+                      <div className="flex items-center text-gray-600 mb-3">
+                        <MapPin size={16} className="mr-2 flex-shrink-0 text-kmk-gold" />
+                        <span className="text-sm">{project.location}</span>
+                      </div>
                     </div>
                     
-                    <div className="flex items-center text-gray-600 mb-4">
-                      <MapPin size={16} className="mr-2 flex-shrink-0 text-kmk-gold" />
-                      <span className="text-sm">{project.location}</span>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                      {project.area && (
-                        <div className="flex items-center">
-                          <Ruler size={16} className="mr-2 text-kmk-gold" />
-                          <span>{project.area}</span>
-                        </div>
-                      )}
-                      {project.units && (
-                        <div className="flex items-center">
-                          <Building2 size={16} className="mr-2 text-kmk-gold" />
-                          <span>{project.units} Units</span>
-                        </div>
-                      )}
-                    </div>
-                    
-                    <p className="text-gray-600 text-sm mb-6 line-clamp-2">
-                      {project.description}
+                    <p className="text-gray-600 text-sm mb-6 line-clamp-3 leading-relaxed opacity-90 group-hover:opacity-100 transition-opacity duration-200">
+                      {project.short_description}
                     </p>
                     
-                    <div className="flex gap-3">
-                      <Button asChild className="flex-1 bg-kmk-navy hover:bg-kmk-navy/90">
-                        <Link to={`/project/${project._id}`}>
-                          View Details <ArrowRight size={16} className="ml-2" />
-                        </Link>
-                      </Button>
+                    <div className="flex gap-3 pt-4 border-t border-gray-100">
                       <Button 
-                        asChild 
-                        variant="outline" 
-                        className="border-kmk-gold text-kmk-gold hover:bg-kmk-gold hover:text-white"
+                        className="flex-1 bg-kmk-navy hover:bg-kmk-navy/90 text-white transform hover:scale-105 transition-all duration-200"
+                        style={{ transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                        onClick={() => window.open('/contact', '_self')}
                       >
-                        <Link to="/contact">
-                          Enquire
-                        </Link>
+                        Get Details
+                        <ArrowRight size={16} className="ml-2" />
                       </Button>
+                      
+                      {project.youtube_link && (
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => window.open(project.youtube_link, '_blank')}
+                          className="border-kmk-gold text-kmk-gold hover:bg-kmk-gold hover:text-white transform hover:scale-105 transition-all duration-200"
+                          style={{ transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)' }}
+                        >
+                          <Play size={14} />
+                        </Button>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
