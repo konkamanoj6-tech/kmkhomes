@@ -565,7 +565,7 @@ const AdminPlots = () => {
                   disabled={uploading}
                 >
                   <Save size={16} className="mr-2" />
-                  {editingProject ? 'Update Project' : 'Create Project'}
+                  {editingProject ? 'Update Plot' : 'Create Plot'}
                 </Button>
               </div>
             </form>
