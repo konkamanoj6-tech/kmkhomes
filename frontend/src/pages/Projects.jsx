@@ -96,14 +96,35 @@ const Projects = () => {
       // Location filter
       if (filters.location && project.location !== filters.location) return false;
       
-      // Price range filter (not applicable for plots)
+      // Status filter
+      if (filters.status && project.status !== filters.status) return false;
+      
+      // Facing filter
+      if (filters.facing && project.facing !== filters.facing) return false;
+      
+      // Price filter (actual price)
+      if (filters.price && project.price !== filters.price) return false;
+      
+      // Price range filter (not for plots)
       if (filters.price_range && activeTab !== 'plots' && project.price_range !== filters.price_range) return false;
       
-      // Property type filter (not applicable for plots)
+      // Property type filter (only for projects and budget homes)
       if (filters.property_type && activeTab !== 'plots' && project.property_type !== filters.property_type) return false;
       
-      // Status filter (for plots only)
-      if (filters.status && activeTab === 'plots' && project.status !== filters.status) return false;
+      // Plot size filter (for projects and budget homes)
+      if (filters.plot_size && activeTab !== 'plots') {
+        if (project.plot_size && project.plot_size.toString() !== filters.plot_size) return false;
+      }
+      
+      // Plot size filter (for plots - using area_sqyds)
+      if (filters.plot_size && activeTab === 'plots') {
+        if (project.area_sqyds && project.area_sqyds.toString() !== filters.plot_size) return false;
+      }
+      
+      // Built-up area filter (not for plots)
+      if (filters.built_up_area && activeTab !== 'plots') {
+        if (project.built_up_area && project.built_up_area.toString() !== filters.built_up_area) return false;
+      }
       
       return true;
     });
