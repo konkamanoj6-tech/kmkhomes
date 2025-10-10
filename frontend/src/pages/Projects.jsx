@@ -137,7 +137,10 @@ const Projects = () => {
           <div className="flex justify-center">
             <div className="flex bg-gray-100 rounded-lg p-1">
               <button
-                onClick={() => setActiveTab('our-projects')}
+                onClick={() => {
+                  setActiveTab('our-projects');
+                  window.location.hash = 'our-projects';
+                }}
                 className={`px-6 py-3 rounded-md font-medium transition-all ${
                   activeTab === 'our-projects'
                     ? 'bg-kmk-navy text-white shadow-md'
@@ -147,7 +150,10 @@ const Projects = () => {
                 Our Projects
               </button>
               <button
-                onClick={() => setActiveTab('budget-homes')}
+                onClick={() => {
+                  setActiveTab('budget-homes');
+                  window.location.hash = 'budget-homes';
+                }}
                 className={`px-6 py-3 rounded-md font-medium transition-all ${
                   activeTab === 'budget-homes'
                     ? 'bg-kmk-navy text-white shadow-md'
@@ -155,6 +161,19 @@ const Projects = () => {
                 }`}
               >
                 Budget Homes
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab('plots');
+                  window.location.hash = 'plots';
+                }}
+                className={`px-6 py-3 rounded-md font-medium transition-all ${
+                  activeTab === 'plots'
+                    ? 'bg-kmk-navy text-white shadow-md'
+                    : 'text-gray-600 hover:text-kmk-navy'
+                }`}
+              >
+                Plots
               </button>
             </div>
           </div>
