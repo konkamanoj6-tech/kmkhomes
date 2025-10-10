@@ -87,8 +87,19 @@ const Projects = () => {
     ? budgetHomes 
     : plots;
   
-  // Filter options based on current data
-  const locationOptions = [...new Set(currentData.map(p => p.location))].filter(Boolean);
+  // Dynamic filter options based on current data
+  const locationOptions = [...new Set(currentData.map(p => p.location))].filter(Boolean).sort();
+  const statusOptions = [...new Set(currentData.map(p => p.status))].filter(Boolean).sort();
+  const facingOptions = [...new Set(currentData.map(p => p.facing))].filter(Boolean).sort();
+  const priceOptions = [...new Set(currentData.map(p => p.price))].filter(Boolean).sort();
+  const priceRangeOptions = [...new Set(currentData.map(p => p.price_range))].filter(Boolean).sort();
+  const propertyTypeOptions = [...new Set(currentData.map(p => p.property_type))].filter(Boolean).sort();
+  
+  const plotSizeOptions = activeTab === 'plots' 
+    ? [...new Set(currentData.map(p => p.area_sqyds))].filter(Boolean).sort((a,b) => a-b)
+    : [...new Set(currentData.map(p => p.plot_size))].filter(Boolean).sort((a,b) => a-b);
+    
+  const builtUpAreaOptions = [...new Set(currentData.map(p => p.built_up_area))].filter(Boolean).sort((a,b) => a-b);
 
   // Filter projects based on selected filters
   const filteredProjects = useMemo(() => {
