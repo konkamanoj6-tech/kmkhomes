@@ -36,10 +36,6 @@ const Projects = () => {
     property_type: ''
   });
 
-  const priceRangeOptions = ['Affordable', 'Mid-range', 'Premium'];
-  const propertyTypeOptions = ['Apartment', 'Villa', 'Plot', 'Commercial'];
-  const statusOptions = ['Available', 'Sold', 'Upcoming'];
-
   useEffect(() => {
     fetchProjectsData();
   }, []);
