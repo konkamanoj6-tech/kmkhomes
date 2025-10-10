@@ -463,14 +463,14 @@ const Home = () => {
           {/* Mini Filters for Budget Homes */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <select
-              value={budgetHomesFilters.price_range}
-              onChange={(e) => setBudgetHomesFilters(prev => ({...prev, price_range: e.target.value}))}
+              value={budgetHomesFilters.price}
+              onChange={(e) => setBudgetHomesFilters(prev => ({...prev, price: e.target.value}))}
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
-              <option value="">All Price Ranges</option>
-              <option value="Affordable">Affordable</option>
-              <option value="Mid-range">Mid-range</option>
-              <option value="Premium">Premium</option>
+              <option value="">All Prices</option>
+              {budgetHomePrices.map(price => (
+                <option key={price} value={price}>{price}</option>
+              ))}
             </select>
             <select
               value={budgetHomesFilters.property_type}
@@ -478,9 +478,9 @@ const Home = () => {
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
             >
               <option value="">All Types</option>
-              <option value="Apartment">Apartment</option>
-              <option value="Villa">Villa</option>
-              <option value="Plot">Plot</option>
+              {budgetHomePropertyTypes.map(type => (
+                <option key={type} value={type}>{type}</option>
+              ))}
             </select>
           </div>
 
