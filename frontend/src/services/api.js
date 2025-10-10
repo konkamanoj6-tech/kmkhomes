@@ -43,6 +43,9 @@ export const publicApi = {
 
   // Budget Homes (Public) 
   getBudgetHomes: (params) => api.get('/budget-homes', { params }),
+
+  // Plots (Public)
+  getPlots: (params) => api.get('/plots', { params }),
 };
 
 // Admin API calls (requires authentication)
