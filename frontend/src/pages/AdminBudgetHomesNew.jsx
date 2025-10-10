@@ -53,10 +53,10 @@ const AdminBudgetHomes = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await adminApi.getOurProjects();
+      const response = await adminApi.getBudgetHomes();
       setProjects(response.data || []);
     } catch (error) {
-      console.error('Error fetching our projects:', error);
+      console.error('Error fetching budget homes:', error);
       setProjects([]);
     } finally {
       setLoading(false);
