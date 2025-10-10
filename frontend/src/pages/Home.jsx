@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MapPin, Home as HomeIcon, Ruler, Compass, Calendar, ArrowRight, Star, CheckCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MapPin, Home as HomeIcon, Ruler, Compass, Calendar, ArrowRight, Star, CheckCircle, Play } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
