@@ -126,19 +126,18 @@ const AdminPlots = () => {
 
   const resetForm = () => {
     setFormData({
-      project_name: '',
+      title: '',
       location: '',
       status: 'Available',
-      plot_size: '',
-      built_up_area: '',
+      area_sqyds: '',
+      area_sqft: '',
+      price_per_sqyd: '',
       facing: 'East',
       price: '',
       price_range: 'Mid-range',
-      property_type: 'Villa',
       description: '',
-      thumbnail_image: '',
+      main_image: '',
       gallery_images: [],
-      amenities: [],
       youtube_link: '',
       enquiry_link: '',
       map_link: '',
@@ -147,7 +146,6 @@ const AdminPlots = () => {
     });
     setEditingProject(null);
     setShowForm(false);
-    setNewAmenity('');
     setNewGalleryImage('');
   };
 
