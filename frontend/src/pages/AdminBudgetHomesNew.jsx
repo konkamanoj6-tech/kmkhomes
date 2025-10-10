@@ -74,9 +74,9 @@ const AdminBudgetHomes = () => {
       };
 
       if (editingProject) {
-        await adminApi.updateOurProject(editingProject._id, submitData);
+        await adminApi.updateBudgetHome(editingProject._id, submitData);
       } else {
-        await adminApi.createOurProject(submitData);
+        await adminApi.createBudgetHome(submitData);
       }
 
       await fetchProjects();
