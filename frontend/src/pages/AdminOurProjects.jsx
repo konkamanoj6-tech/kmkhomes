@@ -29,6 +29,7 @@ const AdminOurProjects = () => {
     plot_size: '',
     built_up_area: '',
     facing: 'East',
+    price: '',
     price_range: 'Mid-range',
     property_type: 'Villa',
     description: '',
