@@ -91,6 +91,7 @@ function App() {
               <Route path="properties" element={<AdminProperties />} />
               <Route path="our-projects" element={<AdminOurProjects />} />
               <Route path="budget-homes" element={<AdminBudgetHomes />} />
+              <Route path="plots" element={<AdminPlots />} />
               <Route path="banners" element={<AdminBanners />} />
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="amenities" element={<AdminAmenities />} />
