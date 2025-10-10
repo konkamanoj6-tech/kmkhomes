@@ -201,6 +201,38 @@ async def get_budget_homes(
     )
     return homes
 
+@router.get("/plots")
+async def get_plots(
+    location: Optional[str] = Query(None),
+    status: Optional[str] = Query(None),
+    area_min: Optional[float] = Query(None),
+    area_max: Optional[float] = Query(None),
+    featured: Optional[bool] = Query(None)
+):
+    """Get plots with optional filters."""
+    filters = {"active": True}
+    if location:
+        filters["location"] = {"$regex": location, "$options": "i"}
+    if status:
+        filters["status"] = status
+    if featured is not None:
+        filters["featured"] = featured
+    
+    # Area filtering (using sq yards if provided)
+    if area_min or area_max:
+        area_filter = {}
+        if area_min:
+            area_filter["$gte"] = area_min
+        if area_max:
+            area_filter["$lte"] = area_max
+        filters["area_sqyds"] = area_filter
+    
+    plots = await plots_db.get_all(
+        filters=filters,
+        sort=[("featured", -1), ("display_order", 1)]
+    )
+    return plots
+
 @router.post("/contact-form")
 async def submit_contact_form(submission: ContactSubmissionCreate):
     """Submit contact form."""
