@@ -195,23 +195,6 @@ const AdminPlots = () => {
     }));
   };
 
-  const addAmenity = () => {
-    if (newAmenity.trim() && !formData.amenities.includes(newAmenity.trim())) {
-      setFormData(prev => ({
-        ...prev,
-        amenities: [...prev.amenities, newAmenity.trim()]
-      }));
-      setNewAmenity('');
-    }
-  };
-
-  const removeAmenity = (index) => {
-    setFormData(prev => ({
-      ...prev,
-      amenities: prev.amenities.filter((_, i) => i !== index)
-    }));
-  };
-
   const getImageUrl = (imageUrl) => {
     if (!imageUrl) return null;
     if (imageUrl.startsWith('http')) return imageUrl;
