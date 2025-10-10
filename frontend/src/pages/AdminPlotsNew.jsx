@@ -338,12 +338,13 @@ const AdminPlots = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Plot Size (Sq. Yards)
+                      Area (Sq. Yards)
                     </label>
                     <input
                       type="number"
-                      value={formData.plot_size}
-                      onChange={(e) => setFormData(prev => ({ ...prev, plot_size: e.target.value }))}
+                      step="0.01"
+                      value={formData.area_sqyds}
+                      onChange={(e) => setFormData(prev => ({ ...prev, area_sqyds: e.target.value }))}
                       className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
                       placeholder="e.g., 300"
                     />
@@ -351,14 +352,29 @@ const AdminPlots = () => {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Built-up Area (Sq. Feet)
+                      Area (Sq. Feet)
                     </label>
                     <input
                       type="number"
-                      value={formData.built_up_area}
-                      onChange={(e) => setFormData(prev => ({ ...prev, built_up_area: e.target.value }))}
+                      step="0.01"
+                      value={formData.area_sqft}
+                      onChange={(e) => setFormData(prev => ({ ...prev, area_sqft: e.target.value }))}
                       className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
                       placeholder="e.g., 2700"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Price per Sq. Yard
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={formData.price_per_sqyd}
+                      onChange={(e) => setFormData(prev => ({ ...prev, price_per_sqyd: e.target.value }))}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      placeholder="e.g., 15000"
                     />
                   </div>
 
