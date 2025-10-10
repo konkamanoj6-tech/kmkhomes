@@ -193,91 +193,86 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Properties Grid */}
+      {/* Projects Grid */}
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4">
-          {filteredProperties.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-20">
+              <div className="text-6xl text-gray-300 mb-4">⏳</div>
+              <h3 className="text-2xl font-bold text-gray-600 mb-2">Loading projects...</h3>
+            </div>
+          ) : filteredProjects.length === 0 ? (
             <div className="text-center py-20">
               <div className="text-6xl text-gray-300 mb-4">🏠</div>
-              <h3 className="text-2xl font-bold text-gray-600 mb-2">No properties found</h3>
-              <p className="text-gray-500 mb-6">Try adjusting your search criteria or clear the filters.</p>
+              <h3 className="text-2xl font-bold text-gray-600 mb-2">No projects found</h3>
+              <p className="text-gray-500 mb-6">Try adjusting your filters or check back later for new projects.</p>
               <Button onClick={clearFilters} className="bg-kmk-gold hover:bg-kmk-gold/90">
                 Clear Filters
               </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProperties.map((property) => (
-                <Card key={property._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
+              {filteredProjects.map((project) => (
+                <Card key={project._id} className="group overflow-hidden hover:shadow-2xl transition-all duration-300 border-0 bg-white">
                   <div className="relative overflow-hidden">
                     <img
-                      src={property.gallery_images && property.gallery_images.length > 0 ? getImageUrl(property.gallery_images[0]) : '/placeholder-villa.jpg'}
-                      alt={property.villa_number}
+                      src={project.images && project.images.length > 0 ? getImageUrl(project.images[0]) : '/placeholder-project.jpg'}
+                      alt={project.title}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
-                    <Badge className={`absolute top-4 left-4 ${
-                      property.status === 'Available' 
-                        ? 'bg-green-500 hover:bg-green-600' 
-                        : 'bg-gray-500 hover:bg-gray-600'
-                    }`}>
-                      {property.status}
+                    <Badge className="absolute top-4 left-4 bg-kmk-gold hover:bg-kmk-gold/90">
+                      {project.property_type}
                     </Badge>
                     <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
-                      {property.gallery_images ? property.gallery_images.length : 0} Photos
+                      {project.images ? project.images.length : 0} Photos
                     </div>
                   </div>
                   
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <h3 className="text-xl font-bold text-kmk-navy">{property.villa_number}</h3>
-                      <span className="text-lg font-bold text-kmk-gold">{property.price_range}</span>
+                      <h3 className="text-xl font-bold text-kmk-navy">{project.title}</h3>
+                      <span className="text-lg font-bold text-kmk-gold">{project.price_range}</span>
                     </div>
                     
                     <div className="flex items-center text-gray-600 mb-4">
                       <MapPin size={16} className="mr-2 flex-shrink-0 text-kmk-gold" />
-                      <span className="text-sm">{property.location}</span>
+                      <span className="text-sm">{project.location}</span>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
-                      <div className="flex items-center">
-                        <Ruler size={16} className="mr-2 text-kmk-gold" />
-                        <span>{property.plot_size} Sq.Yds</span>
-                      </div>
-                      <div className="flex items-center">
-                        <HomeIcon size={16} className="mr-2 text-kmk-gold" />
-                        <span>{property.built_up_area} Sq.Ft</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Compass size={16} className="mr-2 text-kmk-gold" />
-                        <span>{property.facing} Facing</span>
-                      </div>
+                      {project.area && (
+                        <div className="flex items-center">
+                          <Ruler size={16} className="mr-2 text-kmk-gold" />
+                          <span>{project.area}</span>
+                        </div>
+                      )}
+                      {project.units && (
+                        <div className="flex items-center">
+                          <Building2 size={16} className="mr-2 text-kmk-gold" />
+                          <span>{project.units} Units</span>
+                        </div>
+                      )}
                     </div>
                     
                     <p className="text-gray-600 text-sm mb-6 line-clamp-2">
-                      {property.description}
+                      {project.description}
                     </p>
                     
                     <div className="flex gap-3">
                       <Button asChild className="flex-1 bg-kmk-navy hover:bg-kmk-navy/90">
-                        <Link to={`/property/${property._id}`}>
+                        <Link to={`/project/${project._id}`}>
                           View Details <ArrowRight size={16} className="ml-2" />
                         </Link>
                       </Button>
-                      {property.status === 'Available' && (
-                        <Button 
-                          asChild 
-                          variant="outline" 
-                          className="border-kmk-gold text-kmk-gold hover:bg-kmk-gold hover:text-white"
-                        >
-                          <a
-                            href={property.enquiry_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Enquire
-                          </a>
-                        </Button>
-                      )}
+                      <Button 
+                        asChild 
+                        variant="outline" 
+                        className="border-kmk-gold text-kmk-gold hover:bg-kmk-gold hover:text-white"
+                      >
+                        <Link to="/contact">
+                          Enquire
+                        </Link>
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
