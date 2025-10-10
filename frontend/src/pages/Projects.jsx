@@ -209,33 +209,53 @@ const Projects = () => {
                   ))}
                 </select>
 
-                <select
-                  value={filters.price_range}
-                  onChange={(e) => handleFilterChange('price_range', e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                >
-                  <option value="">All Price Ranges</option>
-                  {priceRangeOptions.map(range => (
-                    <option key={range} value={range}>{range}</option>
-                  ))}
-                </select>
+                {/* Price Range filter - not shown for plots */}
+                {activeTab !== 'plots' && (
+                  <select
+                    value={filters.price_range}
+                    onChange={(e) => handleFilterChange('price_range', e.target.value)}
+                    className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                  >
+                    <option value="">All Price Ranges</option>
+                    {priceRangeOptions.map(range => (
+                      <option key={range} value={range}>{range}</option>
+                    ))}
+                  </select>
+                )}
 
-                <select
-                  value={filters.property_type}
-                  onChange={(e) => handleFilterChange('property_type', e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                >
-                  <option value="">All Property Types</option>
-                  {propertyTypeOptions.map(type => (
-                    <option key={type} value={type}>{type}</option>
-                  ))}
-                </select>
+                {/* Property Type filter - not shown for plots */}
+                {activeTab !== 'plots' && (
+                  <select
+                    value={filters.property_type}
+                    onChange={(e) => handleFilterChange('property_type', e.target.value)}
+                    className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                  >
+                    <option value="">All Property Types</option>
+                    {propertyTypeOptions.map(type => (
+                      <option key={type} value={type}>{type}</option>
+                    ))}
+                  </select>
+                )}
+
+                {/* Status filter - only for plots */}
+                {activeTab === 'plots' && (
+                  <select
+                    value={filters.status}
+                    onChange={(e) => handleFilterChange('status', e.target.value)}
+                    className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                  >
+                    <option value="">All Status</option>
+                    {statusOptions.map(status => (
+                      <option key={status} value={status}>{status}</option>
+                    ))}
+                  </select>
+                )}
               </div>
 
               {activeFiltersCount > 0 && (
                 <div className="mt-4 flex justify-between items-center">
                   <span className="text-gray-600">
-                    Showing {filteredProjects.length} of {currentData.length} projects
+                    Showing {filteredProjects.length} of {currentData.length} {activeTab === 'plots' ? 'plots' : 'projects'}
                   </span>
                   <Button
                     onClick={clearFilters}
