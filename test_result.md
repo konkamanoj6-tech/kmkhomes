@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "KMK Homes real estate website - Complete remaining admin CMS features and fix critical bugs including AdminBanners, AdminTestimonials, image display issues, property detail pages not loading, and Projects page not showing properties."
+user_problem_statement: "KMK Homes real estate website - Add admin navigation for plots, complete CMS functionality for Our Projects, Budget Homes and Plots sections. Update Home page to display three new sections with mini filters. Update Projects page to include Plots tab. Ensure clean and neat design with properties from home page appearing in their respective listing pages."
 
 backend:
   - task: "Admin Banners CRUD API"
