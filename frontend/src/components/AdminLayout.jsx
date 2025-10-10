@@ -17,7 +17,8 @@ import {
   Newspaper,
   Globe,
   Zap,
-  Home as HomeIcon
+  Home as HomeIcon,
+  Square
 } from 'lucide-react';
 
 const AdminLayout = () => {
