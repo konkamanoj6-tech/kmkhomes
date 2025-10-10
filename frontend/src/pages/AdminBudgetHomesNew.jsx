@@ -120,6 +120,7 @@ const AdminBudgetHomes = () => {
       youtube_link: project.youtube_link || '',
       enquiry_link: project.enquiry_link || '',
       map_link: project.map_link || '',
+      builder_name: project.builder_name || '',
       featured: project.featured,
       display_order: project.display_order
     });
