@@ -211,15 +211,15 @@ const AdminPlots = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Our Projects</h1>
-          <p className="text-gray-600 mt-2">Manage KMK Homes in-house projects with full details</p>
+          <h1 className="text-3xl font-bold text-gray-900">Plots</h1>
+          <p className="text-gray-600 mt-2">Manage premium plots and land investments</p>
         </div>
         <Button
           onClick={() => setShowForm(true)}
           className="bg-kmk-navy hover:bg-kmk-navy/90"
         >
           <Plus size={16} className="mr-2" />
-          Add Project
+          Add Plot
         </Button>
       </div>
 
