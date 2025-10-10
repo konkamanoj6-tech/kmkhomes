@@ -138,29 +138,7 @@ const Projects = () => {
           {/* Filter Panel */}
           {showFilters && (
             <div className="bg-gray-50 p-6 rounded-lg mb-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                <select
-                  value={filters.status}
-                  onChange={(e) => handleFilterChange('status', e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                >
-                  <option value="">All Status</option>
-                  {statusOptions.map(status => (
-                    <option key={status} value={status}>{status}</option>
-                  ))}
-                </select>
-
-                <select
-                  value={filters.facing}
-                  onChange={(e) => handleFilterChange('facing', e.target.value)}
-                  className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                >
-                  <option value="">All Facing</option>
-                  {facingOptions.map(facing => (
-                    <option key={facing} value={facing}>{facing}</option>
-                  ))}
-                </select>
-
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <select
                   value={filters.location}
                   onChange={(e) => handleFilterChange('location', e.target.value)}
@@ -173,24 +151,24 @@ const Projects = () => {
                 </select>
 
                 <select
-                  value={filters.plotSizeRange}
-                  onChange={(e) => handleFilterChange('plotSizeRange', e.target.value)}
+                  value={filters.price_range}
+                  onChange={(e) => handleFilterChange('price_range', e.target.value)}
                   className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
                 >
-                  <option value="">Plot Size</option>
-                  {plotSizeRanges.map(range => (
-                    <option key={range.value} value={range.value}>{range.label}</option>
+                  <option value="">All Price Ranges</option>
+                  {priceRangeOptions.map(range => (
+                    <option key={range} value={range}>{range}</option>
                   ))}
                 </select>
 
                 <select
-                  value={filters.builtUpAreaRange}
-                  onChange={(e) => handleFilterChange('builtUpAreaRange', e.target.value)}
+                  value={filters.property_type}
+                  onChange={(e) => handleFilterChange('property_type', e.target.value)}
                   className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
                 >
-                  <option value="">Built-up Area</option>
-                  {builtUpAreaRanges.map(range => (
-                    <option key={range.value} value={range.value}>{range.label}</option>
+                  <option value="">All Property Types</option>
+                  {propertyTypeOptions.map(type => (
+                    <option key={type} value={type}>{type}</option>
                   ))}
                 </select>
               </div>
@@ -198,7 +176,7 @@ const Projects = () => {
               {activeFiltersCount > 0 && (
                 <div className="mt-4 flex justify-between items-center">
                   <span className="text-gray-600">
-                    Showing {filteredProperties.length} of {properties.length} properties
+                    Showing {filteredProjects.length} of {currentData.length} projects
                   </span>
                   <Button
                     onClick={clearFilters}
