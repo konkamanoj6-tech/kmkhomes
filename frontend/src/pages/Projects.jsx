@@ -49,51 +49,21 @@ const Projects = () => {
   // Filter options based on current data
   const locationOptions = [...new Set(currentData.map(p => p.location))].filter(Boolean);
 
-  // Filter properties based on selected filters
-  const filteredProperties = useMemo(() => {
-    return properties.filter(property => {
-      // Status filter
-      if (filters.status && property.status !== filters.status) return false;
-      
-      // Facing filter
-      if (filters.facing && property.facing !== filters.facing) return false;
-      
+  // Filter projects based on selected filters
+  const filteredProjects = useMemo(() => {
+    return currentData.filter(project => {
       // Location filter
-      if (filters.location && property.location !== filters.location) return false;
+      if (filters.location && project.location !== filters.location) return false;
       
-      // Plot size range filter
-      if (filters.plotSizeRange) {
-        const [min, max] = filters.plotSizeRange.split('-').map(Number);
-        if (max) {
-          if (property.plot_size < min || property.plot_size > max) return false;
-        } else {
-          if (property.plot_size < min) return false;
-        }
-      }
+      // Price range filter
+      if (filters.price_range && project.price_range !== filters.price_range) return false;
       
-      // Built-up area range filter
-      if (filters.builtUpAreaRange) {
-        const [min, max] = filters.builtUpAreaRange.split('-').map(Number);
-        if (max) {
-          if (property.built_up_area < min || property.built_up_area > max) return false;
-        } else {
-          if (property.built_up_area < min) return false;
-        }
-      }
-      
-      // Search term filter
-      if (filters.searchTerm) {
-        const searchLower = filters.searchTerm.toLowerCase();
-        return (
-          property.villa_number.toLowerCase().includes(searchLower) ||
-          property.location.toLowerCase().includes(searchLower) ||
-          property.description.toLowerCase().includes(searchLower)
-        );
-      }
+      // Property type filter
+      if (filters.property_type && project.property_type !== filters.property_type) return false;
       
       return true;
     });
-  }, [properties, filters]);
+  }, [currentData, filters]);
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
@@ -101,12 +71,9 @@ const Projects = () => {
 
   const clearFilters = () => {
     setFilters({
-      status: '',
-      facing: '',
-      plotSizeRange: '',
-      builtUpAreaRange: '',
       location: '',
-      searchTerm: ''
+      price_range: '',
+      property_type: ''
     });
   };
 
