@@ -414,7 +414,7 @@ const AdminPlots = () => {
                 {/* Thumbnail */}
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Thumbnail Image * (Max 5MB)
+                    Main Image * (Max 5MB)
                   </label>
                   <input
                     type="file"
@@ -425,11 +425,11 @@ const AdminPlots = () => {
                   />
                   {uploading && <p className="text-sm text-blue-600">Uploading image...</p>}
                   
-                  {formData.thumbnail_image && (
+                  {formData.main_image && (
                     <div className="relative mt-2">
                       <img
-                        src={getImageUrl(formData.thumbnail_image)}
-                        alt="Thumbnail preview"
+                        src={getImageUrl(formData.main_image)}
+                        alt="Main image preview"
                         className="w-full h-48 object-cover rounded-lg"
                         onError={(e) => {
                           e.target.onerror = null;
@@ -438,14 +438,14 @@ const AdminPlots = () => {
                       />
                       <Button
                         type="button"
-                        onClick={() => setFormData(prev => ({ ...prev, thumbnail_image: '' }))}
+                        onClick={() => setFormData(prev => ({ ...prev, main_image: '' }))}
                         size="sm"
                         variant="destructive"
                         className="absolute top-2 right-2"
                       >
                         <Trash2 size={12} />
                       </Button>
-                      <p className="text-xs text-gray-500 mt-1 break-all">{formData.thumbnail_image}</p>
+                      <p className="text-xs text-gray-500 mt-1 break-all">{formData.main_image}</p>
                     </div>
                   )}
                 </div>
