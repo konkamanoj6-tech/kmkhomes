@@ -319,6 +319,36 @@ class BudgetHomeCreate(BaseModel):
     featured: bool = Field(default=False)
     display_order: int = Field(default=0)
 
+# Plots Model (Land/Plot listings)
+class Plot(BaseDocument):
+    title: str = Field(..., description="Plot Name/Title")
+    location: str
+    price_range: str
+    area_sqyds: Optional[float] = Field(None, description="Area in Square Yards")
+    area_sqft: Optional[float] = Field(None, description="Area in Square Feet")
+    short_description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    status: str = Field(default="Available", description="Available, Sold, Upcoming")
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+    active: bool = Field(default=True)
+
+class PlotCreate(BaseModel):
+    title: str
+    location: str
+    price_range: str
+    area_sqyds: Optional[float] = None
+    area_sqft: Optional[float] = None
+    short_description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    status: str = Field(default="Available")
+    featured: bool = Field(default=False)
+    display_order: int = Field(default=0)
+
 # Amenity Model
 class Amenity(BaseDocument):
     name: str
