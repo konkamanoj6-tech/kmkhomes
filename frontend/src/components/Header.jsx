@@ -5,7 +5,6 @@ import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
