@@ -147,17 +147,41 @@ const Header = () => {
         }`}>
           <nav className="bg-white border-t border-gray-100 px-4 py-6">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsMenuOpen(false)}
-                className={`block py-3 font-medium transition-colors duration-200 ${
-                  location.pathname === link.path
-                    ? 'text-kmk-gold border-l-4 border-kmk-gold pl-4'
-                    : 'text-kmk-navy hover:text-kmk-gold'
-                }`}
-              >
-                {link.name}
+              link.dropdown ? (
+                <div key={link.name} className="mb-2">
+                  <div className="py-3 font-medium text-kmk-navy border-b border-gray-200 mb-2">
+                    {link.name}
+                  </div>
+                  {link.dropdown.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block py-2 pl-4 font-medium transition-colors duration-200 ${
+                        location.pathname === item.path
+                          ? 'text-kmk-gold'
+                          : 'text-gray-600 hover:text-kmk-gold'
+                      }`}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`block py-3 font-medium transition-colors duration-200 ${
+                    location.pathname === link.path
+                      ? 'text-kmk-gold border-l-4 border-kmk-gold pl-4'
+                      : 'text-kmk-navy hover:text-kmk-gold'
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              )
+            ))}
               </Link>
             ))}
             <Link
