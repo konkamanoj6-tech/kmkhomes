@@ -74,17 +74,50 @@ const Header = () => {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`font-medium transition-colors duration-200 hover:text-kmk-gold ${
-                    location.pathname === link.path
-                      ? 'text-kmk-gold border-b-2 border-kmk-gold pb-1'
-                      : 'text-kmk-navy'
-                  }`}
-                >
-                  {link.name}
-                </Link>
+                link.dropdown ? (
+                  <div 
+                    key={link.name} 
+                    className="relative"
+                    onMouseEnter={() => setIsProjectsOpen(true)}
+                    onMouseLeave={() => setIsProjectsOpen(false)}
+                  >
+                    <button
+                      className={`font-medium transition-colors duration-200 hover:text-kmk-gold flex items-center ${
+                        location.pathname.startsWith('/projects')
+                          ? 'text-kmk-gold border-b-2 border-kmk-gold pb-1'
+                          : 'text-kmk-navy'
+                      }`}
+                    >
+                      {link.name}
+                      <ChevronDown size={16} className="ml-1" />
+                    </button>
+                    {isProjectsOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
+                        {link.dropdown.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.path}
+                            className="block px-4 py-3 text-kmk-navy hover:bg-gray-50 hover:text-kmk-gold transition-colors"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`font-medium transition-colors duration-200 hover:text-kmk-gold ${
+                      location.pathname === link.path
+                        ? 'text-kmk-gold border-b-2 border-kmk-gold pb-1'
+                        : 'text-kmk-navy'
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
             </nav>
 
