@@ -270,6 +270,76 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Explore by Category Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-kmk-navy mb-4">Explore by Category</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose the type of property that fits your dream.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Budget Homes Card */}
+            <Link to="/projects/homes-for-every-budget">
+              <div className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer transition-all duration-300 hover:shadow-2xl">
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundImage: 'url(https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop)'
+                  }}
+                />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h3 className="text-3xl font-bold mb-3">Homes for Every Budget</h3>
+                  <p className="text-lg text-gray-200 mb-6">
+                    Comfortable living options for every lifestyle and budget.
+                  </p>
+                  <Button className="bg-kmk-gold hover:bg-kmk-gold/90 text-white">
+                    Explore Homes
+                    <ArrowRight size={18} className="ml-2" />
+                  </Button>
+                </div>
+              </div>
+            </Link>
+
+            {/* Open Plots Card */}
+            <Link to="/projects/plots">
+              <div className="group relative overflow-hidden rounded-2xl h-96 cursor-pointer transition-all duration-300 hover:shadow-2xl">
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                  style={{
+                    backgroundImage: 'url(https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000&auto=format&fit=crop)'
+                  }}
+                />
+                
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h3 className="text-3xl font-bold mb-3">Find Your Perfect Plot</h3>
+                  <p className="text-lg text-gray-200 mb-6">
+                    Build your dream home from the ground up.
+                  </p>
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                    Explore Plots
+                    <ArrowRight size={18} className="ml-2" />
+                  </Button>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Properties */}
       <section className="py-20 bg-kmk-background">
         <div className="max-w-7xl mx-auto px-4">
