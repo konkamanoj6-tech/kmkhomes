@@ -454,3 +454,89 @@ async def admin_delete_amenity(
     if not success:
         raise HTTPException(status_code=404, detail="Amenity not found")
     return {"message": "Amenity deleted successfully"}
+
+# Budget Homes CRUD
+@router.get("/budget-homes")
+async def admin_get_budget_homes(current_user: dict = Depends(get_current_admin_user)):
+    """Get all budget homes for admin."""
+    homes = await budget_homes_db.get_all(sort=[("display_order", 1), ("created_at", -1)])
+    return homes
+
+@router.post("/budget-homes")
+async def admin_create_budget_home(
+    home_data: BudgetHomeCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create new budget home."""
+    home_dict = home_data.dict()
+    home_dict["created_at"] = datetime.utcnow()
+    home_dict["active"] = True
+    
+    home_id = await budget_homes_db.create(home_dict)
+    return {"id": home_id, "message": "Budget home created successfully"}
+
+@router.put("/budget-homes/{home_id}")
+async def admin_update_budget_home(
+    home_id: str,
+    home_data: BudgetHomeCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update budget home."""
+    success = await budget_homes_db.update_by_id(home_id, home_data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Budget home not found")
+    return {"message": "Budget home updated successfully"}
+
+@router.delete("/budget-homes/{home_id}")
+async def admin_delete_budget_home(
+    home_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete budget home."""
+    success = await budget_homes_db.delete_by_id(home_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Budget home not found")
+    return {"message": "Budget home deleted successfully"}
+
+# Plots CRUD
+@router.get("/plots")
+async def admin_get_plots(current_user: dict = Depends(get_current_admin_user)):
+    """Get all plots for admin."""
+    plots = await plots_db.get_all(sort=[("display_order", 1), ("created_at", -1)])
+    return plots
+
+@router.post("/plots")
+async def admin_create_plot(
+    plot_data: PlotCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create new plot."""
+    plot_dict = plot_data.dict()
+    plot_dict["created_at"] = datetime.utcnow()
+    plot_dict["active"] = True
+    
+    plot_id = await plots_db.create(plot_dict)
+    return {"id": plot_id, "message": "Plot created successfully"}
+
+@router.put("/plots/{plot_id}")
+async def admin_update_plot(
+    plot_id: str,
+    plot_data: PlotCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update plot."""
+    success = await plots_db.update_by_id(plot_id, plot_data.dict())
+    if not success:
+        raise HTTPException(status_code=404, detail="Plot not found")
+    return {"message": "Plot updated successfully"}
+
+@router.delete("/plots/{plot_id}")
+async def admin_delete_plot(
+    plot_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete plot."""
+    success = await plots_db.delete_by_id(plot_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Plot not found")
+    return {"message": "Plot deleted successfully"}
