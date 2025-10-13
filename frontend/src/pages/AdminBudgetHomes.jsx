@@ -341,13 +341,62 @@ const AdminBudgetHomes = () => {
 
               <div>
                 <label className="block text-sm font-medium mb-1">Gallery Images</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleFileUpload(e, 'gallery')}
-                  className="w-full px-3 py-2 border rounded-md"
-                  disabled={uploading}
-                />
+                
+                {/* File Upload Option */}
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 mb-1 block">Option 1: Upload from Computer</label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, 'gallery')}
+                    className="w-full px-3 py-2 border rounded-md"
+                    disabled={uploading}
+                  />
+                </div>
+                
+                {/* Image URL Option */}
+                <div className="mb-2">
+                  <label className="text-xs text-gray-500 mb-1 block">Option 2: Paste Image URL</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      placeholder="https://example.com/image.jpg"
+                      className="flex-1 px-3 py-2 border rounded-md"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          const url = e.target.value.trim();
+                          if (url) {
+                            setFormData(prev => ({
+                              ...prev,
+                              gallery_images: [...prev.gallery_images, url]
+                            }));
+                            e.target.value = '';
+                          }
+                        }
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        const input = e.target.previousElementSibling;
+                        const url = input.value.trim();
+                        if (url) {
+                          setFormData(prev => ({
+                            ...prev,
+                            gallery_images: [...prev.gallery_images, url]
+                          }));
+                          input.value = '';
+                        }
+                      }}
+                      className="px-3 py-2 border rounded-md bg-gray-100 hover:bg-gray-200"
+                    >
+                      Add URL
+                    </button>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">Press Enter or click "Add URL"</p>
+                </div>
+                
                 <div className="mt-2 grid grid-cols-4 gap-2">
                   {formData.gallery_images.map((img, idx) => (
                     <div key={idx} className="relative">
