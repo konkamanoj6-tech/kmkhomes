@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Mail } from 'lucide-react';
+import { Menu, X, Phone, Mail, ChevronDown } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -19,7 +20,15 @@ const Header = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Projects', path: '/projects' },
+    { 
+      name: 'Projects', 
+      path: '/projects',
+      dropdown: [
+        { name: 'Our Projects', path: '/projects' },
+        { name: 'Budget Homes', path: '/projects/homes-for-every-budget' },
+        { name: 'Open Plots', path: '/projects/plots' }
+      ]
+    },
     { name: 'Amenities', path: '/amenities' },
     { name: 'Contact', path: '/contact' }
   ];
