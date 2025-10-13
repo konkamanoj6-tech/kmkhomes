@@ -21,6 +21,8 @@ import AdminLogin from './pages/AdminLogin';
 import AdminLayout from './components/AdminLayout';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminProperties from './pages/AdminProperties';
+import AdminBudgetHomes from './pages/AdminBudgetHomes';
+import AdminPlots from './pages/AdminPlots';
 import AdminBanners from './pages/AdminBanners';
 import AdminTestimonials from './pages/AdminTestimonials';
 import AdminAmenities from './pages/AdminAmenities';
