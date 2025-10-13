@@ -14,6 +14,7 @@ const BudgetHomesListing = () => {
     propertyType: '',
     facing: '',
     status: '',
+    builtUpArea: '',
     searchTerm: ''
   });
   const [showFilters, setShowFilters] = useState(false);
