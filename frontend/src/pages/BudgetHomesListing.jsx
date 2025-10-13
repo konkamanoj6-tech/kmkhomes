@@ -185,7 +185,7 @@ const BudgetHomesListing = () => {
             </div>
 
             {showFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4 pt-4 border-t">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 pt-4 border-t">
                 <div>
                   <label className="block text-sm font-medium mb-2">Location</label>
                   <select
@@ -196,6 +196,20 @@ const BudgetHomesListing = () => {
                     <option value="">All Locations</option>
                     {locationOptions.map(loc => (
                       <option key={loc} value={loc}>{loc}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Price Range</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-lg"
+                    value={filters.priceRange}
+                    onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
+                  >
+                    <option value="">All Prices</option>
+                    {priceRangeOptions.map(range => (
+                      <option key={range.value} value={range.value}>{range.label}</option>
                     ))}
                   </select>
                 </div>
@@ -229,6 +243,20 @@ const BudgetHomesListing = () => {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium mb-2">Built-up Area</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-lg"
+                    value={filters.builtUpArea}
+                    onChange={(e) => setFilters({ ...filters, builtUpArea: e.target.value })}
+                  >
+                    <option value="">All Sizes</option>
+                    {builtUpAreaOptions.map(range => (
+                      <option key={range.value} value={range.value}>{range.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium mb-2">Status</label>
                   <select
                     className="w-full px-3 py-2 border rounded-lg"
@@ -242,7 +270,7 @@ const BudgetHomesListing = () => {
                   </select>
                 </div>
 
-                <div className="md:col-span-4">
+                <div className="md:col-span-3">
                   <Button variant="outline" onClick={resetFilters} className="w-full md:w-auto">
                     Reset Filters
                   </Button>
