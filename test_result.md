@@ -343,6 +343,103 @@ frontend:
     working: true
     file: "/app/frontend/src/pages/Contact.jsx"
     stuck_count: 0
+
+  - task: "AdminBudgetHomes component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/AdminBudgetHomes.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New admin page for managing Budget Homes with full CRUD operations, image upload, gallery management, YouTube link input, and all required fields. Includes dropdown filters for property type, facing, and status."
+
+  - task: "AdminPlots component"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/AdminPlots.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "New admin page for managing Plots with full CRUD operations, image upload, gallery management, YouTube link input, and all required fields. Includes dropdown filters for property type and status."
+
+  - task: "Budget Homes Listing page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/BudgetHomesListing.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Public listing page for Budget Homes at /projects/homes-for-every-budget with gradient header, search functionality, dropdown filters (Location, Property Type, Facing, Status), property cards with status badges, YouTube tour links, and 'View Details' buttons."
+
+  - task: "Budget Home Detail page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/BudgetHomeDetail.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Detail page for individual Budget Home at /projects/homes-for-every-budget/:id with image gallery modal, property details, YouTube video embed (16:9, no autoplay), contact buttons (Call, WhatsApp, Email), and 'Back to All Homes' button."
+
+  - task: "Plots Listing page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/PlotsListing.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Public listing page for Plots at /projects/plots with gradient header, search functionality, dropdown filters (Location, Property Type, Status), plot cards with status badges, YouTube tour links, and 'View Details' buttons."
+
+  - task: "Plot Detail page"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/PlotDetail.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Detail page for individual Plot at /projects/plots/:id with image gallery modal, plot details, YouTube video embed (16:9, no autoplay), contact buttons (Call, WhatsApp, Email), and 'Back to All Plots' button."
+
+  - task: "AdminLayout navigation update"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/AdminLayout.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added 'Budget Homes' and 'Plots' navigation items to admin sidebar with appropriate icons (Home and MapPin). Updated imports from lucide-react."
+
+  - task: "App.js routing updates"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added routes for all new pages: admin routes for /admin/budget-homes and /admin/plots, public routes for /projects/homes-for-every-budget, /projects/homes-for-every-budget/:id, /projects/plots, and /projects/plots/:id. Imported all new components."
+
     priority: "medium"
     needs_retesting: false
     status_history:
