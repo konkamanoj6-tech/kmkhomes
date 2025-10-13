@@ -37,22 +37,44 @@ const Projects = () => {
     }
   };
 
-  // Filter options
-  const statusOptions = [...new Set(properties.map(p => p.status))];
-  const facingOptions = [...new Set(properties.map(p => p.facing))];
-  const locationOptions = [...new Set(properties.map(p => p.location))];
+  // Filter options - all dynamic from data
+  const statusOptions = [...new Set(properties.map(p => p.status))].sort();
+  const facingOptions = [...new Set(properties.map(p => p.facing))].sort();
+  const locationOptions = [...new Set(properties.map(p => p.location))].sort();
 
-  const plotSizeRanges = [
-    { label: '1500-2000 Sq.Yds', value: '1500-2000' },
-    { label: '2000-2500 Sq.Yds', value: '2000-2500' },
-    { label: '2500+ Sq.Yds', value: '2500+' }
-  ];
+  // Dynamic plot size ranges
+  const plotSizeRanges = useMemo(() => {
+    const sizes = properties.map(p => p.plot_size).filter(s => s > 0);
+    if (sizes.length === 0) return [];
+    
+    const min = Math.min(...sizes);
+    const max = Math.max(...sizes);
+    
+    const ranges = [];
+    if (min < 1500) ranges.push({ label: 'Under 1500 Sq.Yds', value: '0-1500' });
+    if (max >= 1500) ranges.push({ label: '1500-2000 Sq.Yds', value: '1500-2000' });
+    if (max >= 2000) ranges.push({ label: '2000-2500 Sq.Yds', value: '2000-2500' });
+    if (max >= 2500) ranges.push({ label: '2500+ Sq.Yds', value: '2500+' });
+    
+    return ranges;
+  }, [properties]);
 
-  const builtUpAreaRanges = [
-    { label: '2000-2500 Sq.Ft', value: '2000-2500' },
-    { label: '2500-3000 Sq.Ft', value: '2500-3000' },
-    { label: '3000+ Sq.Ft', value: '3000+' }
-  ];
+  // Dynamic built-up area ranges
+  const builtUpAreaRanges = useMemo(() => {
+    const areas = properties.map(p => p.built_up_area).filter(a => a > 0);
+    if (areas.length === 0) return [];
+    
+    const min = Math.min(...areas);
+    const max = Math.max(...areas);
+    
+    const ranges = [];
+    if (min < 2000) ranges.push({ label: 'Under 2000 Sq.Ft', value: '0-2000' });
+    if (max >= 2000) ranges.push({ label: '2000-2500 Sq.Ft', value: '2000-2500' });
+    if (max >= 2500) ranges.push({ label: '2500-3000 Sq.Ft', value: '2500-3000' });
+    if (max >= 3000) ranges.push({ label: '3000+ Sq.Ft', value: '3000+' });
+    
+    return ranges;
+  }, [properties]);
 
   // Filter properties based on selected filters
   const filteredProperties = useMemo(() => {
