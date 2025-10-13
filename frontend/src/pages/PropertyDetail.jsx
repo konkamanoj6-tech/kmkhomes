@@ -118,7 +118,10 @@ const PropertyDetail = () => {
     return (match && match[2].length === 11) ? match[2] : null;
   };
 
-  const youtubeVideoId = getYouTubeVideoId(property.youtube_link);
+  const youtubeVideoId = property?.youtube_link ? getYouTubeVideoId(property.youtube_link) : null;
+  
+  console.log('Property youtube_link:', property?.youtube_link);
+  console.log('YouTube video ID:', youtubeVideoId);
 
   return (
     <div className="min-h-screen bg-kmk-background">
