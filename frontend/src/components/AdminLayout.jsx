@@ -38,6 +38,16 @@ const AdminLayout = () => {
       icon: Building2
     },
     {
+      name: 'Budget Homes',
+      href: '/admin/budget-homes',
+      icon: Home
+    },
+    {
+      name: 'Plots',
+      href: '/admin/plots',
+      icon: MapPin
+    },
+    {
       name: 'Home Banners',
       href: '/admin/banners',
       icon: Image
