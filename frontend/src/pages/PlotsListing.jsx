@@ -36,10 +36,42 @@ const PlotsListing = () => {
     }
   };
 
-  // Filter options
-  const locationOptions = [...new Set(plots.map(p => p.location))];
-  const propertyTypeOptions = [...new Set(plots.map(p => p.property_type))];
-  const statusOptions = [...new Set(plots.map(p => p.status))];
+  // Filter options - all dynamic from data
+  const locationOptions = [...new Set(plots.map(p => p.location))].sort();
+  const propertyTypeOptions = [...new Set(plots.map(p => p.property_type))].sort();
+  const statusOptions = [...new Set(plots.map(p => p.status))].sort();
+  
+  // Dynamic price range grouping
+  const priceRangeOptions = useMemo(() => {
+    const ranges = [
+      { label: 'Under ₹50L', value: '0-50', min: 0, max: 50 },
+      { label: '₹50L - ₹1Cr', value: '50-100', min: 50, max: 100 },
+      { label: '₹1Cr - ₹2Cr', value: '100-200', min: 100, max: 200 },
+      { label: 'Above ₹2Cr', value: '200+', min: 200, max: Infinity }
+    ];
+    return ranges;
+  }, []);
+  
+  // Dynamic plot area ranges
+  const plotAreaOptions = useMemo(() => {
+    const areas = plots.map(p => {
+      const match = p.plot_area.match(/(\d+)/);
+      return match ? parseInt(match[0]) : 0;
+    }).filter(a => a > 0);
+    
+    if (areas.length === 0) return [];
+    
+    const min = Math.min(...areas);
+    const max = Math.max(...areas);
+    
+    const ranges = [];
+    if (min < 150) ranges.push({ label: 'Under 150 sq.yds', value: '0-150' });
+    if (max >= 150) ranges.push({ label: '150-300 sq.yds', value: '150-300' });
+    if (max >= 300) ranges.push({ label: '300-500 sq.yds', value: '300-500' });
+    if (max >= 500) ranges.push({ label: 'Above 500 sq.yds', value: '500+' });
+    
+    return ranges;
+  }, [plots]);
 
   // Filter plots based on selected filters
   const filteredPlots = useMemo(() => {
