@@ -189,6 +189,55 @@ backend:
         agent: "testing"
         comment: "TESTED: Admin authentication working perfectly. POST /api/admin/auth/login with credentials (admin/admin123) returns valid JWT token. Token-based authentication for admin endpoints functional."
 
+  - task: "Budget Homes CRUD API"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/routes/admin_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Newly implemented CRUD endpoints for Budget Homes with all required fields (property_name, location, price_range, property_type, built_up_area, facing, description, main_image, gallery_images, youtube_link, area, status, display_order). Endpoints: GET/POST /api/admin/budget-homes, PUT/DELETE /api/admin/budget-homes/{id}"
+
+  - task: "Plots CRUD API"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/routes/admin_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Newly implemented CRUD endpoints for Plots with all required fields (plot_name, location, plot_area, price_range, property_type, description, main_image, gallery_images, youtube_link, status, display_order). Endpoints: GET/POST /api/admin/plots, PUT/DELETE /api/admin/plots/{id}"
+
+  - task: "Budget Homes Public API"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/routes/public_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Public API endpoints for Budget Homes with filtering support (location, price_range, property_type, facing, status). Endpoints: GET /api/budget-homes, GET /api/budget-homes/{id}"
+
+  - task: "Plots Public API"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/routes/public_api.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Public API endpoints for Plots with filtering support (location, plot_area, price_range, property_type, status). Endpoints: GET /api/plots, GET /api/plots/{id}"
+
+
 frontend:
   - task: "AdminBanners component"
     implemented: true
