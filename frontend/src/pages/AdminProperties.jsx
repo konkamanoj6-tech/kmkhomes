@@ -437,6 +437,19 @@ const AdminProperties = () => {
                     placeholder="https://maps.google.com/?q=..."
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    YouTube Video Link (Optional)
+                  </label>
+                  <input
+                    type="url"
+                    value={formData.youtube_link}
+                    onChange={(e) => setFormData(prev => ({ ...prev, youtube_link: e.target.value }))}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    placeholder="https://www.youtube.com/watch?v=..."
+                  />
+                </div>
               </div>
 
               <div className="flex items-center space-x-2">
