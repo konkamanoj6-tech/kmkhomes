@@ -103,6 +103,18 @@ export const adminApi = {
   updateAmenity: (id, data) => api.put(`/admin/amenities/${id}`, data),
   deleteAmenity: (id) => api.delete(`/admin/amenities/${id}`),
   
+  // Budget Homes
+  getBudgetHomes: () => api.get('/admin/budget-homes'),
+  createBudgetHome: (data) => api.post('/admin/budget-homes', data),
+  updateBudgetHome: (id, data) => api.put(`/admin/budget-homes/${id}`, data),
+  deleteBudgetHome: (id) => api.delete(`/admin/budget-homes/${id}`),
+  
+  // Plots
+  getPlots: () => api.get('/admin/plots'),
+  createPlot: (data) => api.post('/admin/plots', data),
+  updatePlot: (id, data) => api.put(`/admin/plots/${id}`, data),
+  deletePlot: (id) => api.delete(`/admin/plots/${id}`),
+  
   // File Upload
   uploadFile: (file) => {
     const formData = new FormData();
