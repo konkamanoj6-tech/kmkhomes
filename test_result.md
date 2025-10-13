@@ -449,17 +449,27 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "1.0"
-  test_sequence: 1
+  version: "2.0"
+  test_sequence: 2
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "Budget Homes CRUD API"
+    - "Plots CRUD API"
+    - "Budget Homes Public API"
+    - "Plots Public API"
+    - "AdminBudgetHomes component"
+    - "AdminPlots component"
+    - "Budget Homes Listing page"
+    - "Budget Home Detail page"
+    - "Plots Listing page"
+    - "Plot Detail page"
   stuck_tasks: []
-  test_all: true
-  test_priority: "complete"
-  backend_testing_complete: true
-  frontend_testing_complete: true
+  test_all: false
+  test_priority: "high_first"
+  backend_testing_complete: false
+  frontend_testing_complete: false
 
 agent_communication:
   - agent: "main"
@@ -468,3 +478,5 @@ agent_communication:
     message: "BACKEND TESTING COMPLETE: All backend APIs are working perfectly. ✅ Admin Banners CRUD, ✅ Admin Testimonials CRUD, ✅ File Upload & Serving, ✅ Property Detail API, ✅ Properties Listing, ✅ Admin Authentication. No backend issues found. Any remaining problems are likely frontend-related (routing, data handling, or UI display issues)."
   - agent: "testing"
     message: "COMPREHENSIVE FRONTEND TESTING COMPLETE: ✅ CRITICAL ISSUE FIXED - Projects page now displays all 5 properties correctly after fixing React key props, useMemo dependencies, and image array access. ✅ All admin features working (AdminBanners, AdminTestimonials with full CRUD). ✅ Property detail pages working. ✅ All public pages functional. ✅ Mobile responsive design working. ✅ Navigation and routing working. ✅ Contact forms functional. All major functionality tested and verified working. Ready for production use."
+  - agent: "main"
+    message: "NEW FEATURE IMPLEMENTATION COMPLETE: Added two new property sections - 'Homes for Every Budget' and 'Find Your Perfect Plot'. Implemented complete backend with CMS models (BudgetHome with facing & built-up area fields, Plot with plot area), database services, admin CRUD APIs, and public APIs with filtering. Created admin pages (AdminBudgetHomes, AdminPlots) with full CRUD, image upload, gallery management, and YouTube links. Created public listing pages with search/filters and detail pages with YouTube embeds (16:9, no autoplay). Updated AdminLayout navigation and App.js routing. All pages follow same design pattern as Our Projects. Existing Our Projects section untouched. Ready for backend and frontend testing."
