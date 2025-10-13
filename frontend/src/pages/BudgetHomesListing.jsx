@@ -36,11 +36,44 @@ const BudgetHomesListing = () => {
     }
   };
 
-  // Filter options
-  const locationOptions = [...new Set(homes.map(h => h.location))];
-  const propertyTypeOptions = [...new Set(homes.map(h => h.property_type))];
-  const facingOptions = [...new Set(homes.map(h => h.facing))];
-  const statusOptions = [...new Set(homes.map(h => h.status))];
+  // Filter options - all dynamic from data
+  const locationOptions = [...new Set(homes.map(h => h.location))].sort();
+  const propertyTypeOptions = [...new Set(homes.map(h => h.property_type))].sort();
+  const facingOptions = [...new Set(homes.map(h => h.facing))].sort();
+  const statusOptions = [...new Set(homes.map(h => h.status))].sort();
+  
+  // Dynamic price range grouping
+  const priceRangeOptions = useMemo(() => {
+    const ranges = [
+      { label: 'Under ₹50L', value: '0-50', min: 0, max: 50 },
+      { label: '₹50L - ₹1Cr', value: '50-100', min: 50, max: 100 },
+      { label: '₹1Cr - ₹2Cr', value: '100-200', min: 100, max: 200 },
+      { label: 'Above ₹2Cr', value: '200+', min: 200, max: Infinity }
+    ];
+    return ranges;
+  }, []);
+  
+  // Dynamic built-up area ranges
+  const builtUpAreaOptions = useMemo(() => {
+    const areas = homes.map(h => {
+      const match = h.built_up_area.match(/(\d+)/);
+      return match ? parseInt(match[0]) : 0;
+    }).filter(a => a > 0);
+    
+    if (areas.length === 0) return [];
+    
+    const min = Math.min(...areas);
+    const max = Math.max(...areas);
+    
+    const ranges = [];
+    if (min < 1000) ranges.push({ label: 'Under 1000 sq.ft', value: '0-1000' });
+    if (max >= 1000) ranges.push({ label: '1000-1500 sq.ft', value: '1000-1500' });
+    if (max >= 1500) ranges.push({ label: '1500-2000 sq.ft', value: '1500-2000' });
+    if (max >= 2000) ranges.push({ label: '2000-2500 sq.ft', value: '2000-2500' });
+    if (max >= 2500) ranges.push({ label: 'Above 2500 sq.ft', value: '2500+' });
+    
+    return ranges;
+  }, [homes]);
 
   // Filter homes based on selected filters
   const filteredHomes = useMemo(() => {
