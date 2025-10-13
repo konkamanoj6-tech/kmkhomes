@@ -44,6 +44,7 @@ class Property(BaseDocument):
     amenities: List[str] = Field(default_factory=list)
     enquiry_link: str
     map_link: str
+    youtube_link: Optional[str] = None
     featured: bool = Field(default=False)
     active: bool = Field(default=True)
 
@@ -60,6 +61,7 @@ class PropertyCreate(BaseModel):
     amenities: List[str] = Field(default_factory=list)
     enquiry_link: str
     map_link: str
+    youtube_link: Optional[str] = None
     featured: bool = Field(default=False)
 
 # Home Banners Model
