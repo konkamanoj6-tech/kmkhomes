@@ -268,3 +268,63 @@ class ContactSubmissionCreate(BaseModel):
     property_interest: Optional[str] = None
     visit_date: Optional[str] = None
     message: str
+
+# Budget Home Model (Homes for Every Budget)
+class BudgetHome(BaseDocument):
+    property_name: str
+    location: str
+    price_range: str
+    property_type: str = Field(..., description="Villa, Apartment, Independent House")
+    built_up_area: str = Field(..., description="e.g., 1600 sq.ft")
+    facing: str = Field(..., description="East, West, North, South, South-East, North-East, etc.")
+    description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    area: Optional[str] = None
+    status: str = Field(default="Available", description="Available or Sold Out")
+    active: bool = Field(default=True)
+    display_order: int = Field(default=0)
+
+class BudgetHomeCreate(BaseModel):
+    property_name: str
+    location: str
+    price_range: str
+    property_type: str
+    built_up_area: str
+    facing: str
+    description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    area: Optional[str] = None
+    status: str = Field(default="Available")
+    display_order: int = Field(default=0)
+
+# Plot Model (Find Your Perfect Plot)
+class Plot(BaseDocument):
+    plot_name: str
+    location: str
+    plot_area: str = Field(..., description="e.g., 300 sq.yds or 2400 sq.ft")
+    price_range: str
+    property_type: str = Field(default="Residential", description="Residential or Commercial")
+    description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    status: str = Field(default="Available", description="Available or Sold Out")
+    active: bool = Field(default=True)
+    display_order: int = Field(default=0)
+
+class PlotCreate(BaseModel):
+    plot_name: str
+    location: str
+    plot_area: str
+    price_range: str
+    property_type: str = Field(default="Residential")
+    description: str
+    main_image: str
+    gallery_images: List[str] = Field(default_factory=list)
+    youtube_link: Optional[str] = None
+    status: str = Field(default="Available")
+    display_order: int = Field(default=0)
