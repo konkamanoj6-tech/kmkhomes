@@ -262,8 +262,18 @@ const Home = () => {
                 </select>
               </div>
               
-              <Button asChild className="w-full bg-kmk-navy hover:bg-kmk-navy/90 text-white py-3">
-                <Link to="/projects">Search Properties</Link>
+              <Button 
+                asChild 
+                className="w-full bg-kmk-navy hover:bg-kmk-navy/90 text-white py-3"
+              >
+                <Link 
+                  to={{
+                    pathname: "/projects",
+                    search: `?status=${filters.status}&facing=${filters.facing}&plotSize=${filters.plotSize}&builtUpArea=${filters.builtUpArea}`
+                  }}
+                >
+                  Search Properties
+                </Link>
               </Button>
             </CardContent>
           </Card>
