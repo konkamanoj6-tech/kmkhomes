@@ -135,6 +135,7 @@ const BudgetHomesListing = () => {
       propertyType: '',
       facing: '',
       status: '',
+      builtUpArea: '',
       searchTerm: ''
     });
   };
