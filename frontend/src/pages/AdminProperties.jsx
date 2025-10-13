@@ -106,6 +106,7 @@ const AdminProperties = () => {
       amenities: property.amenities || [],
       enquiry_link: property.enquiry_link,
       map_link: property.map_link,
+      youtube_link: property.youtube_link || '',
       featured: property.featured
     });
     setShowForm(true);
@@ -125,6 +126,7 @@ const AdminProperties = () => {
       amenities: [],
       enquiry_link: '',
       map_link: '',
+      youtube_link: '',
       featured: false
     });
     setEditingProperty(null);
