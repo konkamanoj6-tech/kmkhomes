@@ -37,6 +37,14 @@ export const publicApi = {
   
   // Contact form
   submitContactForm: (data) => api.post('/contact-form', data),
+  
+  // Budget Homes
+  getBudgetHomes: (params = {}) => api.get('/budget-homes', { params }),
+  getBudgetHome: (id) => api.get(`/budget-homes/${id}`),
+  
+  // Plots
+  getPlots: (params = {}) => api.get('/plots', { params }),
+  getPlot: (id) => api.get(`/plots/${id}`),
 };
 
 // Admin API calls (requires authentication)
