@@ -197,6 +197,34 @@ const PlotsListing = () => {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium mb-2">Plot Area</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-lg"
+                    value={filters.plotArea}
+                    onChange={(e) => setFilters({ ...filters, plotArea: e.target.value })}
+                  >
+                    <option value="">All Sizes</option>
+                    {plotAreaOptions.map(range => (
+                      <option key={range.value} value={range.value}>{range.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Price Range</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-lg"
+                    value={filters.priceRange}
+                    onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
+                  >
+                    <option value="">All Prices</option>
+                    {priceRangeOptions.map(range => (
+                      <option key={range.value} value={range.value}>{range.label}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium mb-2">Property Type</label>
                   <select
                     className="w-full px-3 py-2 border rounded-lg"
