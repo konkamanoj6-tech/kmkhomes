@@ -341,14 +341,62 @@ const AdminProperties = () => {
                   Gallery Images
                 </label>
                 <div className="space-y-4">
-                  <input
-                    type="file"
-                    multiple
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    disabled={uploading}
-                    className="w-full px-4 py-2 border border-gray-200 rounded-lg"
-                  />
+                  {/* File Upload Option */}
+                  <div>
+                    <label className="text-xs text-gray-500 mb-1 block">Option 1: Upload from Computer</label>
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      disabled={uploading}
+                      className="w-full px-4 py-2 border border-gray-200 rounded-lg"
+                    />
+                  </div>
+                  
+                  {/* Image URL Option */}
+                  <div>
+                    <label className="text-xs text-gray-500 mb-1 block">Option 2: Paste Image URL (Cloudinary, Imgur, etc.)</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="url"
+                        placeholder="https://example.com/image.jpg"
+                        className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            e.preventDefault();
+                            const url = e.target.value.trim();
+                            if (url) {
+                              setFormData(prev => ({
+                                ...prev,
+                                gallery_images: [...prev.gallery_images, url]
+                              }));
+                              e.target.value = '';
+                            }
+                          }
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        onClick={(e) => {
+                          const input = e.target.previousElementSibling;
+                          const url = input.value.trim();
+                          if (url) {
+                            setFormData(prev => ({
+                              ...prev,
+                              gallery_images: [...prev.gallery_images, url]
+                            }));
+                            input.value = '';
+                          }
+                        }}
+                        variant="outline"
+                      >
+                        Add URL
+                      </Button>
+                    </div>
+                    <p className="text-xs text-gray-400 mt-1">Press Enter or click "Add URL" to add</p>
+                  </div>
+                  
                   {uploading && <p className="text-sm text-gray-600">Uploading images...</p>}
                   
                   {formData.gallery_images.length > 0 && (
