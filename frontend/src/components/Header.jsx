@@ -77,9 +77,7 @@ const Header = () => {
                 link.dropdown ? (
                   <div 
                     key={link.name} 
-                    className="relative"
-                    onMouseEnter={() => setIsProjectsOpen(true)}
-                    onMouseLeave={() => setIsProjectsOpen(false)}
+                    className="relative group"
                   >
                     <button
                       className={`font-medium transition-colors duration-200 hover:text-kmk-gold flex items-center ${
@@ -91,19 +89,17 @@ const Header = () => {
                       {link.name}
                       <ChevronDown size={16} className="ml-1" />
                     </button>
-                    {isProjectsOpen && (
-                      <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
-                        {link.dropdown.map((item) => (
-                          <Link
-                            key={item.name}
-                            to={item.path}
-                            className="block px-4 py-3 text-kmk-navy hover:bg-gray-50 hover:text-kmk-gold transition-colors"
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                      {link.dropdown.map((item) => (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className="block px-4 py-3 text-kmk-navy hover:bg-gray-50 hover:text-kmk-gold transition-colors"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 ) : (
                   <Link
