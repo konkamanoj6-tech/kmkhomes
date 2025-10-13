@@ -467,10 +467,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Budget Homes CRUD API"
-    - "Plots CRUD API"
-    - "Budget Homes Public API"
-    - "Plots Public API"
     - "AdminBudgetHomes component"
     - "AdminPlots component"
     - "Budget Homes Listing page"
@@ -480,7 +476,7 @@ test_plan:
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
-  backend_testing_complete: false
+  backend_testing_complete: true
   frontend_testing_complete: false
 
 agent_communication:
