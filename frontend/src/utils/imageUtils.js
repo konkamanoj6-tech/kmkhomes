@@ -9,13 +9,13 @@ export const getImageUrl = (imageUrl) => {
   
   // If it's a relative path starting with /uploads/, construct full URL
   if (imageUrl.startsWith('/uploads/')) {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://home-listing-cms.preview.emergentagent.com';
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://kmkhomes-cms.preview.emergentagent.com';
     return `${backendUrl}${imageUrl}`;
   }
   
   // For any other relative path, assume it's an upload
   if (imageUrl.startsWith('/')) {
-    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://home-listing-cms.preview.emergentagent.com';
+    const backendUrl = process.env.REACT_APP_BACKEND_URL || 'https://kmkhomes-cms.preview.emergentagent.com';
     return `${backendUrl}${imageUrl}`;
   }
   
