@@ -71,6 +71,10 @@ function App() {
             <Route path="/" element={<PublicLayout><Home /></PublicLayout>} />
             <Route path="/projects" element={<PublicLayout><Projects /></PublicLayout>} />
             <Route path="/property/:id" element={<PublicLayout><PropertyDetail /></PublicLayout>} />
+            <Route path="/projects/homes-for-every-budget" element={<PublicLayout><BudgetHomesListing /></PublicLayout>} />
+            <Route path="/projects/homes-for-every-budget/:id" element={<PublicLayout><BudgetHomeDetail /></PublicLayout>} />
+            <Route path="/projects/plots" element={<PublicLayout><PlotsListing /></PublicLayout>} />
+            <Route path="/projects/plots/:id" element={<PublicLayout><PlotDetail /></PublicLayout>} />
             <Route path="/about" element={<PublicLayout><About /></PublicLayout>} />
             <Route path="/amenities" element={<PublicLayout><Amenities /></PublicLayout>} />
             {/* Disabled routes - available in admin only
