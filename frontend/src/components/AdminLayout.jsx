@@ -16,7 +16,9 @@ import {
   Mail,
   Newspaper,
   Globe,
-  Zap
+  Zap,
+  Home,
+  MapPin
 } from 'lucide-react';
 
 const AdminLayout = () => {
