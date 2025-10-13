@@ -182,8 +182,6 @@ const Header = () => {
                 </Link>
               )
             ))}
-              </Link>
-            ))}
             <Link
               to="/contact"
               onClick={() => setIsMenuOpen(false)}
