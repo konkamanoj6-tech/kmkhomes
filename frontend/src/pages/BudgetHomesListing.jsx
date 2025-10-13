@@ -84,6 +84,37 @@ const BudgetHomesListing = () => {
       if (filters.facing && home.facing !== filters.facing) return false;
       if (filters.status && home.status !== filters.status) return false;
       
+      // Price range filter
+      if (filters.priceRange) {
+        const priceText = home.price_range.toLowerCase();
+        const priceMatch = priceText.match(/(\d+)/g);
+        if (priceMatch) {
+          const minPrice = parseInt(priceMatch[0]);
+          const [rangeMin, rangeMax] = filters.priceRange.split('-');
+          
+          if (rangeMax === '+') {
+            if (minPrice < parseInt(rangeMin)) return false;
+          } else {
+            if (minPrice < parseInt(rangeMin) || minPrice > parseInt(rangeMax)) return false;
+          }
+        }
+      }
+      
+      // Built-up area filter
+      if (filters.builtUpArea) {
+        const areaMatch = home.built_up_area.match(/(\d+)/);
+        if (areaMatch) {
+          const area = parseInt(areaMatch[0]);
+          const [rangeMin, rangeMax] = filters.builtUpArea.split('-');
+          
+          if (rangeMax === '+') {
+            if (area < parseInt(rangeMin)) return false;
+          } else {
+            if (area < parseInt(rangeMin) || area > parseInt(rangeMax)) return false;
+          }
+        }
+      }
+      
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
         return (
