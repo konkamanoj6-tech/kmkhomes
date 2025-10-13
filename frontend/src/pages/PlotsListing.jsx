@@ -80,6 +80,37 @@ const PlotsListing = () => {
       if (filters.propertyType && plot.property_type !== filters.propertyType) return false;
       if (filters.status && plot.status !== filters.status) return false;
       
+      // Price range filter
+      if (filters.priceRange) {
+        const priceText = plot.price_range.toLowerCase();
+        const priceMatch = priceText.match(/(\d+)/g);
+        if (priceMatch) {
+          const minPrice = parseInt(priceMatch[0]);
+          const [rangeMin, rangeMax] = filters.priceRange.split('-');
+          
+          if (rangeMax === '+') {
+            if (minPrice < parseInt(rangeMin)) return false;
+          } else {
+            if (minPrice < parseInt(rangeMin) || minPrice > parseInt(rangeMax)) return false;
+          }
+        }
+      }
+      
+      // Plot area filter
+      if (filters.plotArea) {
+        const areaMatch = plot.plot_area.match(/(\d+)/);
+        if (areaMatch) {
+          const area = parseInt(areaMatch[0]);
+          const [rangeMin, rangeMax] = filters.plotArea.split('-');
+          
+          if (rangeMax === '+') {
+            if (area < parseInt(rangeMin)) return false;
+          } else {
+            if (area < parseInt(rangeMin) || area > parseInt(rangeMax)) return false;
+          }
+        }
+      }
+      
       if (filters.searchTerm) {
         const searchLower = filters.searchTerm.toLowerCase();
         return (
