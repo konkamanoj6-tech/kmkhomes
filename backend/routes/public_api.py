@@ -161,4 +161,86 @@ async def submit_contact_form(submission: ContactSubmissionCreate):
     submission_dict["status"] = "new"
     
     submission_id = await contact_submissions_db.create(submission_dict)
+
+
+@router.get("/budget-homes")
+async def get_budget_homes(
+    location: Optional[str] = Query(None, description="Filter by location"),
+    price_range: Optional[str] = Query(None, description="Filter by price range"),
+    property_type: Optional[str] = Query(None, description="Filter by property type"),
+    facing: Optional[str] = Query(None, description="Filter by facing"),
+    status: Optional[str] = Query(None, description="Filter by status"),
+    limit: Optional[int] = Query(None, description="Limit results"),
+    skip: int = Query(0, description="Skip results")
+):
+    """Get all budget homes with optional filtering."""
+    filters = {"active": True}
+    
+    if location:
+        filters["location"] = {"$regex": location, "$options": "i"}
+    if price_range:
+        filters["price_range"] = {"$regex": price_range, "$options": "i"}
+    if property_type:
+        filters["property_type"] = property_type
+    if facing:
+        filters["facing"] = facing
+    if status:
+        filters["status"] = status
+    
+    homes = await budget_homes_db.get_all(
+        filters=filters,
+        sort=[("display_order", 1), ("created_at", -1)],
+        limit=limit,
+        skip=skip
+    )
+    return homes
+
+@router.get("/budget-homes/{home_id}")
+async def get_budget_home(home_id: str):
+    """Get single budget home by ID."""
+    home = await budget_homes_db.get_by_id(home_id)
+    if not home:
+        raise HTTPException(status_code=404, detail="Budget home not found")
+    return home
+
+@router.get("/plots")
+async def get_plots(
+    location: Optional[str] = Query(None, description="Filter by location"),
+    plot_area: Optional[str] = Query(None, description="Filter by plot area"),
+    price_range: Optional[str] = Query(None, description="Filter by price range"),
+    property_type: Optional[str] = Query(None, description="Filter by property type"),
+    status: Optional[str] = Query(None, description="Filter by status"),
+    limit: Optional[int] = Query(None, description="Limit results"),
+    skip: int = Query(0, description="Skip results")
+):
+    """Get all plots with optional filtering."""
+    filters = {"active": True}
+    
+    if location:
+        filters["location"] = {"$regex": location, "$options": "i"}
+    if plot_area:
+        filters["plot_area"] = {"$regex": plot_area, "$options": "i"}
+    if price_range:
+        filters["price_range"] = {"$regex": price_range, "$options": "i"}
+    if property_type:
+        filters["property_type"] = property_type
+    if status:
+        filters["status"] = status
+    
+    plots = await plots_db.get_all(
+        filters=filters,
+        sort=[("display_order", 1), ("created_at", -1)],
+        limit=limit,
+        skip=skip
+    )
+    return plots
+
+@router.get("/plots/{plot_id}")
+async def get_plot(plot_id: str):
+    """Get single plot by ID."""
+    plot = await plots_db.get_by_id(plot_id)
+    if not plot:
+        raise HTTPException(status_code=404, detail="Plot not found")
+    return plot
+
     return {"message": "Contact form submitted successfully", "id": submission_id}
