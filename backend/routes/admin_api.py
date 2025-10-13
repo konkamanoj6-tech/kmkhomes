@@ -11,7 +11,7 @@ from services.database import (
 from models.cms_models import (
     AdminLogin, AdminCreate, PropertyCreate, HomeBannerCreate, AboutSectionCreate,
     TeamMemberCreate, AmenityCreate, UpcomingProjectCreate, TestimonialCreate,
-    NewsEventCreate, NRIContentCreate, ContactInfoUpdate
+    NewsEventCreate, NRIContentCreate, ContactInfoUpdate, BudgetHomeCreate, PlotCreate
 )
 import os
 import uuid
