@@ -265,6 +265,23 @@ const PropertyDetail = () => {
                   </div>
                 </div>
 
+                {/* YouTube Video */}
+                {youtubeVideoId && (
+                  <div className="mb-6">
+                    <h3 className="font-bold text-kmk-navy mb-3">Video Tour</h3>
+                    <div className="relative w-full pb-[56.25%] bg-gray-100 rounded-lg overflow-hidden">
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+                        title="Property Video Tour"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                  </div>
+                )}
+
                 {/* Action Buttons */}
                 <div className="space-y-3">
                   {property.status === 'Available' && (
