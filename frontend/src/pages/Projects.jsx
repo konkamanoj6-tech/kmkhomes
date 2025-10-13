@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { MapPin, Home as HomeIcon, Ruler, Compass, ArrowRight, Search, Filter } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -8,6 +8,7 @@ import { publicApi } from '../services/api';
 import { getImageUrl } from '../utils/imageUtils';
 
 const Projects = () => {
+  const location = useLocation();
   const [filters, setFilters] = useState({
     status: '',
     facing: '',
@@ -22,7 +23,24 @@ const Projects = () => {
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+    
+    // Parse URL parameters and set filters
+    const searchParams = new URLSearchParams(location.search);
+    const urlFilters = {
+      status: searchParams.get('status') || '',
+      facing: searchParams.get('facing') || '',
+      plotSizeRange: searchParams.get('plotSize') || '',
+      builtUpAreaRange: searchParams.get('builtUpArea') || '',
+      location: '',
+      searchTerm: ''
+    };
+    setFilters(urlFilters);
+    
+    // Show filters if any are set
+    if (urlFilters.status || urlFilters.facing || urlFilters.plotSizeRange || urlFilters.builtUpAreaRange) {
+      setShowFilters(true);
+    }
+  }, [location.search]);
 
   const fetchProperties = async () => {
     try {
