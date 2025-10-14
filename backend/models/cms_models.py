@@ -45,6 +45,7 @@ class Property(BaseDocument):
     enquiry_link: str
     map_link: str
     youtube_link: Optional[str] = None
+    nearby_places: List[dict] = Field(default_factory=list, description="Nearby amenities")
     featured: bool = Field(default=False)
     active: bool = Field(default=True)
 
@@ -62,6 +63,7 @@ class PropertyCreate(BaseModel):
     enquiry_link: str
     map_link: str
     youtube_link: Optional[str] = None
+    nearby_places: List[dict] = Field(default_factory=list)
     featured: bool = Field(default=False)
 
 # Home Banners Model
