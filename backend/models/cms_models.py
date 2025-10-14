@@ -287,6 +287,7 @@ class BudgetHome(BaseDocument):
     youtube_link: Optional[str] = None
     area: Optional[str] = None
     status: str = Field(default="Available", description="Available or Sold Out")
+    nearby_places: List[dict] = Field(default_factory=list, description="Nearby amenities")
     active: bool = Field(default=True)
     display_order: int = Field(default=0)
 
@@ -303,6 +304,7 @@ class BudgetHomeCreate(BaseModel):
     youtube_link: Optional[str] = None
     area: Optional[str] = None
     status: str = Field(default="Available")
+    nearby_places: List[dict] = Field(default_factory=list)
     display_order: int = Field(default=0)
 
 # Plot Model (Find Your Perfect Plot)
