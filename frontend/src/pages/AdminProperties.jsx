@@ -108,6 +108,7 @@ const AdminProperties = () => {
       enquiry_link: property.enquiry_link,
       map_link: property.map_link,
       youtube_link: property.youtube_link || '',
+      nearby_places: property.nearby_places || [],
       featured: property.featured
     });
     setShowForm(true);
@@ -128,6 +129,7 @@ const AdminProperties = () => {
       enquiry_link: '',
       map_link: '',
       youtube_link: '',
+      nearby_places: [],
       featured: false
     });
     setEditingProperty(null);
