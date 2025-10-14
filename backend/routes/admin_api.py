@@ -541,3 +541,18 @@ async def admin_delete_plot(
     if not success:
         raise HTTPException(status_code=404, detail="Plot not found")
     return {"message": "Plot deleted successfully"}
+
+
+# Fetch Nearby Places
+@router.post("/fetch-nearby-places")
+async def admin_fetch_nearby_places(
+    location: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Fetch nearby places for a given location."""
+    try:
+        nearby = fetch_nearby_places(location, radius_km=5.0)
+        return {"nearby_places": nearby}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching nearby places: {str(e)}")
+
