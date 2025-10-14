@@ -285,6 +285,27 @@ const PropertyDetail = () => {
                   </div>
                 )}
 
+                {/* Nearby Places */}
+                {property.nearby_places && property.nearby_places.length > 0 && (
+                  <div className="mb-6">
+                    <h3 className="font-bold text-kmk-navy mb-3">📍 Nearby Places</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {property.nearby_places.slice(0, 10).map((place, index) => (
+                        <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <span className="text-lg">{place.type.split(' ')[0]}</span>
+                            <div>
+                              <p className="text-sm font-medium text-gray-800">{place.name}</p>
+                              <p className="text-xs text-gray-500">{place.type}</p>
+                            </div>
+                          </div>
+                          <span className="text-sm font-semibold text-kmk-gold">{place.distance} km</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Action Buttons */}
                 <div className="space-y-3">
                   {property.status === 'Available' && (
