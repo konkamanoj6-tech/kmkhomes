@@ -13,6 +13,7 @@ from models.cms_models import (
     TeamMemberCreate, AmenityCreate, UpcomingProjectCreate, TestimonialCreate,
     NewsEventCreate, NRIContentCreate, ContactInfoUpdate, BudgetHomeCreate, PlotCreate
 )
+from utils.nearby_places import fetch_nearby_places
 import os
 import uuid
 from datetime import datetime, timedelta
