@@ -35,6 +35,7 @@ const AdminProperties = () => {
     enquiry_link: '',
     map_link: '',
     youtube_link: '',
+    nearby_places: [],
     featured: false
   });
   const [uploading, setUploading] = useState(false);
