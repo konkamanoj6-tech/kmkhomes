@@ -319,6 +319,7 @@ class Plot(BaseDocument):
     gallery_images: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
     status: str = Field(default="Available", description="Available or Sold Out")
+    nearby_places: List[dict] = Field(default_factory=list, description="Nearby amenities")
     active: bool = Field(default=True)
     display_order: int = Field(default=0)
 
@@ -333,4 +334,5 @@ class PlotCreate(BaseModel):
     gallery_images: List[str] = Field(default_factory=list)
     youtube_link: Optional[str] = None
     status: str = Field(default="Available")
+    nearby_places: List[dict] = Field(default_factory=list)
     display_order: int = Field(default=0)
