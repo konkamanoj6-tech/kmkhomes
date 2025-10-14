@@ -103,6 +103,9 @@ export const adminApi = {
   updateAmenity: (id, data) => api.put(`/admin/amenities/${id}`, data),
   deleteAmenity: (id) => api.delete(`/admin/amenities/${id}`),
   
+  // Fetch Nearby Places
+  fetchNearbyPlaces: (location) => api.post('/admin/fetch-nearby-places', null, { params: { location } }),
+  
   // Budget Homes
   getBudgetHomes: () => api.get('/admin/budget-homes'),
   createBudgetHome: (data) => api.post('/admin/budget-homes', data),
