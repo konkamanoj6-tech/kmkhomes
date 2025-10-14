@@ -311,14 +311,53 @@ const AdminProperties = () => {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Location *
                 </label>
-                <input
-                  type="text"
-                  required
-                  value={formData.location}
-                  onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
-                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                  placeholder="e.g., Jubilee Hills, Hyderabad"
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    required
+                    value={formData.location}
+                    onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
+                    className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                    placeholder="e.g., Jubilee Hills, Hyderabad"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={async () => {
+                      if (!formData.location) {
+                        alert('Please enter a location first');
+                        return;
+                      }
+                      try {
+                        setUploading(true);
+                        const response = await adminApi.fetchNearbyPlaces(formData.location);
+                        setFormData(prev => ({ ...prev, nearby_places: response.data.nearby_places }));
+                        alert(`Found ${response.data.nearby_places.length} nearby places!`);
+                      } catch (error) {
+                        console.error('Error fetching nearby places:', error);
+                        alert('Error fetching nearby places. Please try again.');
+                      } finally {
+                        setUploading(false);
+                      }
+                    }}
+                    disabled={uploading}
+                  >
+                    {uploading ? 'Fetching...' : '🗺️ Fetch Nearby Places'}
+                  </Button>
+                </div>
+                {formData.nearby_places && formData.nearby_places.length > 0 && (
+                  <div className="mt-2 p-3 bg-gray-50 rounded-lg max-h-40 overflow-y-auto">
+                    <p className="text-sm font-medium text-gray-700 mb-2">Found {formData.nearby_places.length} nearby places:</p>
+                    <div className="space-y-1 text-xs">
+                      {formData.nearby_places.slice(0, 10).map((place, idx) => (
+                        <div key={idx} className="flex justify-between">
+                          <span>{place.type}: {place.name}</span>
+                          <span className="text-gray-500">{place.distance} km</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
