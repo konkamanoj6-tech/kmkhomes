@@ -61,11 +61,9 @@ const Header = () => {
           <div className="flex justify-between items-center py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
-              <img 
-                src="/kmk-logo.jpeg" 
-                alt="KMK Homes Logo" 
-                className="w-12 h-12 object-contain rounded-lg"
-              />
+              <div className="w-12 h-12 bg-gradient-to-br from-kmk-navy to-kmk-gold rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KMK</span>
+              </div>
               <div className="hidden sm:block">
                 <h1 className="text-2xl font-bold text-kmk-navy">KMK Homes</h1>
                 <p className="text-sm text-gray-600">Premium Villas & Luxury Living</p>
