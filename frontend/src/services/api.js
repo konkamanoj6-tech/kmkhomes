@@ -124,6 +124,13 @@ export const adminApi = {
   updatePlot: (id, data) => api.put(`/admin/plots/${id}`, data),
   deletePlot: (id) => api.delete(`/admin/plots/${id}`),
   
+  // Blogs
+  getBlogs: () => api.get('/admin/blogs'),
+  getBlog: (id) => api.get(`/admin/blogs/${id}`),
+  createBlog: (data) => api.post('/admin/blogs', data),
+  updateBlog: (id, data) => api.put(`/admin/blogs/${id}`, data),
+  deleteBlog: (id) => api.delete(`/admin/blogs/${id}`),
+  
   // File Upload
   uploadFile: (file) => {
     const formData = new FormData();
