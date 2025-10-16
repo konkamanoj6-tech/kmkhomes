@@ -45,6 +45,12 @@ export const publicApi = {
   // Plots
   getPlots: (params = {}) => api.get('/plots', { params }),
   getPlot: (id) => api.get(`/plots/${id}`),
+  
+  // Blogs
+  getBlogs: (params = {}) => api.get('/blogs', { params }),
+  getBlog: (id) => api.get(`/blogs/${id}`),
+  getBlogBySlug: (slug) => api.get(`/blogs/slug/${slug}`),
+  getBlogCategories: () => api.get('/blogs/categories/all'),
 };
 
 // Admin API calls (requires authentication)
