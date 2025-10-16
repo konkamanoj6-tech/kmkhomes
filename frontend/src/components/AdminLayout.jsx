@@ -118,9 +118,11 @@ const AdminLayout = () => {
           {/* Logo */}
           <div className="flex items-center justify-between h-16 px-6 bg-kmk-navy border-b border-kmk-gold/20">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-kmk-gold rounded-lg flex items-center justify-center">
-                <span className="text-kmk-navy font-bold text-sm">KMK</span>
-              </div>
+              <img 
+                src="/kmk-logo.jpeg" 
+                alt="KMK Homes Logo" 
+                className="w-8 h-8 object-contain rounded-lg bg-white/10 p-0.5"
+              />
               <span className="text-white font-semibold">CMS Admin</span>
             </div>
             <button
