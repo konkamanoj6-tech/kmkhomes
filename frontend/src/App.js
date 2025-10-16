@@ -30,6 +30,8 @@ import NRICorner from './pages/NRICorner';
 import HappyClients from './pages/HappyClients';
 import News from './pages/News';
 import Contact from './pages/Contact';
+import BlogListing from './pages/BlogListing';
+import BlogDetail from './pages/BlogDetail';
 
 // Admin Pages
 import AdminLogin from './pages/AdminLogin';
@@ -47,6 +49,7 @@ import AdminNRICorner from './pages/AdminNRICorner';
 import AdminContactInfo from './pages/AdminContactInfo';
 import AdminSubmissions from './pages/AdminSubmissions';
 import AdminSettings from './pages/AdminSettings';
+import AdminBlogs from './pages/AdminBlogs';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
