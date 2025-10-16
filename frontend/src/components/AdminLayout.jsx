@@ -18,7 +18,8 @@ import {
   Globe,
   Zap,
   Home,
-  MapPin
+  MapPin,
+  BookOpen
 } from 'lucide-react';
 
 const AdminLayout = () => {
