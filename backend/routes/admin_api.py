@@ -556,3 +556,79 @@ async def admin_fetch_nearby_places(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching nearby places: {str(e)}")
 
+
+# ========================
+# Blog/Insights Management
+# ========================
+
+@router.get("/blogs")
+async def get_all_blogs_admin(current_user: dict = Depends(get_current_admin_user)):
+    """Get all blog posts for admin (including inactive)."""
+    blogs = await blogs_db.get_all(sort=[("publish_date", -1)])
+    return blogs
+
+@router.post("/blogs")
+async def create_blog(
+    blog_data: BlogCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Create a new blog post."""
+    blog_dict = blog_data.dict()
+    
+    # Auto-generate slug from title if not provided
+    if not blog_dict.get('slug'):
+        blog_dict['slug'] = blog_dict['title'].lower().replace(' ', '-').replace('/', '-')
+    
+    # Auto-generate meta fields if not provided
+    if not blog_dict.get('meta_title'):
+        blog_dict['meta_title'] = blog_dict['title'] + " | KMK Homes"
+    
+    if not blog_dict.get('meta_description'):
+        blog_dict['meta_description'] = blog_dict['excerpt'][:160]
+    
+    blog_id = await blogs_db.create(blog_dict)
+    return {"_id": blog_id, "message": "Blog created successfully"}
+
+@router.get("/blogs/{blog_id}")
+async def get_blog_by_id_admin(
+    blog_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Get single blog post by ID for admin."""
+    blog = await blogs_db.get_by_id(blog_id)
+    if not blog:
+        raise HTTPException(status_code=404, detail="Blog not found")
+    return blog
+
+@router.put("/blogs/{blog_id}")
+async def update_blog(
+    blog_id: str,
+    blog_data: BlogCreate,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Update blog post."""
+    blog_dict = blog_data.dict()
+    
+    # Auto-generate meta fields if not provided
+    if not blog_dict.get('meta_title'):
+        blog_dict['meta_title'] = blog_dict['title'] + " | KMK Homes"
+    
+    if not blog_dict.get('meta_description'):
+        blog_dict['meta_description'] = blog_dict['excerpt'][:160]
+    
+    success = await blogs_db.update_by_id(blog_id, blog_dict)
+    if not success:
+        raise HTTPException(status_code=404, detail="Blog not found")
+    return {"message": "Blog updated successfully"}
+
+@router.delete("/blogs/{blog_id}")
+async def delete_blog(
+    blog_id: str,
+    current_user: dict = Depends(get_current_admin_user)
+):
+    """Delete blog post."""
+    success = await blogs_db.delete_by_id(blog_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Blog not found")
+    return {"message": "Blog deleted successfully"}
+
