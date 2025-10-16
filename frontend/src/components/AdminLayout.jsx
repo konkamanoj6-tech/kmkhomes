@@ -69,6 +69,11 @@ const AdminLayout = () => {
       icon: Users
     },
     {
+      name: 'Blog/Insights',
+      href: '/admin/blogs',
+      icon: BookOpen
+    },
+    {
       name: 'News & Events',
       href: '/admin/news-events',
       icon: Newspaper
