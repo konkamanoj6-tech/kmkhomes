@@ -243,4 +243,70 @@ async def get_plot(plot_id: str):
         raise HTTPException(status_code=404, detail="Plot not found")
     return plot
 
+
+# ========================
+# Blog/Insights Public APIs
+# ========================
+
+@router.get("/blogs")
+async def get_blogs(
+    category: Optional[str] = Query(None, description="Filter by category"),
+    featured: Optional[bool] = Query(None, description="Filter featured blogs"),
+    limit: Optional[int] = Query(20, description="Limit results"),
+    skip: Optional[int] = Query(0, description="Skip results")
+):
+    """Get all active blog posts with optional filters."""
+    filters = {"active": True}
+    
+    if category:
+        filters["category"] = category
+    
+    if featured is not None:
+        filters["featured"] = featured
+    
+    blogs = await blogs_db.get_all(
+        filters=filters,
+        sort=[("publish_date", -1)],
+        limit=limit,
+        skip=skip
+    )
+    return blogs
+
+@router.get("/blogs/slug/{slug}")
+async def get_blog_by_slug(slug: str):
+    """Get single blog post by slug."""
+    blog = await blogs_db.get_one({"slug": slug, "active": True})
+    if not blog:
+        raise HTTPException(status_code=404, detail="Blog not found")
+    
+    # Increment view count
+    await blogs_db.update_by_id(blog["_id"], {"views": blog.get("views", 0) + 1})
+    
+    return blog
+
+@router.get("/blogs/{blog_id}")
+async def get_blog_by_id(blog_id: str):
+    """Get single blog post by ID."""
+    blog = await blogs_db.get_by_id(blog_id)
+    if not blog or not blog.get("active", True):
+        raise HTTPException(status_code=404, detail="Blog not found")
+    
+    # Increment view count
+    await blogs_db.update_by_id(blog_id, {"views": blog.get("views", 0) + 1})
+    
+    return blog
+
+@router.get("/blogs/categories/all")
+async def get_blog_categories():
+    """Get all unique blog categories."""
+    # This could be enhanced to fetch from database dynamically
+    return {
+        "categories": [
+            "Luxury Villas",
+            "Budget Homes",
+            "Open Plots",
+            "Market Insights"
+        ]
+    }
+
     return {"message": "Contact form submitted successfully", "id": submission_id}
