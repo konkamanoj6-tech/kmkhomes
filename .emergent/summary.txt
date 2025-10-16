@@ -1,111 +1,118 @@
 <analysis>
-The AI engineer successfully established the KMK Homes real estate application from scratch, moving from mock data to a fully CMS-driven system. Initial work focused on implementing core CMS models, API routes, and an admin dashboard for properties, banners, and testimonials. Debugging efforts included resolving Pydantic v2 compatibility, CORS issues, and frontend rendering problems.
-
-Subsequent interactions involved addressing user-reported discrepancies between agent's test results and user's view, leading to the identification and resolution of several frontend display issues (like image paths and property detail loading). New admin features for Happy Clients, News & Events, NRI Corner, and admin password change were implemented. UI modifications, such as updating contact information, simplifying public navigation, and dynamically populating property filters on the homepage, were also completed. The recurring theme is image management and display, with the latest request still focusing on persistent image upload issues and exploring self-service options.
+The AI engineer has successfully transitioned the KMK Homes application from a basic MVP to a feature-rich, CMS-driven platform. Initial work focused on foundational CMS models, API routes, and an admin dashboard. Subsequent iterations addressed critical frontend display issues, image management challenges (leading to the implementation of direct image URL input), and UI enhancements like dynamic filters and improved navigation. New sections for Budget Homes and Open Plots were integrated, complete with dedicated CMS, public listing, and detail pages, alongside YouTube video embeds. Most recently, the engineer began implementing a Nearby Places feature using OpenStreetMap. The ongoing work involves enhancing existing functionalities and preparing for a comprehensive SEO overhaul and blog integration.
 </analysis>
 
 <product_requirements>
-The user requested a dynamic real estate website, KMK Homes, with a premium design. The primary goal is a fully CMS-driven, no-code editable site. Key features include:
+The user's primary goal is a dynamic, premium, CMS-driven KMK Homes real estate website with no-code editing. Key features include CMS-powered property listings, detailed property pages with image galleries and Enquire Now options, a dynamic homepage featuring banners, quick search, and CTAs. Specific content was requested for About Us and Amenities pages. Core CMS functionalities implemented include admin login, CRUD for properties, banners, testimonials, happy clients, contact info, news/events, NRI Corner, and amenities.
 
-**Website Structure & Content:**
-*   **Properties/Projects Page**: CMS-powered, displaying villa number, status, plot/built-up size, facing, location, image gallery. Visually appealing cards with status badges.
-*   **Property Detail Page**: Dedicated page per property with image slider/gallery, map, details, Enquire Now button.
-*   **Home Page**: Big banner with rotating images, quick property search/filter, Featured Projects (available villas), and CTAs. Dynamic plot size and built-up area filters. Updated contact info (+91 8074831140, homeskmk3@gmail.com).
-*   **Contact Page**: Google Maps embed, phone, email, WhatsApp chat.
-*   **About Us Page**: Custom Our Story content, removed Our Journey and Leadership Team sections.
-*   **Amenities Page**: Removed hardcoded images, removed Property Specifications section, now displays luxury lifestyle features with icons.
-*   SEO-ready and mobile responsive.
-
-**CMS Requirements (Implemented So Far):**
-*   **Admin Login/Dashboard**: JWT-based authentication, dashboard overview. Option to change admin password.
-*   **Properties/Villas**: CRUD operations for properties including map_link, enquiry_link.
-*   **Home Page Banners**: Add/remove hero images, promotional banners.
-*   **Happy Clients / Testimonials**: Add/edit/delete name, image, testimonial text.
-*   **Contact Info**: Edit company phone, email, WhatsApp, address, Google Map link.
-*   **Admin Navigation**: Implemented and then publicly disabled for NRI Corner, Happy Clients, News & Events.
-*   **Amenities**: CMS for managing amenity details (icons, titles, descriptions), though images were later removed from public view.
+Recent major additions include:
+1.  **Homes for Every Budget**: A new CMS collection and public pages ( and detail page) with dynamic filtering (Location, Price Range, Property Type, Built-up Area, Facing, Status).
+2.  **Find Your Perfect Plot**: Integrated as a new public section ( and detail page) using an existing  CMS collection, featuring dynamic filtering (Location, Area Range, Price Range, Status).
+3.  **YouTube Integration**: Red play icons on listing cards and embedded videos on detail pages for all property types.
+4.  **Dynamic Filters**: All listing pages (Our Projects, Budget Homes, Plots) to have dynamic dropdown filters for various criteria.
+5.  **Homepage Enhancements**: A new Explore by Category section with banner cards linking to Budget Homes and Open Plots, and improved search functionality for Find your perfect villa on the homepage.
+6.  **Image Management**: Implemented Image URL input fields in all admin forms (Properties, Budget Homes, Plots) as a reliable alternative to file uploads.
+7.  **Scroll-to-Top**: Ensures pages always load at the top.
+8.  **WhatsApp Redirect**: For contact information.
+9.  **Nearby Places**: Automatic fetching and display of points of interest (e.g., railway station, malls) based on property location using OpenStreetMap.
+10. **Upcoming**: Comprehensive SEO optimization and a new KMK Insights blog section.
 </product_requirements>
 
 <key_technical_concepts>
 - **Full-stack Architecture**: React (frontend), FastAPI (backend), MongoDB (database).
-- **CMS**: Dynamic content management through backend collections and an admin dashboard.
-- **Shadcn UI**: Frontend component library for modern UI.
-- **Authentication**: JWT-based login for admin panel.
-- **Environment Variables**: For secure configuration (, ).
+- **CMS**: Dynamic content management, admin dashboard.
+- **Shadcn UI**: Frontend component library.
+- **Authentication**: JWT-based admin login.
+- **Environment Variables**: For secure configuration.
 - **Tailwind CSS**: Utility-first CSS framework.
+- **Image Handling**: Direct image URL input for reliability.
+- **External APIs**: OpenStreetMap for Nearby Places.
 </key_technical_concepts>
 
 <code_architecture>
 
+-   **/app/backend/models/cms_models.py**:
+    -   **Importance**: Defines Pydantic models for all data entities.
+    -   **Changes**: Added  and  models. , , and  models were updated to include  and  fields.
+-   **/app/backend/routes/admin_api.py**:
+    -   **Importance**: Handles admin CRUD operations.
+    -   **Changes**: Added full CRUD endpoints for  and . A new endpoint  was added for fetching nearby POIs.
+-   **/app/backend/routes/public_api.py**:
+    -   **Importance**: Exposes public API for fetching content.
+    -   **Changes**: Added endpoints to fetch listing and detail data for  and .
+-   **/app/backend/services/database.py**:
+    -   **Importance**: Manages database connections and collection instances.
+    -   **Changes**: Added  and  instances.
+-   **/app/backend/utils/nearby_places.py**:
+    -   **Importance**: New utility for fetching nearby places.
+    -   **Changes**: Contains logic for OpenStreetMap API calls.
+-   **/app/frontend/src/App.js**:
+    -   **Importance**: Central routing and application setup.
+    -   **Changes**: Integrated new admin routes (, ) and public routes (, , , ). Implemented a  component.
+-   **/app/frontend/src/components/AdminLayout.jsx**:
+    -   **Importance**: Admin panel navigation structure.
+    -   **Changes**: Added navigation links for the new Admin Budget Homes and Admin Plots sections.
+-   **/app/frontend/src/components/Header.jsx**:
+    -   **Importance**: Public website navigation.
+    -   **Changes**: Implemented a Projects dropdown menu in the main navigation, including links to Our Projects, Budget Homes, and Open Plots. Fixed hover behavior.
+-   **/app/frontend/src/pages/AdminBudgetHomes.jsx (New)**:
+    -   **Importance**: Admin interface for managing Budget Home listings.
+    -   **Changes**: Full CRUD for Budget Homes, including image URL input and a Fetch Nearby Places button.
+-   **/app/frontend/src/pages/AdminPlots.jsx (New)**:
+    -   **Importance**: Admin interface for managing Plot listings.
+    -   **Changes**: Full CRUD for Plots, including image URL input and a Fetch Nearby Places button.
+-   **/app/frontend/src/pages/AdminProperties.jsx**:
+    -   **Importance**: Admin interface for managing Our Projects (Properties).
+    -   **Changes**: Updated to include YouTube link input, support for direct image URL input (main image and gallery), and a Fetch Nearby Places button.
+-   **/app/frontend/src/pages/BudgetHomeDetail.jsx (New)**:
+    -   **Importance**: Public detail page for Homes for Every Budget.
+    -   **Changes**: Displays full property details, image gallery, YouTube embed, and nearby places.
+-   **/app/frontend/src/pages/BudgetHomesListing.jsx (New)**:
+    -   **Importance**: Public listing page for Homes for Every Budget.
+    -   **Changes**: Displays property cards with dynamic filters and clickable YouTube video buttons.
+-   **/app/frontend/src/pages/Contact.jsx**:
+    -   **Importance**: Public contact form.
+    -   **Changes**: Implemented WhatsApp redirect for the contact number.
+-   **/app/frontend/src/pages/Home.jsx**:
+    -   **Importance**: Homepage.
+    -   **Changes**: Added Explore by Category section with banners. Updated Find your perfect villa search to pass filters via URL parameters.
+-   **/app/frontend/src/pages/PlotDetail.jsx (New)**:
+    -   **Importance**: Public detail page for Plots.
+    -   **Changes**: Displays full plot details, image gallery, YouTube embed, and nearby places.
+-   **/app/frontend/src/pages/PlotsListing.jsx (New)**:
+    -   **Importance**: Public listing page for Plots.
+    -   **Changes**: Displays plot cards with dynamic filters and clickable YouTube video buttons.
+-   **/app/frontend/src/pages/Projects.jsx**:
+    -   **Importance**: Public listing page for Our Projects.
+    -   **Changes**: Filters made fully dynamic, handles URL parameters for search, and added a clickable YouTube video badge to property cards.
+-   **/app/frontend/src/pages/PropertyDetail.jsx**:
+    -   **Importance**: Public detail page for Our Projects.
+    -   **Changes**: Added YouTube video embed section and dynamic display of nearby places.
+-   **/app/frontend/src/services/api.js**:
+    -   **Importance**: Centralized API service for frontend.
+    -   **Changes**: Added methods for new Budget Home and Plot APIs, and .
+-   **/app/frontend/src/utils/imageUtils.js**:
+    -   **Importance**: Image URL processing utility.
+    -   **Changes**: Confirmed proper handling of external image URLs.
+-   **/app/IMAGE_UPLOAD_GUIDE.md (New)**:
+    -   **Importance**: User guide for new image upload functionality.
+    -   **Changes**: Created to explain the image URL field feature.
 
-**Key Files and Changes:**
-*   **/app/backend/server.py**: Main FastAPI application.
-    *   **Changes**: Renamed from . Configures CORS, MongoDB, includes  and  routers, serves static files from . Updated .
-*   **/app/backend/models/cms_models.py**: Defines Pydantic models for CMS entities.
-    *   **Changes**: Central to CMS backend, includes models for Property, Banner, Testimonial, ContactInfo, NewsEvent, NRICorner, ContactSubmission, Amenities. Handles  for MongoDB.
-*   **/app/backend/routes/admin_api.py**: Admin API endpoints.
-    *   **Changes**: Added CRUD for Banners, Testimonials, ContactInfo, Submissions, HappyClients, NewsEvents, NRICorner, Amenities. Implemented  endpoint for images and . Fixed file URL construction to use the correct .
-*   **/app/backend/routes/public_api.py**: Public API endpoints.
-    *   **Changes**: Exposes CMS data (properties, contact info, testimonials, banners) to the frontend.
-*   **/app/frontend/src/App.js**: Main React application entry point.
-    *   **Changes**: Updated to correctly import and use , , , , ,  components for admin routes. Admin routes for disabled public pages (, , , ) are still present.
-*   **/app/frontend/src/components/AdminLayout.jsx**: Admin panel layout.
-    *   **Changes**: Updated navigation sidebar to include new admin pages: , , , , . Imported necessary icons.
-*   **/app/frontend/src/components/Header.jsx**: Application header.
-    *   **Changes**: Updated default contact info and simplified navigation by removing public links to NRI Corner, Happy Clients, News & Events, and Amenities.
-*   **/app/frontend/src/components/Footer.jsx**: Application footer.
-    *   **Changes**: Updated default fallback contact info to match the new details; fetches dynamic contact info from API.
-*   **/app/frontend/src/pages/AdminLogin.jsx**: Admin login page.
-    *   **Changes**: Removed demo credentials display. Added a security notice to change password.
-*   **/app/frontend/src/pages/AdminBanners.jsx**: Admin page for managing banners.
-    *   **Changes**: Fully implemented for CRUD operations.
-*   **/app/frontend/src/pages/AdminTestimonials.jsx**: Admin page for managing testimonials.
-    *   **Changes**: Fully implemented for CRUD operations.
-*   **/app/frontend/src/pages/AdminHappyClients.jsx**: Admin page for managing happy clients.
-    *   **Changes**: New file, fully implemented for CRUD.
-*   **/app/frontend/src/pages/AdminNewsEvents.jsx**: Admin page for managing news/events.
-    *   **Changes**: New file, fully implemented for CRUD.
-*   **/app/frontend/src/pages/AdminNRICorner.jsx**: Admin page for managing NRI Corner content.
-    *   **Changes**: New file, fully implemented for CRUD.
-*   **/app/frontend/src/pages/AdminSettings.jsx**: Admin page for changing password.
-    *   **Changes**: New file, fully implemented with account info and password change form.
-*   **/app/frontend/src/pages/AdminAmenities.jsx**: Admin page for managing amenities.
-    *   **Changes**: New file, fully implemented for CRUD.
-*   **/app/frontend/src/pages/About.jsx**: About Us page.
-    *   **Changes**: Our Story content updated; Our Journey and Leadership Team sections removed.
-*   **/app/frontend/src/pages/Amenities.jsx**: Public Amenities page.
-    *   **Changes**: Hardcoded Unsplash images removed from gallery and amenity cards. Removed the Property Specifications section.
-*   **/app/frontend/src/pages/Home.jsx**: Homepage.
-    *   **Changes**: Dynamic plot size and built-up area ranges implemented for the Find your perfect villa filter. Uses  for property links.
-*   **/app/frontend/src/pages/Projects.jsx**: Projects listing page.
-    *   **Changes**: Fixed  vs  issue (reverted after identifying axios always wraps in ). Uses  for property links.
-*   **/app/frontend/src/pages/PropertyDetail.jsx**: Property detail page.
-    *   **Changes**: Implemented image modal/expansion for full-size viewing. Added scroll-to-top on component load. Uses  for fetching property details.
-*   **/app/frontend/src/services/api.js**: Centralized API service.
-    *   **Changes**: Added API methods for Banners, Testimonials, ContactInfo, Submissions, HappyClients, NewsEvents, NRICorner, Amenities, and .
-*   **/app/frontend/src/utils/imageUtils.js**: Utility for image URL construction.
-    *   **Changes**: New file, created to prepend  to  paths for dynamic image display.
 </code_architecture>
 
 <pending_tasks>
-- Investigate and fix the persistent image upload issues (user reports images are not getting updated/displayed after upload).
-- Implement a more robust solution for user-initiated image management without developer intervention.
+- Update the logo across the entire application (frontend and backend).
+- Complete the Nearby Places feature implementation for AdminBudgetHomes and AdminPlots.
+- Implement comprehensive SEO optimization for all pages.
+- Create the KMK Insights (blog) section.
+- Integrate email/SMS notifications for contact form submissions.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary, the AI engineer was addressing several critical user issues: fixing image upload, adding provided images to Villa No 59, creating Amenities CMS, fixing image expansion in property details, fixing View Details scroll to top, and resolving a missing Settings link in the admin portal.
-
-The engineer successfully:
-1.  **Updated Villa No 59**: Added user-provided images.
-2.  **Created Amenities CMS**: Implemented , updated admin navigation, API services, and backend routes for amenity management.
-3.  **Fixed image expansion**: Implemented an image modal with next/previous functionality in .
-4.  **Fixed scroll-to-top**: Ensured  scrolls to the top on load.
-5.  **Fixed Settings visibility**: Ensured  is accessible via admin navigation.
-
-All these fixes were verified to be working. However, the user's very last message explicitly states: still if shd say u to upload the images but not able to upload i am any possible alternative u acn provde so evrytie no need to ask u. This indicates that despite previous attempts and the agent's internal verification, the core image upload and display problem persists for the user, and they are seeking an alternative solution for independent image management. The agent's last action was to acknowledge this and propose investigating the current upload system.
+Immediately before this summary, the AI engineer was focused on implementing the Nearby Places feature using OpenStreetMap. This involved adding a backend utility (), updating , , and  models to include a  field, creating a new backend API endpoint (), and integrating this functionality into the frontend API service (). The Fetch Nearby Places button and display of results were added to the  form and the  public page. However, the integration of the Fetch Nearby Places button into  and  was not explicitly confirmed as completed in the trajectory. Additionally, the user had requested a logo update, for which the new logo image was downloaded. The user's last major request was a comprehensive SEO optimization and blog integration.
 </current_work>
 
 <optional_next_step>
-Investigate and fix the current image upload system to allow users to upload images independently, as per the user's latest request.
+Complete the logo update across the application and finish integrating the Fetch Nearby Places feature in AdminBudgetHomes and AdminPlots.
 </optional_next_step>
 

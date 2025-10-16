@@ -11,7 +11,7 @@ from typing import Dict, Any, Optional
 
 class ComprehensiveBudgetPlotsAPITester:
     def __init__(self):
-        self.base_url = "https://kmkhomes-cms.preview.emergentagent.com"
+        self.base_url = "https://realestate-dashboard-4.preview.emergentagent.com"
         try:
             with open('/app/frontend/.env', 'r') as f:
                 for line in f:

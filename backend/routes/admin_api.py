@@ -122,7 +122,7 @@ async def upload_file(
         buffer.write(content)
     
     # Return file URL - using the correct base URL
-    backend_url = os.environ.get('BACKEND_URL', 'https://kmkhomes-cms.preview.emergentagent.com')
+    backend_url = os.environ.get('BACKEND_URL', 'https://realestate-dashboard-4.preview.emergentagent.com')
     file_url = f"{backend_url}/uploads/{unique_filename}"
     
     return {"file_url": file_url, "filename": unique_filename}

@@ -14,7 +14,7 @@ import uuid
 class KMKHomesAPITester:
     def __init__(self):
         # Get backend URL from environment
-        self.base_url = "https://kmkhomes-cms.preview.emergentagent.com"
+        self.base_url = "https://realestate-dashboard-4.preview.emergentagent.com"
         try:
             with open('/app/frontend/.env', 'r') as f:
                 for line in f:
