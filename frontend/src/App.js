@@ -98,6 +98,10 @@ function App() {
             <Route path="/news" element={<PublicLayout><News /></PublicLayout>} />
             */}
             <Route path="/contact" element={<PublicLayout><Contact /></PublicLayout>} />
+            
+            {/* Blog/Insights Routes */}
+            <Route path="/insights" element={<PublicLayout><BlogListing /></PublicLayout>} />
+            <Route path="/insights/:slug" element={<PublicLayout><BlogDetail /></PublicLayout>} />
 
             {/* Admin Login */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -117,6 +121,7 @@ function App() {
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="amenities" element={<AdminAmenities />} />
               <Route path="happy-clients" element={<AdminHappyClients />} />
+              <Route path="blogs" element={<AdminBlogs />} />
               <Route path="news-events" element={<AdminNewsEvents />} />
               <Route path="nri-corner" element={<AdminNRICorner />} />
               <Route path="contact" element={<AdminContactInfo />} />
