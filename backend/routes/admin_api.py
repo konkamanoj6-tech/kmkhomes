@@ -11,7 +11,7 @@ from services.database import (
 from models.cms_models import (
     AdminLogin, AdminCreate, PropertyCreate, HomeBannerCreate, AboutSectionCreate,
     TeamMemberCreate, AmenityCreate, UpcomingProjectCreate, TestimonialCreate,
-    NewsEventCreate, NRIContentCreate, ContactInfoUpdate, BudgetHomeCreate, PlotCreate
+    NewsEventCreate, NRIContentCreate, ContactInfoUpdate, BudgetHomeCreate, PlotCreate, BlogCreate
 )
 from utils.nearby_places import fetch_nearby_places
 import os
