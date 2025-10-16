@@ -49,11 +49,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
-              <img 
-                src="/kmk-logo.jpeg" 
-                alt="KMK Homes Logo" 
-                className="w-12 h-12 object-contain rounded-lg bg-white/10 p-1"
-              />
+              <div className="w-12 h-12 bg-gradient-to-br from-kmk-gold to-yellow-500 rounded-lg flex items-center justify-center">
+                <span className="text-kmk-navy font-bold text-xl">KMK</span>
+              </div>
               <div>
                 <h3 className="text-2xl font-bold">KMK Homes</h3>
                 <p className="text-gray-300 text-sm">Premium Villas & Luxury Living</p>
