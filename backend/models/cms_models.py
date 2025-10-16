@@ -335,4 +335,39 @@ class PlotCreate(BaseModel):
     youtube_link: Optional[str] = None
     status: str = Field(default="Available")
     nearby_places: List[dict] = Field(default_factory=list)
+
+# Blog/Insights Model
+class Blog(BaseDocument):
+    title: str = Field(..., description="Blog post title")
+    slug: str = Field(..., description="URL-friendly slug")
+    excerpt: str = Field(..., description="Short description for previews")
+    content: str = Field(..., description="Full blog content (HTML supported)")
+    featured_image: str = Field(..., description="Main blog image URL")
+    category: str = Field(..., description="Luxury Villas, Budget Homes, Open Plots, Market Insights")
+    author: str = Field(default="KMK Homes Team")
+    publish_date: datetime = Field(default_factory=datetime.utcnow)
+    tags: List[str] = Field(default_factory=list, description="SEO keywords")
+    meta_title: Optional[str] = Field(None, description="SEO meta title")
+    meta_description: Optional[str] = Field(None, description="SEO meta description")
+    meta_keywords: Optional[str] = Field(None, description="SEO keywords")
+    featured: bool = Field(default=False)
+    active: bool = Field(default=True)
+    views: int = Field(default=0)
+    display_order: int = Field(default=0)
+
+class BlogCreate(BaseModel):
+    title: str
+    slug: str
+    excerpt: str
+    content: str
+    featured_image: str
+    category: str
+    author: str = Field(default="KMK Homes Team")
+    publish_date: Optional[datetime] = None
+    tags: List[str] = Field(default_factory=list)
+    meta_title: Optional[str] = None
+    meta_description: Optional[str] = None
+    meta_keywords: Optional[str] = None
+    featured: bool = Field(default=False)
+
     display_order: int = Field(default=0)
