@@ -361,7 +361,7 @@ const NRICorner = () => {
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-kmk-navy px-8 py-4">
-              <a href={`https://wa.me/919876543210?text=Hi! I'm an NRI interested in property investment. Can you help me?`} target="_blank" rel="noopener noreferrer">
+              <a href={`https://wa.me/919014060147?text=Hi! I'm an NRI interested in property investment. Can you help me?`} target="_blank" rel="noopener noreferrer">
                 WhatsApp Consultation
               </a>
             </Button>
