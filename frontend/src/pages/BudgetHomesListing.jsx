@@ -84,18 +84,38 @@ const BudgetHomesListing = () => {
       if (filters.facing && home.facing !== filters.facing) return false;
       if (filters.status && home.status !== filters.status) return false;
       
-      // Price range filter
+      // Price range filter - improved to handle Cr and L
       if (filters.priceRange) {
         const priceText = home.price_range.toLowerCase();
-        const priceMatch = priceText.match(/(\d+)/g);
-        if (priceMatch) {
-          const minPrice = parseInt(priceMatch[0]);
+        let priceInLakhs = 0;
+        
+        // Parse price and convert to lakhs
+        if (priceText.includes('cr') || priceText.includes('crore')) {
+          const match = priceText.match(/(\d+\.?\d*)/);
+          if (match) {
+            priceInLakhs = parseFloat(match[0]) * 100; // Convert crores to lakhs
+          }
+        } else if (priceText.includes('l') || priceText.includes('lakh')) {
+          const match = priceText.match(/(\d+\.?\d*)/);
+          if (match) {
+            priceInLakhs = parseFloat(match[0]);
+          }
+        } else {
+          // Try to extract just numbers and assume lakhs if > 50, crores if < 50
+          const match = priceText.match(/(\d+\.?\d*)/);
+          if (match) {
+            const num = parseFloat(match[0]);
+            priceInLakhs = num > 50 ? num : num * 100;
+          }
+        }
+        
+        if (priceInLakhs > 0) {
           const [rangeMin, rangeMax] = filters.priceRange.split('-');
           
           if (rangeMax === '+') {
-            if (minPrice < parseInt(rangeMin)) return false;
+            if (priceInLakhs < parseInt(rangeMin)) return false;
           } else {
-            if (minPrice < parseInt(rangeMin) || minPrice > parseInt(rangeMax)) return false;
+            if (priceInLakhs < parseInt(rangeMin) || priceInLakhs > parseInt(rangeMax)) return false;
           }
         }
       }
