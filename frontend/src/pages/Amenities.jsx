@@ -36,9 +36,9 @@ const Amenities = () => {
       description: "Uninterrupted power supply with diesel generators, solar panels, and reliable water supply with overhead tanks."
     },
     {
-      icon: Waves,
-      title: "Swimming Pool Complex", 
-      description: "Luxurious swimming pool with separate kids section, poolside seating, and professional maintenance services."
+      icon: Building2,
+      title: "Premium Architecture", 
+      description: "Elegant architectural design with premium finishes, spacious layouts, and attention to every detail."
     },
     {
       icon: Dumbbell,
@@ -61,9 +61,9 @@ const Amenities = () => {
       description: "Fiber optic internet connectivity throughout the community with WiFi zones in common areas."
     },
     {
-      icon: Camera,
-      title: "Smart Home Features",
-      description: "Integrated smart home systems with video door bells, automated lighting, and climate control systems."
+      icon: Hammer,
+      title: "Premium Materials Construction",
+      description: "High-quality construction materials including imported marble, premium tiles, branded fittings, and superior finishing."
     },
     {
       icon: Users,
