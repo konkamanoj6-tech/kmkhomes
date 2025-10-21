@@ -12,7 +12,7 @@ export const generateOrganizationSchema = () => {
     "url": window.location.origin,
     "logo": `${window.location.origin}/kmk-logo.jpeg`,
     "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
-    "telephone": "+918074831140",
+    "telephone": "+919791662929",
     "email": "homeskmk3@gmail.com",
     "address": {
       "@type": "PostalAddress",
