@@ -163,6 +163,12 @@ const Home = () => {
         {/* Hero Content */}
         <div className="relative z-10 flex items-center justify-center h-full">
           <div className="text-center text-white max-w-6xl mx-auto px-4">
+            {/* No Brokerage Badge */}
+            <div className="inline-flex items-center gap-2 bg-kmk-gold text-white px-6 py-3 rounded-full font-bold text-lg mb-6 shadow-lg animate-pulse">
+              <CheckCircle size={24} />
+              <span>NO BROKERAGE FEE</span>
+            </div>
+            
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               Find Your Dream Home
               <span className="block text-kmk-gold">with KMK Homes</span>
