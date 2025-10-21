@@ -28,8 +28,27 @@
         
         <!-- Hide Emergent Badge -->
         <style>
-            #emergent-badge { display: none !important; }
+            #emergent-badge { display: none !important; visibility: hidden !important; opacity: 0 !important; }
         </style>
+        <script>
+            // Remove Emergent badge when DOM loads
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(function() {
+                    var badge = document.getElementById('emergent-badge');
+                    if (badge) {
+                        badge.remove();
+                    }
+                }, 100);
+                
+                // Keep checking and removing it if it gets re-injected
+                setInterval(function() {
+                    var badge = document.getElementById('emergent-badge');
+                    if (badge) {
+                        badge.remove();
+                    }
+                }, 1000);
+            });
+        </script>
         
         <!--
         These two scripts have been added for the testing, please do not edit or remove them
