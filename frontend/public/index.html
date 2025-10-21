@@ -28,26 +28,43 @@
         
         <!-- Hide Emergent Badge -->
         <style>
-            #emergent-badge { display: none !important; visibility: hidden !important; opacity: 0 !important; }
+            [id*="emergent"], [class*="emergent"], a[href*="emergent.sh"] { 
+                display: none !important; 
+                visibility: hidden !important; 
+                opacity: 0 !important; 
+                pointer-events: none !important;
+                position: absolute !important;
+                left: -9999px !important;
+            }
         </style>
         <script>
-            // Remove Emergent badge when DOM loads
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(function() {
-                    var badge = document.getElementById('emergent-badge');
-                    if (badge) {
-                        badge.remove();
-                    }
-                }, 100);
+            // Aggressive badge removal
+            (function() {
+                function removeBadge() {
+                    // Remove by ID
+                    var badges = document.querySelectorAll('[id*="emergent"], [class*="emergent"], a[href*="emergent.sh"]');
+                    badges.forEach(function(badge) {
+                        if (badge && badge.parentNode) {
+                            badge.parentNode.removeChild(badge);
+                        }
+                    });
+                }
                 
-                // Keep checking and removing it if it gets re-injected
-                setInterval(function() {
-                    var badge = document.getElementById('emergent-badge');
-                    if (badge) {
-                        badge.remove();
-                    }
-                }, 1000);
-            });
+                // Run immediately
+                removeBadge();
+                
+                // Run after DOM loads
+                document.addEventListener('DOMContentLoaded', removeBadge);
+                
+                // Keep checking every 500ms
+                setInterval(removeBadge, 500);
+                
+                // Watch for new nodes being added
+                if (typeof MutationObserver !== 'undefined') {
+                    var observer = new MutationObserver(removeBadge);
+                    observer.observe(document.documentElement, { childList: true, subtree: true });
+                }
+            })();
         </script>
         
         <!--
