@@ -258,13 +258,89 @@ const AdminBudgetHomes = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1">Facing *</label>
+                  <label className="block text-sm font-medium mb-1">Facing * (General)</label>
                   <select
                     required
                     className="w-full px-3 py-2 border rounded-md"
                     value={formData.facing}
                     onChange={(e) => setFormData({...formData, facing: e.target.value})}
                   >
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="North-East">North-East</option>
+                    <option value="South-East">South-East</option>
+                    <option value="North-West">North-West</option>
+                    <option value="South-West">South-West</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">Facing for 1BHK (Optional)</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-md"
+                    value={formData.facing_1bhk}
+                    onChange={(e) => setFormData({...formData, facing_1bhk: e.target.value})}
+                  >
+                    <option value="">Not Applicable</option>
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="North-East">North-East</option>
+                    <option value="South-East">South-East</option>
+                    <option value="North-West">North-West</option>
+                    <option value="South-West">South-West</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">Facing for 2BHK (Optional)</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-md"
+                    value={formData.facing_2bhk}
+                    onChange={(e) => setFormData({...formData, facing_2bhk: e.target.value})}
+                  >
+                    <option value="">Not Applicable</option>
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="North-East">North-East</option>
+                    <option value="South-East">South-East</option>
+                    <option value="North-West">North-West</option>
+                    <option value="South-West">South-West</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">Facing for 3BHK (Optional)</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-md"
+                    value={formData.facing_3bhk}
+                    onChange={(e) => setFormData({...formData, facing_3bhk: e.target.value})}
+                  >
+                    <option value="">Not Applicable</option>
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="North-East">North-East</option>
+                    <option value="South-East">South-East</option>
+                    <option value="North-West">North-West</option>
+                    <option value="South-West">South-West</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-1">Facing for 4BHK (Optional)</label>
+                  <select
+                    className="w-full px-3 py-2 border rounded-md"
+                    value={formData.facing_4bhk}
+                    onChange={(e) => setFormData({...formData, facing_4bhk: e.target.value})}
+                  >
+                    <option value="">Not Applicable</option>
                     <option value="East">East</option>
                     <option value="West">West</option>
                     <option value="North">North</option>
