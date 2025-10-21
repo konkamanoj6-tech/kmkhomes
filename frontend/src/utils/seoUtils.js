@@ -175,7 +175,7 @@ export const generateMetaTags = (page, data = {}) => {
     },
     contact: {
       title: "Contact KMK Homes | Book Site Visit | Hyderabad",
-      description: "Get in touch with KMK Homes for luxury villas, budget homes & plots in Hyderabad. Call +91 8074831140 or schedule a site visit.",
+      description: "Get in touch with KMK Homes for luxury villas, budget homes & plots in Hyderabad. Call +91 9791662929 or schedule a site visit.",
       keywords: "contact KMK Homes, site visit, luxury villas Hyderabad, property inquiry"
     },
     blog: {
