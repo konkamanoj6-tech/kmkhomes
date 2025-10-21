@@ -315,7 +315,7 @@ const PropertyDetail = () => {
                         className="w-full bg-kmk-gold hover:bg-kmk-gold/90 text-white"
                       >
                         <a
-                          href={property.enquiry_link}
+                          href={`https://wa.me/919014060147?text=Hi, I'm interested in ${property.villa_number || property.property_name || 'your property'}`}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
