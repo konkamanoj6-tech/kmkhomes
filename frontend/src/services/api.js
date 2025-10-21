@@ -46,6 +46,11 @@ export const publicApi = {
   getPlots: (params = {}) => api.get('/plots', { params }),
   getPlot: (id) => api.get(`/plots/${id}`),
   
+  // Dynamic Filters
+  getPropertiesFilters: () => api.get('/properties/filters'),
+  getBudgetHomesFilters: () => api.get('/budget-homes/filters'),
+  getPlotsFilters: () => api.get('/plots/filters'),
+  
   // Blogs
   getBlogs: (params = {}) => api.get('/blogs', { params }),
   getBlog: (id) => api.get(`/blogs/${id}`),
