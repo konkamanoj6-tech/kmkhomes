@@ -26,43 +26,115 @@
         
         <title>KMK Homes | Luxury Villas & Premium Real Estate in Hyderabad</title>
         
-        <!-- Hide Emergent Badge -->
+        <!-- Aggressive Emergent Badge Removal -->
         <style>
-            [id*="emergent"], [class*="emergent"], a[href*="emergent.sh"] { 
-                display: none !important; 
-                visibility: hidden !important; 
-                opacity: 0 !important; 
+            /* Hide emergent badge with maximum specificity */
+            #emergent-badge,
+            a#emergent-badge,
+            div#emergent-badge,
+            [id="emergent-badge"],
+            a[href*="emergent.sh"],
+            a[href*="app.emergent"],
+            [class*="emergent-badge"],
+            [id*="emergent-badge"] {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
                 pointer-events: none !important;
-                position: absolute !important;
-                left: -9999px !important;
+                position: fixed !important;
+                left: -99999px !important;
+                top: -99999px !important;
+                width: 0 !important;
+                height: 0 !important;
+                z-index: -999999 !important;
             }
         </style>
         <script>
-            // Aggressive badge removal
+            // Ultra-aggressive badge removal - runs before any other scripts
             (function() {
-                function removeBadge() {
-                    // Remove by ID
-                    var badges = document.querySelectorAll('[id*="emergent"], [class*="emergent"], a[href*="emergent.sh"]');
-                    badges.forEach(function(badge) {
+                // Remove function
+                function nukeEmergentBadge() {
+                    try {
+                        // Method 1: Remove by ID
+                        var badge = document.getElementById('emergent-badge');
                         if (badge && badge.parentNode) {
                             badge.parentNode.removeChild(badge);
                         }
-                    });
+                        
+                        // Method 2: Remove by query selector
+                        var badges = document.querySelectorAll(
+                            'a[href*="emergent"], ' +
+                            '[id*="emergent"], ' +
+                            '[class*="emergent-badge"], ' +
+                            'a[href*="app.emergent"]'
+                        );
+                        badges.forEach(function(el) {
+                            if (el && el.textContent && el.textContent.toLowerCase().includes('emergent')) {
+                                if (el.parentNode) {
+                                    el.parentNode.removeChild(el);
+                                }
+                            }
+                        });
+                        
+                        // Method 3: Hide all links with emergent in text
+                        var links = document.getElementsByTagName('a');
+                        for (var i = 0; i < links.length; i++) {
+                            if (links[i].textContent && 
+                                links[i].textContent.toLowerCase().includes('emergent') &&
+                                links[i].href && 
+                                links[i].href.includes('emergent')) {
+                                links[i].style.display = 'none';
+                                links[i].style.visibility = 'hidden';
+                                links[i].style.opacity = '0';
+                                links[i].style.position = 'fixed';
+                                links[i].style.left = '-99999px';
+                            }
+                        }
+                    } catch(e) {
+                        // Fail silently
+                    }
                 }
                 
                 // Run immediately
-                removeBadge();
+                nukeEmergentBadge();
                 
-                // Run after DOM loads
-                document.addEventListener('DOMContentLoaded', removeBadge);
+                // Run every 200ms
+                setInterval(nukeEmergentBadge, 200);
                 
-                // Keep checking every 500ms
-                setInterval(removeBadge, 500);
+                // Run on DOM ready
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', nukeEmergentBadge);
+                } else {
+                    nukeEmergentBadge();
+                }
                 
-                // Watch for new nodes being added
+                // Run on window load
+                window.addEventListener('load', nukeEmergentBadge);
+                
+                // Watch for DOM mutations
                 if (typeof MutationObserver !== 'undefined') {
-                    var observer = new MutationObserver(removeBadge);
-                    observer.observe(document.documentElement, { childList: true, subtree: true });
+                    var observer = new MutationObserver(function(mutations) {
+                        nukeEmergentBadge();
+                    });
+                    
+                    // Start observing as soon as possible
+                    if (document.body) {
+                        observer.observe(document.body, { 
+                            childList: true, 
+                            subtree: true,
+                            attributes: true 
+                        });
+                    } else {
+                        setTimeout(function() {
+                            if (document.body) {
+                                observer.observe(document.body, { 
+                                    childList: true, 
+                                    subtree: true,
+                                    attributes: true 
+                                });
+                            }
+                        }, 100);
+                    }
                 }
             })();
         </script>
