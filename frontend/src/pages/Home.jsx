@@ -217,7 +217,7 @@ const Home = () => {
       </section>
 
       {/* Quick Search Widget */}
-      <section className="relative -mt-20 z-30 px-4">
+      <section className="relative -mt-32 z-30 px-4 mb-16">
         <div className="max-w-6xl mx-auto">
           <Card className="bg-white/95 backdrop-blur-md shadow-2xl border-0">
             <CardContent className="p-8">
