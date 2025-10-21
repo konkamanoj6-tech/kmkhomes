@@ -217,11 +217,11 @@ const Home = () => {
       </section>
 
       {/* Quick Search Widget */}
-      <section className="relative -mt-32 z-30 px-4 mb-16">
+      <section className="relative -mt-16 md:-mt-32 z-30 px-4 mb-16">
         <div className="max-w-6xl mx-auto">
           <Card className="bg-white/95 backdrop-blur-md shadow-2xl border-0">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-kmk-navy mb-6 text-center">Find Your Perfect Villa</h3>
+            <CardContent className="p-4 md:p-8">
+              <h3 className="text-xl md:text-2xl font-bold text-kmk-navy mb-4 md:mb-6 text-center">Find Your Perfect Villa</h3>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <select
                   value={filters.status}
