@@ -266,13 +266,13 @@ const PlotDetail = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <a href="tel:+918074831140">
+                  <a href="tel:+919791662929">
                     <Button className="w-full bg-blue-600 hover:bg-blue-700">
                       <Phone className="w-4 h-4 mr-2" />
                       Call Now
                     </Button>
                   </a>
-                  <a href={`https://wa.me/918074831140?text=Hi, I'm interested in ${plot.plot_name}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/919791662929?text=Hi, I'm interested in ${plot.plot_name}`} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" className="w-full">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
