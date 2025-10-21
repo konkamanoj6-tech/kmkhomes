@@ -29,7 +29,6 @@ const Header = () => {
       ]
     },
     { name: 'Amenities', path: '/amenities' },
-    { name: 'Insights', path: '/insights' },
     { name: 'Contact', path: '/contact' }
   ];
 
