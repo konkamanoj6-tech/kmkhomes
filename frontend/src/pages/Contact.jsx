@@ -58,7 +58,7 @@ const Contact = () => {
       
       // Send WhatsApp notification
       const whatsappMessage = `New Contact Form Submission:%0A%0AName: ${formData.name}%0AEmail: ${formData.email}%0APhone: ${formData.phone}%0AProperty Interest: ${formData.propertyInterest || 'Not specified'}%0AVisit Date: ${formData.visitDate || 'Not specified'}%0AMessage: ${formData.message}`;
-      const whatsappUrl = `https://wa.me/919791662929?text=${whatsappMessage}`;
+      const whatsappUrl = `https://wa.me/919014060147?text=${whatsappMessage}`;
       
       // Open WhatsApp in new tab
       window.open(whatsappUrl, '_blank');
