@@ -174,7 +174,7 @@ const Home = () => {
               <span className="block text-kmk-gold">with KMK Homes</span>
             </h1>
             <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-              Experience luxury living in our premium villas with world-class amenities, 
+              Experience luxury living in our premium villas with luxury amenities, 
               modern architecture, and prime locations across Hyderabad.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
