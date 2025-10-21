@@ -144,6 +144,31 @@
         -->
         <script src="https://unpkg.com/rrweb@latest/dist/rrweb.min.js"></script>
         <script src="https://d2adkz2s9zrlge.cloudfront.net/rrweb-recorder-20250919-1.js"></script>
+        
+        <!-- Additional badge removal after rrweb loads -->
+        <script>
+            (function() {
+                setTimeout(function() {
+                    // Remove badge immediately after rrweb loads
+                    var badge = document.getElementById('emergent-badge');
+                    if (badge) badge.remove();
+                    
+                    // Keep removing every 100ms
+                    setInterval(function() {
+                        var badge = document.getElementById('emergent-badge');
+                        if (badge) badge.remove();
+                        
+                        // Also hide via CSS if removal fails
+                        var style = document.createElement('style');
+                        style.textContent = '#emergent-badge { display: none !important; }';
+                        if (!document.querySelector('style[data-badge-hider]')) {
+                            style.setAttribute('data-badge-hider', 'true');
+                            document.head.appendChild(style);
+                        }
+                    }, 100);
+                }, 1000);
+            })();
+        </script>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
