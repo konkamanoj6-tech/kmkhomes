@@ -65,19 +65,25 @@ async def startup_event():
             admin_data = {
                 "username": "admin",
                 "email": "admin@kmkhomes.com",
-                "password_hash": hash_password("admin123"),
+                "password_hash": hash_password("Manojntr12@"),
                 "role": "admin",
                 "active": True,
                 "created_at": datetime.utcnow()
             }
             
             await admin_users_db.create(admin_data)
-            logger.info("Default admin user created: username=admin, password=admin123")
+            logger.info("Default admin user created: username=admin, password=Manojntr12@")
         else:
-            logger.info("Admin user already exists")
+            # Update existing admin password
+            updated_password = hash_password("Manojntr12@")
+            await admin_users_db.update_by_id(
+                existing_admin["_id"],
+                {"password_hash": updated_password}
+            )
+            logger.info("Admin user password updated")
             
     except Exception as e:
-        logger.error(f"Error creating default admin user: {e}")
+        logger.error(f"Error creating/updating default admin user: {e}")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
