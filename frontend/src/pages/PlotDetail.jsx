@@ -272,7 +272,7 @@ const PlotDetail = () => {
                       Call Now
                     </Button>
                   </a>
-                  <a href={`https://wa.me/919791662929?text=Hi, I'm interested in ${plot.plot_name}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/919014060147?text=Hi, I'm interested in ${plot.plot_name}`} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" className="w-full">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
