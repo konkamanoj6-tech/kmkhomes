@@ -409,21 +409,51 @@ const AdminBudgetHomes = () => {
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">Main Image *</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleFileUpload(e, 'main_image')}
-                  className="w-full px-3 py-2 border rounded-md"
-                  disabled={uploading}
-                />
-                {formData.main_image && (
-                  <img 
-                    src={getImageUrl(formData.main_image)} 
-                    alt="Main" 
-                    className="mt-2 w-32 h-32 object-cover rounded"
+              {/* Main Image Section */}
+              <div className="border-t pt-4">
+                <h3 className="text-lg font-semibold mb-4 text-kmk-navy">Main/Thumbnail Image</h3>
+                
+                {/* Image URL Option (Primary) */}
+                <div className="mb-3">
+                  <label className="block text-sm font-medium mb-2">
+                    Image URL * (Recommended: Use Cloudinary, Imgur, Unsplash, etc.)
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      required
+                      placeholder="https://images.unsplash.com/photo-..."
+                      className="flex-1 px-3 py-2 border rounded-md focus:ring-2 focus:ring-kmk-gold"
+                      value={formData.main_image}
+                      onChange={(e) => setFormData({...formData, main_image: e.target.value})}
+                    />
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Paste the direct image URL from Unsplash, Cloudinary, Imgur, or any image hosting service</p>
+                </div>
+
+                {/* File Upload Option (Alternative) */}
+                <div className="mb-3">
+                  <label className="block text-sm text-gray-500 mb-1">
+                    OR Upload from Computer (Alternative)
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => handleFileUpload(e, 'main_image')}
+                    className="w-full px-3 py-2 border rounded-md text-sm"
+                    disabled={uploading}
                   />
+                </div>
+
+                {/* Image Preview */}
+                {formData.main_image && (
+                  <div className="mt-3">
+                    <img 
+                      src={getImageUrl(formData.main_image)} 
+                      alt="Main preview" 
+                      className="w-full max-w-md h-48 object-cover rounded-lg border"
+                    />
+                  </div>
                 )}
               </div>
 
