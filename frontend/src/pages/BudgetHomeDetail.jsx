@@ -276,13 +276,13 @@ const BudgetHomeDetail = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <a href="tel:+918074831140">
+                  <a href="tel:+919791662929">
                     <Button className="w-full bg-emerald-600 hover:bg-emerald-700">
                       <Phone className="w-4 h-4 mr-2" />
                       Call Now
                     </Button>
                   </a>
-                  <a href={`https://wa.me/918074831140?text=Hi, I'm interested in ${home.property_name}`} target="_blank" rel="noopener noreferrer">
+                  <a href={`https://wa.me/919014060147?text=Hi, I'm interested in ${home.property_name}`} target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" className="w-full">
                       <MessageCircle className="w-4 h-4 mr-2" />
                       WhatsApp
