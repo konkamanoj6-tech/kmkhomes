@@ -598,7 +598,7 @@ const AdminProperties = () => {
                     value={formData.enquiry_link}
                     onChange={(e) => setFormData(prev => ({ ...prev, enquiry_link: e.target.value }))}
                     className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
-                    placeholder="https://wa.me/919876543210"
+                    placeholder="https://wa.me/919014060147"
                   />
                 </div>
 
