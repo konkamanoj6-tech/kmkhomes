@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Zap, Waves, Dumbbell, Trees, Car, Wifi, Camera, Users, Gamepad2, ArrowRight } from 'lucide-react';
+import { Shield, Zap, Dumbbell, Trees, Car, Wifi, Users, Gamepad2, ArrowRight, Hammer, Building2 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { publicApi } from '../services/api';
