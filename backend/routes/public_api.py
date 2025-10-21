@@ -310,3 +310,63 @@ async def get_blog_categories():
     }
 
     return {"message": "Contact form submitted successfully", "id": submission_id}
+
+
+# ========================
+# Dynamic Filter APIs
+# ========================
+
+@router.get("/properties/filters")
+async def get_properties_filters():
+    """Get unique filter values for properties."""
+    all_properties = await properties_db.get_all(filters={"active": True})
+    
+    locations = sorted(list(set(prop.get("location", "") for prop in all_properties if prop.get("location"))))
+    statuses = sorted(list(set(prop.get("status", "") for prop in all_properties if prop.get("status"))))
+    facings = sorted(list(set(prop.get("facing", "") for prop in all_properties if prop.get("facing"))))
+    
+    return {
+        "locations": locations,
+        "statuses": statuses,
+        "facings": facings
+    }
+
+@router.get("/budget-homes/filters")
+async def get_budget_homes_filters():
+    """Get unique filter values for budget homes."""
+    all_homes = await budget_homes_db.get_all(filters={"active": True})
+    
+    locations = sorted(list(set(home.get("location", "") for home in all_homes if home.get("location"))))
+    price_ranges = sorted(list(set(home.get("price_range", "") for home in all_homes if home.get("price_range"))))
+    property_types = sorted(list(set(home.get("property_type", "") for home in all_homes if home.get("property_type"))))
+    facings = sorted(list(set(home.get("facing", "") for home in all_homes if home.get("facing"))))
+    built_up_areas = sorted(list(set(home.get("built_up_area", "") for home in all_homes if home.get("built_up_area"))))
+    statuses = sorted(list(set(home.get("status", "") for home in all_homes if home.get("status"))))
+    
+    return {
+        "locations": locations,
+        "price_ranges": price_ranges,
+        "property_types": property_types,
+        "facings": facings,
+        "built_up_areas": built_up_areas,
+        "statuses": statuses
+    }
+
+@router.get("/plots/filters")
+async def get_plots_filters():
+    """Get unique filter values for plots."""
+    all_plots = await plots_db.get_all(filters={"active": True})
+    
+    locations = sorted(list(set(plot.get("location", "") for plot in all_plots if plot.get("location"))))
+    plot_areas = sorted(list(set(plot.get("plot_area", "") for plot in all_plots if plot.get("plot_area"))))
+    price_ranges = sorted(list(set(plot.get("price_range", "") for plot in all_plots if plot.get("price_range"))))
+    property_types = sorted(list(set(plot.get("property_type", "") for plot in all_plots if plot.get("property_type"))))
+    statuses = sorted(list(set(plot.get("status", "") for plot in all_plots if plot.get("status"))))
+    
+    return {
+        "locations": locations,
+        "plot_areas": plot_areas,
+        "price_ranges": price_ranges,
+        "property_types": property_types,
+        "statuses": statuses
+    }
