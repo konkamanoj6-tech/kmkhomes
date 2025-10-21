@@ -377,10 +377,95 @@ const AdminProperties = () => {
                 />
               </div>
 
+              {/* Main/Thumbnail Image */}
+              <div className="border-t pt-4">
+                <h3 className="text-lg font-semibold mb-4 text-kmk-navy">Main/Thumbnail Image</h3>
+                <p className="text-sm text-gray-600 mb-3">Add the main image that will be used as thumbnail in listings</p>
+                
+                {/* Image URL Input */}
+                <div className="mb-3">
+                  <label className="block text-sm font-medium mb-2">
+                    Image URL (Recommended: Use Cloudinary, Imgur, Unsplash, etc.)
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      placeholder="https://images.unsplash.com/photo-..."
+                      className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-kmk-gold"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          const url = e.target.value.trim();
+                          if (url) {
+                            // Add as first image in gallery if gallery is empty
+                            if (formData.gallery_images.length === 0) {
+                              setFormData(prev => ({
+                                ...prev,
+                                gallery_images: [url, ...prev.gallery_images]
+                              }));
+                            } else {
+                              // Replace first image
+                              const newGallery = [...formData.gallery_images];
+                              newGallery[0] = url;
+                              setFormData(prev => ({
+                                ...prev,
+                                gallery_images: newGallery
+                              }));
+                            }
+                            e.target.value = '';
+                          }
+                        }
+                      }}
+                    />
+                    <Button
+                      type="button"
+                      onClick={(e) => {
+                        const input = e.target.previousElementSibling;
+                        const url = input.value.trim();
+                        if (url) {
+                          // Add as first image in gallery if gallery is empty
+                          if (formData.gallery_images.length === 0) {
+                            setFormData(prev => ({
+                              ...prev,
+                              gallery_images: [url, ...prev.gallery_images]
+                            }));
+                          } else {
+                            // Replace first image
+                            const newGallery = [...formData.gallery_images];
+                            newGallery[0] = url;
+                            setFormData(prev => ({
+                              ...prev,
+                              gallery_images: newGallery
+                            }));
+                          }
+                          input.value = '';
+                        }
+                      }}
+                      variant="outline"
+                    >
+                      Set as Main
+                    </Button>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">Press Enter or click "Set as Main" - This will be the first image in your gallery</p>
+                </div>
+
+                {/* Preview */}
+                {formData.gallery_images.length > 0 && (
+                  <div className="mt-3">
+                    <p className="text-xs text-gray-500 mb-2">Current Main/Thumbnail:</p>
+                    <img 
+                      src={formData.gallery_images[0]} 
+                      alt="Main preview" 
+                      className="w-full max-w-md h-48 object-cover rounded-lg border"
+                    />
+                  </div>
+                )}
+              </div>
+
               {/* Gallery Images */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Gallery Images
+                  Additional Gallery Images
                 </label>
                 <div className="space-y-4">
                   {/* File Upload Option */}
