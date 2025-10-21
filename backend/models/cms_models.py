@@ -281,6 +281,10 @@ class BudgetHome(BaseDocument):
     property_type: str = Field(..., description="Villa, Apartment, Independent House")
     built_up_area: str = Field(..., description="e.g., 1600 sq.ft")
     facing: str = Field(..., description="East, West, North, South, South-East, North-East, etc.")
+    facing_1bhk: Optional[str] = Field(None, description="Facing for 1BHK units")
+    facing_2bhk: Optional[str] = Field(None, description="Facing for 2BHK units")
+    facing_3bhk: Optional[str] = Field(None, description="Facing for 3BHK units")
+    facing_4bhk: Optional[str] = Field(None, description="Facing for 4BHK units")
     description: str
     main_image: str
     gallery_images: List[str] = Field(default_factory=list)
@@ -298,6 +302,10 @@ class BudgetHomeCreate(BaseModel):
     property_type: str
     built_up_area: str
     facing: str
+    facing_1bhk: Optional[str] = None
+    facing_2bhk: Optional[str] = None
+    facing_3bhk: Optional[str] = None
+    facing_4bhk: Optional[str] = None
     description: str
     main_image: str
     gallery_images: List[str] = Field(default_factory=list)
