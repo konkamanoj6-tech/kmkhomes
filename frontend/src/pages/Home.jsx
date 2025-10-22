@@ -140,8 +140,18 @@ const Home = () => {
     { number: "100%", label: "Customer Satisfaction", icon: CheckCircle }
   ];
 
+  const seoMeta = generateMetaTags('home');
+
   return (
     <div className="min-h-screen">
+      <SEO 
+        title={seoMeta.title}
+        description={seoMeta.description}
+        keywords={seoMeta.keywords}
+        ogImage="/kmk-logo.jpeg"
+        schema={generateOrganizationSchema()}
+      />
+      
       {/* Hero Section */}
       <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
