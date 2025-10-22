@@ -6,6 +6,8 @@ import { Card, CardContent } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { publicApi } from '../services/api';
 import { getImageUrl } from '../utils/imageUtils';
+import SEO from '../components/SEO';
+import { generateMetaTags, generateOrganizationSchema } from '../utils/seoUtils';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
