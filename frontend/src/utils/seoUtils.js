@@ -6,12 +6,13 @@
 export const generateOrganizationSchema = () => {
   return {
     "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
+    "@type": "Organization",
     "name": "KMK Homes",
-    "description": "Luxury villas, budget homes & premium plots in Hyderabad since 2009",
+    "alternateName": "KMK Homes Hyderabad",
+    "description": "KMK Homes is a Hyderabad-based real estate developer offering luxury villas, budget homes, and verified open plots from trusted builders.",
     "url": window.location.origin,
     "logo": `${window.location.origin}/kmk-logo.jpeg`,
-    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200",
+    "image": `${window.location.origin}/kmk-logo.jpeg`,
     "telephone": "+919014060147",
     "email": "homeskmk3@gmail.com",
     "address": {
@@ -31,6 +32,11 @@ export const generateOrganizationSchema = () => {
       "@type": "City",
       "name": "Hyderabad"
     },
+    "founder": {
+      "@type": "Person",
+      "name": "KMK Homes"
+    },
+    "foundingDate": "2009",
     "priceRange": "₹₹₹",
     "sameAs": [
       "https://www.facebook.com/kmkhomes",
