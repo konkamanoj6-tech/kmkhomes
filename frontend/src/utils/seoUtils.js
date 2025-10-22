@@ -155,39 +155,39 @@ export const generatePlaceSchema = (property) => {
 export const generateMetaTags = (page, data = {}) => {
   const metaTags = {
     home: {
-      title: "KMK Homes | Luxury Villas & Premium Real Estate in Hyderabad",
-      description: "KMK Homes - Building dream homes since 2009. Ultra-luxury triplex villas, budget homes & premium plots in Sainikpuri, Gachibowli, Hyderabad.",
-      keywords: "luxury villas Hyderabad, KMK Homes, Sainikpuri villas, triplex villas, Gachibowli properties, premium real estate"
+      title: "KMK Homes – Luxury Villas, Budget Homes & Verified Plots in Hyderabad",
+      description: "KMK Homes is a trusted real estate developer in Hyderabad, building luxury villas, budget-friendly homes, and verified plots across prime locations like Sainikpuri and Gachibowli.",
+      keywords: "KMK Homes, Luxury Villas Hyderabad, Budget Homes Hyderabad, Plots for Sale Hyderabad, Real Estate Developers Hyderabad"
     },
     projects: {
-      title: "Our Projects | Luxury Villas in Hyderabad | KMK Homes",
-      description: "Explore KMK Homes' ultra-luxury triplex villas with world-class amenities in prime Hyderabad locations. 4000-6000 sq.ft premium properties.",
-      keywords: "luxury villas Hyderabad, triplex villas, premium properties, KMK Homes projects, Sainikpuri villas"
+      title: "Luxury Villas in Hyderabad | Premium Properties | KMK Homes",
+      description: "Explore KMK Homes' ultra-luxury triplex villas with world-class amenities in prime Hyderabad locations. 4000-6000 sq.ft premium properties in Sainikpuri and Gachibowli.",
+      keywords: "luxury villas Hyderabad, triplex villas, premium properties, KMK Homes projects, Sainikpuri villas, Gachibowli villas"
     },
     budgetHomes: {
-      title: "Homes for Every Budget | Affordable Luxury Villas | KMK Homes",
-      description: "Budget-friendly luxury homes from ₹50L. Elegant 2-3 BHK homes with premium amenities in emerging Hyderabad locations.",
-      keywords: "budget homes Hyderabad, affordable villas, KMK Homes budget, family homes, budget-friendly luxury"
+      title: "Budget Homes in Hyderabad | Affordable Luxury Villas | KMK Homes",
+      description: "Budget-friendly luxury homes from ₹50L. Elegant 2-3 BHK homes with premium amenities in emerging Hyderabad locations. Quality homes at affordable prices.",
+      keywords: "budget homes Hyderabad, affordable villas, KMK Homes budget, family homes, budget-friendly luxury, 2BHK 3BHK Hyderabad"
     },
     plots: {
-      title: "Open Plots for Sale in Hyderabad | Premium Plots | KMK Homes",
-      description: "RERA-approved premium open plots in Gachibowli, Sainikpuri & prime Hyderabad locations. Complete documentation support.",
-      keywords: "open plots Hyderabad, plots for sale, Gachibowli plots, Sainikpuri plots, RERA approved plots"
+      title: "Open Plots for Sale in Hyderabad | RERA Approved Plots | KMK Homes",
+      description: "RERA-approved premium open plots in Gachibowli, Sainikpuri & prime Hyderabad locations. Complete documentation support. Verified plots from trusted builders.",
+      keywords: "open plots Hyderabad, plots for sale, Gachibowli plots, Sainikpuri plots, RERA approved plots, verified plots Hyderabad"
     },
     about: {
-      title: "About KMK Homes | Trusted Real Estate Builder Since 2009",
-      description: "Learn about KMK Homes - Hyderabad's trusted luxury real estate brand. 15+ years of excellence in villa construction and customer satisfaction.",
-      keywords: "KMK Homes, about us, real estate Hyderabad, trusted builder, luxury villas"
+      title: "About KMK Homes | Trusted Real Estate Builder Since 2009 | Hyderabad",
+      description: "Learn about KMK Homes - Hyderabad's trusted luxury real estate brand. 15+ years of excellence in villa construction and customer satisfaction. Building dreams since 2009.",
+      keywords: "KMK Homes, about us, real estate Hyderabad, trusted builder, luxury villas, real estate developer"
     },
     contact: {
-      title: "Contact KMK Homes | Book Site Visit | Hyderabad",
-      description: "Get in touch with KMK Homes for luxury villas, budget homes & plots in Hyderabad. Call +91 9791662929 or schedule a site visit.",
-      keywords: "contact KMK Homes, site visit, luxury villas Hyderabad, property inquiry"
+      title: "Contact KMK Homes | Book Site Visit | Hyderabad Real Estate",
+      description: "Get in touch with KMK Homes for luxury villas, budget homes & plots in Hyderabad. Call +91 9791662929 or WhatsApp +91 9014060147 to schedule a site visit.",
+      keywords: "contact KMK Homes, site visit, luxury villas Hyderabad, property inquiry, KMK Homes Hyderabad contact"
     },
     blog: {
-      title: "KMK Insights | Real Estate Blog | Property Investment Tips",
-      description: "Expert insights on Hyderabad real estate, villa investments, plot buying guides & market trends by KMK Homes.",
-      keywords: "real estate blog, Hyderabad property, investment tips, villa buying guide, KMK Insights"
+      title: "KMK Insights | Real Estate Blog | Property Investment Tips Hyderabad",
+      description: "Expert insights on Hyderabad real estate, villa investments, plot buying guides & market trends by KMK Homes. Latest property news and investment advice.",
+      keywords: "real estate blog, Hyderabad property, investment tips, villa buying guide, KMK Insights, property news Hyderabad"
     }
   };
 
